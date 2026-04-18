@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - Abdulloh Sodiq</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .news-card {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(58,123,213,0.1);
+        }
+        .news-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .news-card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+        .news-date {
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+        .news-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-ai       { background: #e8f0fe; color: #3a7bd5; }
+        .tag-privacy  { background: #e8f8f0; color: #27ae60; }
+        .tag-cyber    { background: #fef3e8; color: #e67e22; }
+        .tag-legal    { background: #f3e8fe; color: #8e44ad; }
+
+        .news-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.7rem;
+            line-height: 1.4;
+        }
+        .news-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 1.2rem;
+        }
+        .news-source {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .news-read-link {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: auto;
+            transition: gap 0.2s;
+        }
+        .news-read-link:hover { gap: 0.7rem; }
+
+        .featured-article-card {
+            background: var(--bg-white);
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 0 8px 8px 0;
+            padding: 1.8rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .featured-article-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(58,123,213,0.1);
+        }
+        .featured-article-card .news-tag { margin-bottom: 0.8rem; display: inline-block; }
+        .featured-article-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.7rem;
+        }
+        .featured-article-card p {
+            font-size: 0.92rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+    </style>
+</head>
+<body class="no-sidebar">
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Abdulloh Sodiq</a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-container">
+                <ul class="nav-links" id="nav-links">
+                    <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
+                    <li class="nav-item"><a href="news.html" data-translate="newsLink">News</a></li>
+                    <li class="nav-item"><a href="videos.html" data-translate="vidsLink">Videos</a></li>
+                    <li class="nav-item"><a href="conferences.html" data-translate="confLink">Conferences</a></li>
+                    <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
+                    <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="language-button">
+                        <span class="current-language">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-list">
+                        <a href="#" class="language-option active" data-lang="en">English</a>
+                        <a href="#" class="language-option" data-lang="ru">Русский</a>
+                        <a href="#" class="language-option" data-lang="uz">O'zbek</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-translate="newsTitle">News</h1>
+        </div>
+
+        <!-- Latest News Section -->
+        <section class="content-section">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="latestUpdates">Latest Updates</h2>
+                <div class="card-grid">
+
+                    <!-- News 1: EU AI Act -->
+                    <div class="news-card">
+                        <img src="https://picsum.photos/seed/eu-ai-act/400/200.jpg" alt="EU AI Act" class="news-card-image">
+                        <div class="news-card-body">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> March 13, 2024</span>
+                                <span class="news-tag tag-ai" data-translate="tagAI">AI Law</span>
+                            </div>
+                            <h3 class="news-card-title" data-translate="news1Title">EU Adopts World's First Comprehensive AI Law</h3>
+                            <p class="news-card-desc" data-translate="news1Desc">The European Parliament passed the AI Act — the world's first binding legal framework regulating artificial intelligence. The law bans AI uses that pose "unacceptable risks" and sets strict requirements for high-risk AI systems in healthcare, education, and law enforcement.</p>
+                            <div class="news-source"><i class="fas fa-external-link-alt"></i> European Parliament</div>
+                            <a href="https://www.europarl.europa.eu/news/en/press-room/20240308IPR19015/artificial-intelligence-act-meps-adopt-landmark-law" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News 2: NYT vs OpenAI -->
+                    <div class="news-card">
+                        <img src="https://picsum.photos/seed/nyt-openai/400/200.jpg" alt="NYT vs OpenAI" class="news-card-image">
+                        <div class="news-card-body">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> December 27, 2023</span>
+                                <span class="news-tag tag-legal" data-translate="tagLegal">IP Law</span>
+                            </div>
+                            <h3 class="news-card-title" data-translate="news2Title">New York Times Sues OpenAI and Microsoft for Copyright Infringement</h3>
+                            <p class="news-card-desc" data-translate="news2Desc">The New York Times filed a landmark lawsuit against OpenAI and Microsoft, alleging that millions of its articles were used without permission to train ChatGPT. The case could set a precedent for AI copyright law and reshape how companies build large language models.</p>
+                            <div class="news-source"><i class="fas fa-external-link-alt"></i> Reuters</div>
+                            <a href="https://www.reuters.com/legal/litigation/new-york-times-sues-openai-microsoft-copyright-infringement-2023-12-27/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News 3: Meta GDPR Fine -->
+                    <div class="news-card">
+                        <img src="https://picsum.photos/seed/meta-gdpr/400/200.jpg" alt="Meta GDPR Fine" class="news-card-image">
+                        <div class="news-card-body">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> May 22, 2023</span>
+                                <span class="news-tag tag-privacy" data-translate="tagPrivacy">Data Privacy</span>
+                            </div>
+                            <h3 class="news-card-title" data-translate="news3Title">Meta Fined €1.2 Billion — Largest GDPR Penalty in History</h3>
+                            <p class="news-card-desc" data-translate="news3Desc">Ireland's Data Protection Commission issued a record €1.2 billion fine against Meta for illegally transferring European user data to the United States in violation of GDPR. Meta was also ordered to suspend all data transfers to the US within 6 months.</p>
+                            <div class="news-source"><i class="fas fa-external-link-alt"></i> Irish Data Protection Commission</div>
+                            <a href="https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-decision-against-meta-ireland" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News 4: US AI Executive Order -->
+                    <div class="news-card">
+                        <img src="https://picsum.photos/seed/biden-ai/400/200.jpg" alt="US AI Executive Order" class="news-card-image">
+                        <div class="news-card-body">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> October 30, 2023</span>
+                                <span class="news-tag tag-ai" data-translate="tagAI">AI Law</span>
+                            </div>
+                            <h3 class="news-card-title" data-translate="news4Title">US Issues Executive Order on Safe and Trustworthy AI Development</h3>
+                            <p class="news-card-desc" data-translate="news4Desc">President Biden signed an Executive Order directing federal agencies to establish new AI safety standards, requiring developers of powerful AI systems to share safety test results with the government before public release. The order also addresses AI's risks to national security and civil rights.</p>
+                            <div class="news-source"><i class="fas fa-external-link-alt"></i> The White House</div>
+                            <a href="https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News 5: SEC Cybersecurity Rules -->
+                    <div class="news-card">
+                        <img src="https://picsum.photos/seed/sec-cyber/400/200.jpg" alt="SEC Cybersecurity Rules" class="news-card-image">
+                        <div class="news-card-body">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> July 26, 2023</span>
+                                <span class="news-tag tag-cyber" data-translate="tagCyber">Cybersecurity</span>
+                            </div>
+                            <h3 class="news-card-title" data-translate="news5Title">SEC Mandates Cybersecurity Breach Disclosure for Public Companies</h3>
+                            <p class="news-card-desc" data-translate="news5Desc">The US Securities and Exchange Commission adopted new rules requiring public companies to disclose significant cybersecurity incidents within four business days. Companies must also annually disclose their cybersecurity risk management strategies, marking a major shift in corporate cyber liability.</p>
+                            <div class="news-source"><i class="fas fa-external-link-alt"></i> U.S. Securities and Exchange Commission</div>
+                            <a href="https://www.sec.gov/news/press-release/2023-139" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News 6: UK Online Safety Act -->
+                    <div class="news-card">
+                        <img src="https://picsum.photos/seed/uk-online-safety/400/200.jpg" alt="UK Online Safety Act" class="news-card-image">
+                        <div class="news-card-body">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> October 26, 2023</span>
+                                <span class="news-tag tag-legal" data-translate="tagLegal">Internet Law</span>
+                            </div>
+                            <h3 class="news-card-title" data-translate="news6Title">UK Online Safety Act: Platforms Face Fines Up to £18 Billion</h3>
+                            <p class="news-card-desc" data-translate="news6Desc">The UK's Online Safety Act became law, imposing new legal duties on social media platforms to protect users — especially children — from harmful content. Ofcom gained sweeping powers to fine non-compliant companies up to 10% of global annual turnover, making it one of the toughest internet laws in the world.</p>
+                            <div class="news-source"><i class="fas fa-external-link-alt"></i> UK Parliament</div>
+                            <a href="https://www.legislation.gov.uk/ukpga/2023/50/contents/enacted" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Articles Section -->
+        <section class="content-section" style="background-color: var(--bg-light);">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="featuredTitle">Featured Articles</h2>
+                <div class="card-grid">
+
+                    <div class="featured-article-card">
+                        <span class="news-tag tag-ai" data-translate="tagAI">AI Law</span>
+                        <h3 data-translate="featured1Title">EU AI Act: A New Era for AI Regulation</h3>
+                        <p data-translate="featured1Desc">An in-depth breakdown of the EU AI Act's risk-based approach, prohibited AI practices, obligations for general-purpose AI models, and what it means for companies operating globally.</p>
+                        <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readArticle">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="featured-article-card">
+                        <span class="news-tag tag-cyber" data-translate="tagCyber">Cybersecurity</span>
+                        <h3 data-translate="featured2Title">CISA Cybersecurity Resources for Legal Professionals</h3>
+                        <p data-translate="featured2Desc">The US Cybersecurity and Infrastructure Security Agency's guidance on cyber threats, incident response obligations, and how new disclosure laws affect legal counsel and corporate governance teams.</p>
+                        <a href="https://www.cisa.gov/cybersecurity" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readArticle">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            body.classList.toggle('menu-open', navLinks.classList.contains('active'));
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

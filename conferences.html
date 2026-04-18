@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferences - Abdulloh Sodiq</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Conference Specific Styles */
+        .conf-card {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .conf-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(58, 123, 213, 0.1);
+        }
+
+        .conf-img-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .conf-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .conf-card:hover .conf-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .conf-date-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .conf-status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #28a745; /* Green for upcoming */
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .conf-card-content {
+            padding: 1.5rem;
+        }
+
+        .conf-location {
+            display: flex;
+            align-items: center;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .conf-location i {
+            margin-right: 0.5rem;
+        }
+
+        .conf-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .conf-card-desc {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .conf-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .conf-role {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Past Conferences Timeline Improvements */
+        .past-conf-section {
+            background-color: var(--bg-white);
+            padding: 4rem 0;
+        }
+
+        .past-timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .past-timeline-img {
+            flex: 0 0 150px;
+            height: 150px;
+        }
+
+        .past-timeline-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .past-timeline-content {
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        .past-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .past-timeline-item {
+                flex-direction: column;
+            }
+            .past-timeline-img {
+                flex: none;
+                height: 200px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="no-sidebar">
+   <header>
+        <nav>
+            <a href="index.html" class="logo">Abdulloh Sodiq</a>
+            
+            <!-- NEW: Mobile Menu Toggle Button -->
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="nav-container">
+                <ul class="nav-links" id="nav-links">
+                    <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
+                    <li class="nav-item"><a href="news.html" data-translate="newsLink">News</a></li>
+                    <li class="nav-item"><a href="videos.html" data-translate="vidsLink">Videos</a></li>
+                    <li class="nav-item"><a href="conferences.html" data-translate="confLink">Conferences</a></li>
+                    <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
+                    <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
+                </ul>
+                
+                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
+                <div class="language-switcher">
+                    <button class="language-button">
+                        <span class="current-language">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-list">
+                        <a href="#" class="language-option active" data-lang="en">English</a>
+                        <a href="#" class="language-option" data-lang="ru">Русский</a>
+                        <a href="#" class="language-option" data-lang="uz">O'zbek</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-translate="confTitle">Conferences</h1>
+        </div>
+
+        <!-- Upcoming Conferences (Card Grid) -->
+        <section class="content-section" style="background-color: var(--bg-light);">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="upcomingConfTitle">Upcoming Conferences</h2>
+                
+                <div class="card-grid">
+                    <!-- Card 1 -->
+                    <div class="conf-card">
+                        <div class="conf-img-wrapper">
+                            <img src="https://picsum.photos/seed/conf-geneva/600/400.jpg" alt="Geneva Conference">
+                            <span class="conf-date-badge">Oct 15, 2023</span>
+                            <span class="conf-status-badge" data-translate="upcomingTag">Upcoming</span>
+                        </div>
+                        <div class="conf-card-content">
+                            <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Geneva, Switzerland</div>
+                            <h3 class="conf-card-title" data-translate="conf1Title">International Conference on AI Governance</h3>
+                            <p class="conf-card-desc" data-translate="conf1Desc">Keynote speaker on "Regulatory Frameworks for AI: Balancing Innovation and Protection"</p>
+                            <div class="conf-footer">
+                                <span class="conf-role"><i class="fas fa-user-tie"></i> <span data-translate="roleSpeaker">Speaker</span></span>
+                                <a href="#" class="card-link" data-translate="viewDetails">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="conf-card">
+                        <div class="conf-img-wrapper">
+                            <img src="https://picsum.photos/seed/conf-singapore/600/400.jpg" alt="Singapore Summit">
+                            <span class="conf-date-badge">Nov 8-10, 2023</span>
+                            <span class="conf-status-badge" data-translate="upcomingTag">Upcoming</span>
+                        </div>
+                        <div class="conf-card-content">
+                            <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Singapore</div>
+                            <h3 class="conf-card-title" data-translate="conf2Title">Global Technology Law Summit</h3>
+                            <p class="conf-card-desc" data-translate="conf2Desc">Panel discussion on "Cross-Border Data Flows and Privacy Regulations"</p>
+                            <div class="conf-footer">
+                                <span class="conf-role"><i class="fas fa-users"></i> <span data-translate="rolePanelist">Panelist</span></span>
+                                <a href="#" class="card-link" data-translate="viewDetails">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="conf-card">
+                        <div class="conf-img-wrapper">
+                            <img src="https://picsum.photos/seed/conf-berlin/600/400.jpg" alt="Berlin Symposium">
+                            <span class="conf-date-badge">Dec 4-5, 2023</span>
+                            <span class="conf-status-badge" data-translate="upcomingTag">Upcoming</span>
+                        </div>
+                        <div class="conf-card-content">
+                            <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Berlin, Germany</div>
+                            <h3 class="conf-card-title" data-translate="conf3Title">Digital Rights and Ethics Symposium</h3>
+                            <p class="conf-card-desc" data-translate="conf3Desc">Workshop facilitator for "Implementing Ethical AI Guidelines in Government Policy"</p>
+                            <div class="conf-footer">
+                                <span class="conf-role"><i class="fas fa-chalkboard-teacher"></i> <span data-translate="roleFacilitator">Facilitator</span></span>
+                                <a href="#" class="card-link" data-translate="viewDetails">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Past Conferences (Timeline List) -->
+        <section class="content-section past-conf-section">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="pastConfTitle">Past Conferences</h2>
+                
+                <!-- Item 1 -->
+                <div class="past-timeline-item">
+                    <div class="past-timeline-img">
+                        <img src="https://picsum.photos/seed/conf-tokyo/300/300.jpg" alt="Tokyo Congress">
+                    </div>
+                    <div class="past-timeline-content">
+                        <span class="past-year">Jun 20-22, 2023</span>
+                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</div>
+                        <h3 class="conf-card-title" data-translate="conf4Title">World Technology Law Congress</h3>
+                        <p class="conf-card-desc" data-translate="conf4Desc">Presented paper on "Emerging Regulatory Challenges in Quantum Computing"</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="past-timeline-item">
+                    <div class="past-timeline-img">
+                        <img src="https://picsum.photos/seed/conf-london/300/300.jpg" alt="London Privacy">
+                    </div>
+                    <div class="past-timeline-content">
+                        <span class="past-year">Mar 15-17, 2023</span>
+                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> London, UK</div>
+                        <h3 class="conf-card-title" data-translate="conf5Title">International Privacy Law Conference</h3>
+                        <p class="conf-card-desc" data-translate="conf5Desc">Keynote speaker on "Balancing National Security and Individual Privacy Rights"</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="past-timeline-item">
+                    <div class="past-timeline-img">
+                        <img src="https://picsum.photos/seed/conf-dubai/300/300.jpg" alt="Dubai Forum">
+                    </div>
+                    <div class="past-timeline-content">
+                        <span class="past-year">Jan 10-12, 2023</span>
+                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Dubai, UAE</div>
+                        <h3 class="conf-card-title" data-translate="conf6Title">Digital Economy and Law Forum</h3>
+                        <p class="conf-card-desc" data-translate="conf6Desc">Panel discussion on "Legal Frameworks for Cryptocurrency and Blockchain Technology"</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 (New) -->
+                <div class="past-timeline-item">
+                    <div class="past-timeline-img">
+                        <img src="https://picsum.photos/seed/conf-paris/300/300.jpg" alt="Paris Summit">
+                    </div>
+                    <div class="past-timeline-content">
+                        <span class="past-year">Nov 5-6, 2022</span>
+                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Paris, France</div>
+                        <h3 class="conf-card-title" data-translate="conf7Title">Global AI Ethics Summit</h3>
+                        <p class="conf-card-desc" data-translate="conf7Desc">Led a roundtable discussion on "Bias in Algorithmic Decision Making Systems"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+  <!-- ... footer code ... -->
+
+    <script src="translations.js"></script>
+    
+    <!-- NEW: Mobile Menu Toggle Script -->
+    <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const body = document.body;
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        
+        // Toggle body scroll lock
+        if (navLinks.classList.contains('active')) {
+            body.classList.add('menu-open');
+        } else {
+            body.classList.remove('menu-open');
+        }
+    });
+
+    // Close menu and unlock scroll when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+</script>
+
+</body>
+</html>
+
+    <script src="translations.js"></script>
+</body>
+</html>

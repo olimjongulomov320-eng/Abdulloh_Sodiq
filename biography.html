@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biography - Abdulloh Sodiq</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="no-sidebar">
+     <header>
+        <nav>
+            <a href="index.html" class="logo">Abdulloh Sodiq</a>
+            
+            <!-- NEW: Mobile Menu Toggle Button -->
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="nav-container">
+                <ul class="nav-links" id="nav-links">
+                    <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
+                    <li class="nav-item"><a href="news.html" data-translate="newsLink">News</a></li>
+                    <li class="nav-item"><a href="videos.html" data-translate="vidsLink">Videos</a></li>
+                    <li class="nav-item"><a href="conferences.html" data-translate="confLink">Conferences</a></li>
+                    <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
+                    <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
+                </ul>
+                
+                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
+                <div class="language-switcher">
+                    <button class="language-button">
+                        <span class="current-language">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-list">
+                        <a href="#" class="language-option active" data-lang="en">English</a>
+                        <a href="#" class="language-option" data-lang="ru">Русский</a>
+                        <a href="#" class="language-option" data-lang="uz">O'zbek</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-translate="bioTitle">Biography</h1>
+        </div>
+
+        <!-- NEW: Professional Profile Section with Image -->
+        <section class="content-section">
+            <div class="content-container profile-layout">
+                <div class="profile-text">
+                    <h2 class="section-title" data-translate="bioProfileTitle">Professional Profile</h2>
+                    <p data-translate="bioProfileText1">With a career spanning two decades at the forefront of legal scholarship, Professor Smith has dedicated his life to navigating the complex 
+relationship between emerging technologies and established legal frameworks.</p>
+                    <p data-translate="bioProfileText2">His work is driven by a fundamental question: how do we protect human rights in an increasingly automated world? This inquiry has led him to 
+advise governments, international bodies, and tech giants on ethical governance.</p>
+                </div>
+                <div class="profile-image-wrapper">
+                    <!-- Using a placeholder image. You can replace 'profile.jpg' with your actual file -->
+                    <img src="photo_2026-03-31 17.39.14.jpeg" alt="John Smith Portrait" class="profile-photo">
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section (Kept as is) -->
+        <section class="content-section alt-bg">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="bioEducation">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2005</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="edu1Title">Doctor of Law (J.S.D.)</h3>
+                            <p class="timeline-description" data-translate="edu1Desc">Doctoral research focused on regulatory frameworks for digital privacy</p>
+                            <p class="timeline-location" data-translate="edu1Location">Harvard Law School, Cambridge, MA</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2001</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="edu2Title">Master of Laws (LL.M.)</h3>
+                            <p class="timeline-description" data-translate="edu2Desc">Specialization in Technology Law and Policy</p>
+                            <p class="timeline-location" data-translate="edu2Location">Yale Law School, New Haven, CT</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1998</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="edu3Title">Bachelor of Laws (LL.B.)</h3>
+                            <p class="timeline-description" data-translate="edu3Desc">Graduated with honors</p>
+                            <p class="timeline-location" data-translate="edu3Location">National University, School of Law</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section (Kept as is) -->
+        <section class="content-section">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="bioExperience">Professional Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2015-Present</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="exp1Title">Professor of Law</h3>
+                            <p class="timeline-description" data-translate="exp1Desc">Leading courses in Technology Law, Digital Rights, and International Regulatory Frameworks</p>
+                            <p class="timeline-location" data-translate="exp1Location">National University, Department of Law</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2012-Present</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="exp2Title">Director, Technology Law Research Center</h3>
+                            <p class="timeline-description" data-translate="exp2Desc">Overseeing research initiatives and policy recommendations on emerging technology regulations</p>
+                            <p class="timeline-location" data-translate="exp2Location">National University</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2005-2015</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="exp3Title">Associate Professor of Law</h3>
+                            <p class="timeline-description" data-translate="exp3Desc">Conducted research and taught courses on intellectual property and digital rights</p>
+                            <p class="timeline-location" data-translate="exp3Location">National University, Department of Law</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: Honors & Awards Section -->
+        <section class="content-section alt-bg">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="bioAwardsTitle">Honors & Awards</h2>
+                <div class="awards-grid">
+                    <div class="award-card">
+                        <i class="fas fa-award award-icon"></i>
+                        <h3 data-translate="award1Title">Distinguished Scholar Award</h3>
+                        <p data-translate="award1Year">2022</p>
+                    </div>
+                    <div class="award-card">
+                        <i class="fas fa-medal award-icon"></i>
+                        <h3 data-translate="award2Title">Excellence in Legal Research</h3>
+                        <p data-translate="award2Year">2018</p>
+                    </div>
+                    <div class="award-card">
+                        <i class="fas fa-trophy award-icon"></i>
+                        <h3 data-translate="award3Title">Best Paper on AI Governance</h3>
+                        <p data-translate="award3Year">2016</p>
+                    </div>
+                    <div class="award-card">
+                        <i class="fas fa-certificate award-icon"></i>
+                        <h3 data-translate="award4Title">Teacher of the Year</h3>
+                        <p data-translate="award4Year">2014</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+  <!-- ... footer code ... -->
+
+    <script src="translations.js"></script>
+    
+    <!-- NEW: Mobile Menu Toggle Script -->
+   <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const body = document.body;
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        
+        // Toggle body scroll lock
+        if (navLinks.classList.contains('active')) {
+            body.classList.add('menu-open');
+        } else {
+            body.classList.remove('menu-open');
+        }
+    });
+
+    // Close menu and unlock scroll when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+</script>
+
+</body>
+</html>
+
+    <script src="translations.js"></script>
+</body>
+</html>

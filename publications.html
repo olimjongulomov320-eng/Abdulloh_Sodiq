@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Abdulloh Sodiq</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .case-card {
+            background: var(--bg-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(58, 123, 213, 0.12);
+            border-color: var(--primary-blue);
+        }
+
+        .case-header {
+            background: linear-gradient(135deg, var(--primary-blue), #2c5282);
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .case-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.85;
+        }
+
+        .case-year {
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        .case-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        .case-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .case-desc {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 1.2rem;
+        }
+
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .case-tag {
+            font-size: 0.72rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            background: var(--bg-light);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+        }
+
+        .case-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .case-status {
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .case-status.resolved { color: #28a745; }
+        .case-status.ongoing  { color: #e67e22; }
+        .case-status.landmark { color: var(--primary-blue); }
+
+        .case-link {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s;
+        }
+
+        .case-link:hover { gap: 0.6rem; text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .case-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="no-sidebar">
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Abdulloh Sodiq</a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-container">
+                <ul class="nav-links" id="nav-links">
+                    <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
+                    <li class="nav-item"><a href="news.html" data-translate="newsLink">News</a></li>
+                    <li class="nav-item"><a href="videos.html" data-translate="vidsLink">Videos</a></li>
+                    <li class="nav-item"><a href="conferences.html" data-translate="confLink">Conferences</a></li>
+                    <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
+                    <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="language-button">
+                        <span class="current-language">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-list">
+                        <a href="#" class="language-option active" data-lang="en">English</a>
+                        <a href="#" class="language-option" data-lang="ru">Русский</a>
+                        <a href="#" class="language-option" data-lang="uz">O'zbek</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-translate="pubsTitle">Publications</h1>
+        </div>
+
+        <!-- Case Studies Section -->
+        <section class="content-section" style="background-color: var(--bg-light);">
+            <div class="content-container">
+                <h2 class="section-title" data-translate="casesTitle">Case Studies</h2>
+
+                <div class="case-grid">
+
+                    <!-- Case 1 -->
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-number" data-translate="case1Number">Case No. 01</span>
+                            <span class="case-year">2023</span>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-category" data-translate="case1Category">AI &amp; Medical Law</div>
+                            <h3 class="case-title" data-translate="case1Title">AI-Assisted Diagnosis Liability in Healthcare</h3>
+                            <p class="case-desc" data-translate="case1Desc">Analysis of legal accountability when an AI diagnostic tool provides an incorrect recommendation that leads to patient harm. Examines liability distribution between the software developer, the hospital, and the attending physician.</p>
+                            <div class="case-tags">
+                                <span class="case-tag">AI Liability</span>
+                                <span class="case-tag">Medical Law</span>
+                                <span class="case-tag">Tort</span>
+                            </div>
+                            <div class="case-footer">
+                                <span class="case-status landmark"><i class="fas fa-gavel"></i> <span data-translate="statusLandmark">Landmark</span></span>
+                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 2 -->
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-number" data-translate="case2Number">Case No. 02</span>
+                            <span class="case-year">2023</span>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-category" data-translate="case2Category">Data Privacy</div>
+                            <h3 class="case-title" data-translate="case2Title">GDPR vs. US CLOUD Act: Cross-Border Data Conflict</h3>
+                            <p class="case-desc" data-translate="case2Desc">Comparative analysis of the conflict between European GDPR data protection requirements and the US CLOUD Act obligations, focusing on multinational corporations caught between competing legal regimes.</p>
+                            <div class="case-tags">
+                                <span class="case-tag">GDPR</span>
+                                <span class="case-tag">Data Privacy</span>
+                                <span class="case-tag">International</span>
+                            </div>
+                            <div class="case-footer">
+                                <span class="case-status ongoing"><i class="fas fa-spinner"></i> <span data-translate="statusOngoing">Ongoing</span></span>
+                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 3 -->
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-number" data-translate="case3Number">Case No. 03</span>
+                            <span class="case-year">2022</span>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-category" data-translate="case3Category">Blockchain &amp; Contract Law</div>
+                            <h3 class="case-title" data-translate="case3Title">Smart Contract Enforceability in Commercial Disputes</h3>
+                            <p class="case-desc" data-translate="case3Desc">Examination of whether self-executing blockchain smart contracts meet the legal requirements for binding commercial agreements, and how courts in different jurisdictions have ruled on their enforceability.</p>
+                            <div class="case-tags">
+                                <span class="case-tag">Blockchain</span>
+                                <span class="case-tag">Contract</span>
+                                <span class="case-tag">FinTech</span>
+                            </div>
+                            <div class="case-footer">
+                                <span class="case-status resolved"><i class="fas fa-check-circle"></i> <span data-translate="statusResolved">Resolved</span></span>
+                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 4 -->
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-number" data-translate="case4Number">Case No. 04</span>
+                            <span class="case-year">2022</span>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-category" data-translate="case4Category">Civil Liberties</div>
+                            <h3 class="case-title" data-translate="case4Title">Facial Recognition &amp; Constitutional Privacy Rights</h3>
+                            <p class="case-desc" data-translate="case4Desc">Study of a legal challenge against police use of facial recognition software in public spaces, examining Fourth Amendment rights and the proportionality of biometric surveillance against public safety benefits.</p>
+                            <div class="case-tags">
+                                <span class="case-tag">Facial Recognition</span>
+                                <span class="case-tag">Privacy</span>
+                                <span class="case-tag">Surveillance</span>
+                            </div>
+                            <div class="case-footer">
+                                <span class="case-status landmark"><i class="fas fa-gavel"></i> <span data-translate="statusLandmark">Landmark</span></span>
+                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 5 -->
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-number" data-translate="case5Number">Case No. 05</span>
+                            <span class="case-year">2023</span>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-category" data-translate="case5Category">Platform Liability</div>
+                            <h3 class="case-title" data-translate="case5Title">Social Media Algorithmic Harm &amp; Section 230</h3>
+                            <p class="case-desc" data-translate="case5Desc">Analysis of whether social media platforms can be held liable for harms caused by their recommendation algorithms, testing the limits of Section 230 immunity and exploring regulatory frameworks for algorithmic accountability.</p>
+                            <div class="case-tags">
+                                <span class="case-tag">Platform Law</span>
+                                <span class="case-tag">Algorithms</span>
+                                <span class="case-tag">Section 230</span>
+                            </div>
+                            <div class="case-footer">
+                                <span class="case-status ongoing"><i class="fas fa-spinner"></i> <span data-translate="statusOngoing">Ongoing</span></span>
+                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 6 -->
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-number" data-translate="case6Number">Case No. 06</span>
+                            <span class="case-year">2021</span>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-category" data-translate="case6Category">International Cyber Law</div>
+                            <h3 class="case-title" data-translate="case6Title">State-Sponsored Cyberattacks &amp; International Accountability</h3>
+                            <p class="case-desc" data-translate="case6Desc">Investigation into the legal frameworks for attributing and responding to state-sponsored cyberattacks against critical infrastructure, examining gaps in international law and the applicability of countermeasures doctrine.</p>
+                            <div class="case-tags">
+                                <span class="case-tag">Cybersecurity</span>
+                                <span class="case-tag">International Law</span>
+                                <span class="case-tag">State Responsibility</span>
+                            </div>
+                            <div class="case-footer">
+                                <span class="case-status resolved"><i class="fas fa-check-circle"></i> <span data-translate="statusResolved">Resolved</span></span>
+                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            body.classList.toggle('menu-open', navLinks.classList.contains('active'));
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

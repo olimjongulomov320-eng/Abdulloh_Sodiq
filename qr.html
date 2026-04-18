@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code - Abdulloh Sodiq</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .qr-wrapper {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            max-width: 420px;
+            width: 90%;
+        }
+        .qr-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+        .qr-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+        .qr-image {
+            width: 260px;
+            height: 260px;
+            margin: 0 auto 2rem;
+            display: block;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            background: white;
+        }
+        .qr-url {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            word-break: break-all;
+            margin-bottom: 1.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg-light);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        .qr-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+        .qr-btn:hover { background: #2a5faa; }
+        .qr-divider {
+            width: 40px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+        @media print {
+            body { background: white; }
+            .qr-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-wrapper">
+        <div class="qr-logo">Abdulloh Sodiq</div>
+        <div class="qr-subtitle">Doctor of Law, Professor</div>
+        <div class="qr-divider"></div>
+
+        <img id="qr-img" class="qr-image" alt="QR Code">
+
+        <div class="qr-url" id="qr-url-display"></div>
+
+        <button class="qr-btn" onclick="window.print()">
+            <i class="fas fa-print"></i> Print / Save
+        </button>
+    </div>
+
+    <script>
+        // ============================================================
+        //  CHANGE THIS URL to your actual deployed website address
+        // ============================================================
+        const SITE_URL = 'https://olimjongulomov320-eng.github.io/Abdulloh-Sodiq/';
+        // ============================================================
+
+        const encoded = encodeURIComponent(SITE_URL);
+        document.getElementById('qr-img').src =
+            `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encoded}&format=png&margin=10`;
+        document.getElementById('qr-url-display').textContent = SITE_URL;
+    </script>
+</body>
+</html>

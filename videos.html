@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Abdulloh Sodiq</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Video Card Specific Styles */
+        .video-card {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .video-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .video-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .video-card:hover .video-wrapper img {
+            transform: scale(1.05);
+        }
+
+        /* Play Button Overlay */
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .video-card:hover .play-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Duration Badge */
+        .duration-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        /* Featured Video Section */
+        .featured-video {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .featured-video {
+                flex-direction: row;
+                height: 400px;
+            }
+            .featured-video .featured-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .featured-video .featured-img-wrapper {
+                flex: 1.5;
+            }
+        }
+
+        .featured-img-wrapper {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .featured-img-wrapper {
+                height: 100%;
+            }
+        }
+
+        .featured-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .featured-content {
+            padding: 2rem;
+        }
+        
+        .featured-tag {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Video overlay effect */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+
+        .video-card:hover .video-overlay,
+        .featured-video:hover .video-overlay {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body class="no-sidebar">
+      <header>
+        <nav>
+            <a href="index.html" class="logo">Abdulloh Sodiq</a>
+            
+            <!-- NEW: Mobile Menu Toggle Button -->
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="nav-container">
+                <ul class="nav-links" id="nav-links">
+                    <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
+                    <li class="nav-item"><a href="news.html" data-translate="newsLink">News</a></li>
+                    <li class="nav-item"><a href="videos.html" data-translate="vidsLink">Videos</a></li>
+                    <li class="nav-item"><a href="conferences.html" data-translate="confLink">Conferences</a></li>
+                    <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
+                    <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
+                </ul>
+                
+                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
+                <div class="language-switcher">
+                    <button class="language-button">
+                        <span class="current-language">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-list">
+                        <a href="#" class="language-option active" data-lang="en">English</a>
+                        <a href="#" class="language-option" data-lang="ru">Русский</a>
+                        <a href="#" class="language-option" data-lang="uz">O'zbek</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-translate="videosTitle">Videos</h1>
+        </div>
+
+        <section class="content-section">
+            <div class="content-container">
+                
+                <!-- NEW: Featured Video Section -->
+                <div class="featured-video" onclick="window.open('https://youtu.be/qXnUKvYtf-I?si=oLmDmUIypVpoDCGc', '_blank')">
+                    <div class="featured-img-wrapper">
+                        <img src="https://img.youtube.com/vi/qXnUKvYtf-I/hqdefault.jpg" alt="Featured Video" onerror="this.onerror=null;this.src='https://picsum.photos/seed/featured-vid/400/300.jpg'">
+                        <div class="video-overlay"></div>
+                        <div class="play-btn" style="width: 80px; height: 80px; font-size: 2rem;"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="featured-content">
+                        <span class="featured-tag" data-translate="featuredTag">Featured Video</span>
+                        <h2 class="section-title" style="margin-bottom: 1rem;" data-translate="featuredVideoTitle">Digital Rights in the Age of AI</h2>
+                        <p style="color: var(--text-medium); line-height: 1.8; margin-bottom: 1.5rem;" data-translate="featuredVideoDesc">A comprehensive exploration of how artificial intelligence is reshaping digital rights frameworks and what legal protections are needed in the era of machine learning.</p>
+                        <a href="#" class="btn btn-primary" onclick="event.stopPropagation(); window.open('https://youtu.be/qXnUKvYtf-I?si=oLmDmUIypVpoDCGc', '_blank')"><i class="fas fa-play-circle"></i> <span data-translate="watchNow">Watch Now</span></a>
+                    </div>
+                </div>
+
+                <h2 class="section-title" data-translate="lecturesTitle">Lectures & Presentations</h2>
+                <div class="card-grid">
+                    <!-- Card 1 -->
+                    <div class="card video-card" onclick="window.open('https://youtu.be/kTcTOM_xAtw?si=ZNmQ8QscUp_CSc4-', '_blank')">
+                        <div class="video-wrapper">
+                            <img src="https://img.youtube.com/vi/kTcTOM_xAtw/hqdefault.jpg" alt="Video Thumbnail" class="card-image" onerror="this.onerror=null;this.src='https://picsum.photos/seed/data-law/400/250.jpg'">
+                            <div class="video-overlay"></div>
+                            <div class="play-btn"><i class="fas fa-play"></i></div>
+                            <span class="duration-badge">45:20</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" data-translate="video1Title">Data Protection Laws: Global Trends</h3>
+                            <p class="card-text" data-translate="video1Desc">Emerging trends in data protection legislation and the challenges of harmonization across jurisdictions.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="card video-card" onclick="window.open('https://youtu.be/9Vc-3pC0nl8?si=PB--fPyA7w4oDcTo', '_blank')">
+                        <div class="video-wrapper">
+                            <img src="https://img.youtube.com/vi/9Vc-3pC0nl8/hqdefault.jpg" alt="Video Thumbnail" class="card-image" onerror="this.onerror=null;this.src='https://picsum.photos/seed/cyber-law/400/250.jpg'">
+                            <div class="video-overlay"></div>
+                            <div class="play-btn"><i class="fas fa-play"></i></div>
+                            <span class="duration-badge">1:12:05</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" data-translate="video2Title">Cybersecurity and International Law</h3>
+                            <p class="card-text" data-translate="video2Desc">The intersection of cybersecurity threats with international legal frameworks and state responsibility in cyberspace.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3 -->
+                    <div class="card video-card" onclick="window.open('https://youtu.be/LxuvbE0HQyM?si=gdWW2quJR-cE7N-S', '_blank')">
+                        <div class="video-wrapper">
+                            <img src="https://img.youtube.com/vi/LxuvbE0HQyM/hqdefault.jpg" alt="Video Thumbnail" class="card-image" onerror="this.onerror=null;this.src='https://picsum.photos/seed/ethics-tech/400/250.jpg'">
+                            <div class="video-overlay"></div>
+                            <div class="play-btn"><i class="fas fa-play"></i></div>
+                            <span class="duration-badge">32:15</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" data-translate="video3Title">Ethics in Technology Governance</h3>
+                            <p class="card-text" data-translate="video3Desc">Ethical considerations in technology governance and the role of legal frameworks in ensuring responsible innovation.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 4 -->
+                    <div class="card video-card" onclick="window.open('https://youtu.be/iepCnII_acc?si=yj-b_EPeUsuXqZMR', '_blank')">
+                        <div class="video-wrapper">
+                            <img src="https://img.youtube.com/vi/iepCnII_acc/hqdefault.jpg" alt="Video Thumbnail" class="card-image" onerror="this.onerror=null;this.src='https://picsum.photos/seed/ip-law/400/250.jpg'">
+                            <div class="video-overlay"></div>
+                            <div class="play-btn"><i class="fas fa-play"></i></div>
+                            <span class="duration-badge">28:40</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" data-translate="video4Title">Intellectual Property in Digital Era</h3>
+                            <p class="card-text" data-translate="video4Desc">How intellectual property law is adapting to digital transformation and protecting innovation in cyberspace.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="card video-card" onclick="window.open('https://youtu.be/qXnUKvYtf-I?si=oLmDmUIypVpoDCGc', '_blank')">
+                        <div class="video-wrapper">
+                            <img src="https://img.youtube.com/vi/qXnUKvYtf-I/hqdefault.jpg" alt="Video Thumbnail" class="card-image" onerror="this.onerror=null;this.src='https://picsum.photos/seed/blockchain/400/250.jpg'">
+                            <div class="video-overlay"></div>
+                            <div class="play-btn"><i class="fas fa-play"></i></div>
+                            <span class="duration-badge">55:10</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" data-translate="video5Title">Blockchain and Legal Systems</h3>
+                            <p class="card-text" data-translate="video5Desc">The transformative potential of blockchain technology for legal systems and dispute resolution worldwide.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="card video-card" onclick="window.open('https://youtu.be/kTcTOM_xAtw?si=ZNmQ8QscUp_CSc4-', '_blank')">
+                        <div class="video-wrapper">
+                            <img src="https://img.youtube.com/vi/kTcTOM_xAtw/hqdefault.jpg" alt="Video Thumbnail" class="card-image" onerror="this.onerror=null;this.src='https://picsum.photos/seed/privacy-sec/400/250.jpg'">
+                            <div class="video-overlay"></div>
+                            <div class="play-btn"><i class="fas fa-play"></i></div>
+                            <span class="duration-badge">20:55</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" data-translate="video6Title">Privacy vs. National Security</h3>
+                            <p class="card-text" data-translate="video6Desc">Balancing individual privacy rights with national security concerns — a legal perspective on digital surveillance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    
+    <!-- NEW: Mobile Menu Toggle Script -->
+    <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const body = document.body;
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        
+        // Toggle body scroll lock
+        if (navLinks.classList.contains('active')) {
+            body.classList.add('menu-open');
+        } else {
+            body.classList.remove('menu-open');
+        }
+    });
+
+    // Close menu and unlock scroll when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+</script>
+
+</body>
+</html>
