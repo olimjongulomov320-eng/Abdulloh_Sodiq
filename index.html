@@ -85,16 +85,53 @@
             .focus-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .social-sidebar {
                 display: none;
             }
-            
+
             header {
                 left: 0;
             }
             main {
                 margin-left: 0;
+            }
+        }
+
+        /* Mobile Social Bar */
+        .mobile-social-bar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-social-bar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1.5rem;
+                padding: 1rem;
+                background-color: var(--bg-white);
+                border-top: 1px solid var(--border-color);
+            }
+
+            .mobile-social-bar .social-icon {
+                width: 44px;
+                height: 44px;
+                margin: 0;
+                color: var(--text-medium);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: color 0.2s ease;
+                text-decoration: none;
+            }
+
+            .mobile-social-bar .social-icon:hover {
+                color: var(--primary-blue);
+            }
+
+            .mobile-social-bar .social-icon i {
+                font-size: 1.3rem;
             }
         }
 
@@ -313,6 +350,14 @@ collaborations.</p>
             </div>
         </section>
     </main>
+
+    <!-- Mobile Social Bar (visible only on mobile) -->
+    <div class="mobile-social-bar">
+        <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-icon" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-icon" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-icon" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+    </div>
 
     <footer>
         <div class="footer-content">
