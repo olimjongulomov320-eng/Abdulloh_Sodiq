@@ -214,7 +214,7 @@ const translations = {
         'sendBtn': 'Send Message',
 
         'getInTouch': 'Get in Touch',
-        'email': 'Email',
+        'email': 'Telegram',
         'office': 'Office',
         'phone': 'Phone',
         'socialMedia': 'Social Media'
@@ -437,9 +437,10 @@ const translations = {
         'formMessage': 'Сообщение',
         'sendBtn': 'Отправить',
         'getInTouch': 'Связаться',
-        'email': 'Электронная почта',
+        'email': 'Telegram',
         'office': 'Офис',
-        'phone': 'Телефон'
+        'phone': 'Телефон',
+        'socialMedia': 'Социальные сети'
     },
     'uz': {
         // Common elements
@@ -660,9 +661,10 @@ const translations = {
         'sendBtn': 'Yuborish',
 
         'getInTouch': 'Bog\'lanish',
-        'email': 'Elektron pochta',
+        'email': 'Telegram',
         'office': 'Ofis',
-        'phone': 'Telefon'
+        'phone': 'Telefon',
+        'socialMedia': 'Ijtimoiy tarmoqlar'
     }
 };
 

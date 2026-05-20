@@ -165,8 +165,8 @@
         }
 
         .social-btn {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: white;
             border: 1px solid var(--border-color);
@@ -175,12 +175,26 @@
             justify-content: center;
             color: var(--text-medium);
             transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
         }
 
         .social-btn:hover {
             background: var(--primary-blue);
             border-color: var(--primary-blue);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 123, 213, 0.25);
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .info-content p a {
+            font-weight: 500;
         }
     </style>
 </head>
@@ -237,15 +251,15 @@
                             <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div class="info-content">
                                 <h3 data-translate="office">Office</h3>
-                                <p>Room 305, Law Building<br>National University<br>123 Academic Avenue<br>Capital City, Country</p>
+                                <p>Yakkasaroy 5, Tashkent, Uzbekistan</p>
                             </div>
                         </div>
 
                         <div class="info-item">
-                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="info-icon"><i class="fab fa-telegram"></i></div>
                             <div class="info-content">
-                                <h3 data-translate="email">Email</h3>
-                                <p><a href="mailto:abdulloh.sodiq@university.edu">abdulloh.sodiq@university.edu</a></p>
+                                <h3 data-translate="email">Telegram</h3>
+                                <p><a href="https://t.me/Abdulloh_Sodiq_lawyer" target="_blank" rel="noopener noreferrer">@Abdulloh_Sodiq_lawyer</a></p>
                             </div>
                         </div>
 
@@ -253,15 +267,7 @@
                             <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
                             <div class="info-content">
                                 <h3 data-translate="phone">Phone</h3>
-                                <p>+1 (555) 123-4567</p>
-                            </div>
-                        </div>
-
-                        <div class="info-item">
-                            <div class="info-icon"><i class="fas fa-clock"></i></div>
-                            <div class="info-content">
-                                <h3 data-translate="officeHours">Office Hours</h3>
-                                <p data-translate="officeHoursDesc">Mon - Fri: 9:00 AM - 5:00 PM</p>
+                                <p><a href="tel:+998974258770">+998 97 425 87 70</a></p>
                             </div>
                         </div>
 
@@ -270,17 +276,13 @@
                             <div class="info-content">
                                 <h3 data-translate="socialMedia">Social Media</h3>
                                 <div class="social-links-contact">
-                                    <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="social-btn"><i class="fab fa-researchgate"></i></a>
+                                    <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-btn" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-btn" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-btn" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-btn" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-btn" title="Telegram" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Map Placeholder -->
-                        <div class="map-placeholder">
-                            <img src="https://picsum.photos/seed/map-placeholder/600/300.jpg" alt="Map Location">
-                            <div class="map-overlay"></div>
                         </div>
                     </div>
 
