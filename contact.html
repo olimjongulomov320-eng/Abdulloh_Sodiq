@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Abdulloh Sodiq</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info-section {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+
+        .info-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(58, 123, 213, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+        }
+
+        .info-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-content p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .info-content a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info-content a:hover {
+            text-decoration: underline;
+        }
+
+        .map-placeholder {
+            margin-top: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+        }
+
+        .map-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(58, 123, 213, 0.1), transparent);
+        }
+
+        /* Form Styling */
+        .contact-form-section {
+            background: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--bg-light);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.1);
+            background-color: white;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 123, 213, 0.3);
+        }
+
+        .social-links-contact {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body class="no-sidebar">
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Abdulloh Sodiq</a>
+            
+            <!-- NEW: Mobile Menu Toggle Button -->
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="nav-container">
+                <ul class="nav-links" id="nav-links">
+                    <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
+                    <li class="nav-item"><a href="news.html" data-translate="newsLink">News</a></li>
+                    <li class="nav-item"><a href="videos.html" data-translate="vidsLink">Videos</a></li>
+                    <li class="nav-item"><a href="conferences.html" data-translate="confLink">Conferences</a></li>
+                    <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
+                    <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
+                </ul>
+                
+                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
+                <div class="language-switcher">
+                    <button class="language-button">
+                        <span class="current-language">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-list">
+                        <a href="#" class="language-option active" data-lang="en">English</a>
+                        <a href="#" class="language-option" data-lang="ru">Русский</a>
+                        <a href="#" class="language-option" data-lang="uz">O'zbek</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-translate="contactTitle">Contact</h1>
+        </div>
+
+        <section class="content-section">
+            <div class="content-container">
+                <div class="contact-wrapper">
+                    
+                    <!-- Left Column: Contact Info -->
+                    <div class="contact-info-section">
+                        <h2 class="section-title" style="margin-bottom: 2rem;" data-translate="contactInfoTitle">Contact Information</h2>
+                        
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="info-content">
+                                <h3 data-translate="office">Office</h3>
+                                <p>Room 305, Law Building<br>National University<br>123 Academic Avenue<br>Capital City, Country</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="info-content">
+                                <h3 data-translate="email">Email</h3>
+                                <p><a href="mailto:abdulloh.sodiq@university.edu">abdulloh.sodiq@university.edu</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="info-content">
+                                <h3 data-translate="phone">Phone</h3>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-clock"></i></div>
+                            <div class="info-content">
+                                <h3 data-translate="officeHours">Office Hours</h3>
+                                <p data-translate="officeHoursDesc">Mon - Fri: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-share-alt"></i></div>
+                            <div class="info-content">
+                                <h3 data-translate="socialMedia">Social Media</h3>
+                                <div class="social-links-contact">
+                                    <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-btn"><i class="fab fa-researchgate"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map Placeholder -->
+                        <div class="map-placeholder">
+                            <img src="https://picsum.photos/seed/map-placeholder/600/300.jpg" alt="Map Location">
+                            <div class="map-overlay"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Contact Form -->
+                    <div class="contact-form-section">
+                        <h2 class="section-title" style="margin-bottom: 2rem;" data-translate="sendMessage">Send a Message</h2>
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <label for="name" data-translate="formName">Your Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" data-translate="formEmail">Your Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" data-translate="formSubject">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="message" data-translate="formMessage">Message</label>
+                                <textarea id="message" name="message" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit" data-translate="sendBtn">Send Message</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+  <!-- ... footer code ... -->
+
+    <script src="translations.js"></script>
+    
+    <!-- NEW: Mobile Menu Toggle Script -->
+    <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const body = document.body;
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        
+        // Toggle body scroll lock
+        if (navLinks.classList.contains('active')) {
+            body.classList.add('menu-open');
+        } else {
+            body.classList.remove('menu-open');
+        }
+    });
+
+    // Close menu and unlock scroll when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+</script>
+
+</body>
+</html>
+
+    <script src="translations.js"></script>
+</body>
+</html>
