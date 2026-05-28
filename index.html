@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdulloh Sodiq - Professional Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     
@@ -65,6 +65,8 @@
         /* 3. Main Content: Shifted right to clear sidebar */
         main {
             margin-left: 80px;
+            position: relative;
+            z-index: 1;
         }
 
         /* --- Research Grid Styles --- */
@@ -178,6 +180,9 @@
 </head>
 <body>
 
+    <!-- Particle Canvas -->
+    <canvas id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
     <!-- Social Sidebar -->
     <div class="social-sidebar">
         <div class="social-icons-group">
@@ -233,7 +238,7 @@
                     <img src="ChatGPT Image Mar 31, 2026 at 12_45_45 PM.png" alt="Profile" class="profile-image">
                 </div>
                 <div class="hero-content">
-                    <h1 data-translate="name">Abdulloh Sodiq</h1>
+                    <h1 data-translate="name">Abdulloh <span>Sodiq</span></h1>
                     <h2>
                         <span data-translate="title1">Managing Partner & Attorney</span>
                         <span data-translate="title2">Gulyamov, Sadikov & Partners</span>
@@ -367,31 +372,106 @@
   <!-- ... footer code ... -->
 
     <script src="translations.js"></script>
-    
-   <script>
+    <script>
+    /* Mobile menu */
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
     const body = document.body;
 
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        
-        // Toggle body scroll lock
-        if (navLinks.classList.contains('active')) {
-            body.classList.add('menu-open');
-        } else {
-            body.classList.remove('menu-open');
-        }
+        body.classList.toggle('menu-open', navLinks.classList.contains('active'));
     });
 
-    // Close menu and unlock scroll when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             body.classList.remove('menu-open');
         });
     });
-</script>
+
+    /* Particle canvas */
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+
+    function Particle() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.r = Math.random() * 1.5 + 0.3;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.alpha = Math.random() * 0.5 + 0.1;
+    }
+
+    function init() {
+        resize();
+        particles = Array.from({length: 90}, () => new Particle());
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0,184,148,${p.alpha})`;
+            ctx.fill();
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1;
+            if (p.y < 0 || p.y > H) p.vy *= -1;
+        });
+
+        /* connect nearby */
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(0,184,148,${0.08 * (1 - dist/120)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    init();
+    draw();
+
+    /* Parallax on hero */
+    window.addEventListener('scroll', () => {
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            const y = window.scrollY;
+            hero.style.backgroundPositionY = (y * 0.4) + 'px';
+            const img = hero.querySelector('.profile-image');
+            if (img) img.style.transform = `translateY(${y * 0.08}px)`;
+        }
+        /* canvas parallax */
+        canvas.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+    });
+
+    /* Scroll reveal */
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card, .focus-item, .detail-card').forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+    </script>
 
 
 </body>
