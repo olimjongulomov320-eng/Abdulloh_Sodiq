@@ -208,6 +208,25 @@ const translations = {
         'readArticle': 'Read Article',
         'downloadPDF': 'Download PDF',
         
+        // Conferences page labels
+        'confLabel': 'Speaking & Events',
+        'confMetaSpeaker': 'Keynote Speaker',
+        'confMetaInternational': 'International & Domestic',
+        'confStatEvents': 'Conferences',
+        'confStatCountries': 'Countries',
+        'confStatRoles': 'Roles',
+        'upcomingHeadline': 'Scheduled Appearances',
+        'pastHeadline': 'Previous Engagements',
+
+        // Publications page labels
+        'pubsLabel': 'Research & Writing',
+        'pubsHeroDesc': 'Peer-reviewed articles and analytical case studies at the intersection of law, finance, and technology in Uzbekistan and the wider region.',
+        'articlesLabel': 'Peer-Reviewed',
+        'casesLabel': 'Legal Analysis',
+
+        // Contact page labels
+        'contactLabel': 'Get In Touch',
+
         'contactTitle': 'Contact',
          // Contact Page
         'contactInfoTitle': 'Contact Information',
@@ -491,6 +510,25 @@ const translations = {
         'downloadPDF': 'Скачать PDF',
         'socialMedia': 'Социальные сети',
 
+        // Conferences page labels
+        'confLabel': 'Выступления и мероприятия',
+        'confMetaSpeaker': 'Основной докладчик',
+        'confMetaInternational': 'Международные и внутренние',
+        'confStatEvents': 'Конференций',
+        'confStatCountries': 'Стран',
+        'confStatRoles': 'Роли',
+        'upcomingHeadline': 'Запланированные выступления',
+        'pastHeadline': 'Прошедшие мероприятия',
+
+        // Publications page labels
+        'pubsLabel': 'Исследования и публикации',
+        'pubsHeroDesc': 'Рецензируемые статьи и аналитические кейсы на стыке права, финансов и технологий в Узбекистане и регионе.',
+        'articlesLabel': 'Рецензируемые',
+        'casesLabel': 'Правовой анализ',
+
+        // Contact page labels
+        'contactLabel': 'Связаться',
+
         'contactTitle': 'Контакты',
           // Contact Page
         'contactInfoTitle': 'Контактная информация',
@@ -772,6 +810,25 @@ const translations = {
         'readArticle': 'Maqolani o\'qish',
         'downloadPDF': 'PDF yuklab olish',
         'socialMedia': 'Ijtimoiy tarmoqlar',
+
+        // Conferences page labels
+        'confLabel': 'Chiqishlar va tadbirlar',
+        'confMetaSpeaker': 'Asosiy ma\'ruzachi',
+        'confMetaInternational': 'Xalqaro va mahalliy',
+        'confStatEvents': 'Konferensiya',
+        'confStatCountries': 'Mamlakat',
+        'confStatRoles': 'Rol',
+        'upcomingHeadline': 'Rejalashtirilgan chiqishlar',
+        'pastHeadline': 'O\'tgan tadbirlar',
+
+        // Publications page labels
+        'pubsLabel': 'Tadqiqot va yozuvlar',
+        'pubsHeroDesc': 'O\'zbekiston va mintaqada huquq, moliya va texnologiya kesishmasida peer-review maqolalar va tahliliy keys tadqiqotlari.',
+        'articlesLabel': 'Peer-Review',
+        'casesLabel': 'Huquqiy tahlil',
+
+        // Contact page labels
+        'contactLabel': 'Bog\'lanish',
 
         'contactTitle': 'Aloqa',
          // Contact Page

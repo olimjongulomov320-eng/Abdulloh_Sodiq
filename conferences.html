@@ -4,20 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conferences - Abdulloh Sodiq</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page hero */
+        .conf-hero {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 10rem 5rem 4rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .conf-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(0,184,148,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .conf-hero-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 1.2rem;
+        }
+        .conf-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--text-white);
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+        .conf-hero-title .accent { color: var(--emerald); }
+        .conf-hero-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 2rem;
+        }
+        .conf-hero-meta span { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* Section wrapper */
+        .conf-section {
+            padding: 5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .conf-section-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 2.5rem;
+        }
+        .conf-section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 3rem;
+        }
+
+        /* Conference list (editorial row style) */
+        .conf-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--border);
+        }
+        .conf-row {
+            display: grid;
+            grid-template-columns: 180px 1fr auto;
+            gap: 0;
+            background: var(--bg-dark);
+            padding: 2.5rem 0;
+            position: relative;
+            transition: background 0.25s;
+            cursor: default;
+        }
+        .conf-row::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald), transparent);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .conf-row:hover { background: var(--bg-card); }
+        .conf-row:hover::before { opacity: 1; }
+
+        .conf-row-date {
+            padding: 0 2.5rem 0 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .conf-row-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--emerald);
+            line-height: 1;
+        }
+        .conf-row-month {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.3rem;
+        }
+
+        .conf-row-body { border-left: 1px solid var(--border); padding-left: 2.5rem; }
+        .conf-row-location {
+            font-size: 0.78rem;
+            color: var(--emerald);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .conf-row-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 0.7rem;
+            line-height: 1.3;
+        }
+        .conf-row-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 60ch;
+        }
+
+        .conf-row-role {
+            padding-left: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            gap: 0.6rem;
+            white-space: nowrap;
+        }
+        .role-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            background: rgba(0,184,148,0.08);
+            color: var(--emerald);
+            border: 1px solid var(--border);
+        }
+        .status-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+        }
+        .status-upcoming { background: rgba(0,184,148,0.15); color: var(--emerald); border: 1px solid var(--emerald); }
+        .status-past { background: rgba(139,168,163,0.1); color: var(--text-muted); border: 1px solid var(--border); }
+
+        /* Stats strip */
+        .conf-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .conf-stat {
+            background: var(--bg-dark);
+            padding: 3rem 5rem;
+            text-align: left;
+        }
+        .conf-stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 900;
+            color: var(--emerald);
+            line-height: 1;
+        }
+        .conf-stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        /* Reveal animation */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 900px) {
+            .conf-hero { padding: 8rem 2rem 3rem; }
+            .conf-section { padding: 3rem 2rem; }
+            .conf-row { grid-template-columns: 1fr; gap: 1rem; padding: 2rem; }
+            .conf-row-date { flex-direction: row; align-items: baseline; gap: 0.8rem; padding: 0; border: none; }
+            .conf-row-body { border-left: none; padding-left: 0; }
+            .conf-row-role { align-items: flex-start; padding-left: 0; flex-direction: row; flex-wrap: wrap; }
+            .conf-stats { grid-template-columns: 1fr; }
+            .conf-stat { padding: 2rem; }
+        }
+    </style>
 </head>
 <body class="no-sidebar">
-   <header>
+    <header>
         <nav>
             <a href="index.html" class="logo">Abdulloh Sodiq</a>
-            
-            <!-- NEW: Mobile Menu Toggle Button -->
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
-
             <div class="nav-container">
                 <ul class="nav-links" id="nav-links">
                     <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
@@ -27,8 +238,6 @@
                     <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
                     <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
                 </ul>
-                
-                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
                 <div class="language-switcher">
                     <button class="language-button">
                         <span class="current-language">English</span>
@@ -44,129 +253,163 @@
         </nav>
     </header>
 
-
     <main>
-        <div class="page-header">
-            <h1 class="page-title" data-translate="confTitle">Conferences</h1>
+        <!-- Page Hero -->
+        <section class="conf-hero">
+            <p class="conf-hero-label" data-translate="confLabel">Speaking & Events</p>
+            <h1 class="conf-hero-title" data-translate="confTitle">Conferences &amp; <span class="accent">Appearances</span></h1>
+            <div class="conf-hero-meta">
+                <span><i class="fas fa-microphone" style="color:var(--emerald)"></i> <span data-translate="confMetaSpeaker">Keynote Speaker</span></span>
+                <span><i class="fas fa-globe" style="color:var(--emerald)"></i> <span data-translate="confMetaInternational">International & Domestic</span></span>
+            </div>
+        </section>
+
+        <!-- Stats Strip -->
+        <div class="conf-stats">
+            <div class="conf-stat reveal">
+                <div class="conf-stat-number" data-count="7">7</div>
+                <div class="conf-stat-label" data-translate="confStatEvents">Conferences</div>
+            </div>
+            <div class="conf-stat reveal" style="transition-delay:0.1s">
+                <div class="conf-stat-number" data-count="5">5</div>
+                <div class="conf-stat-label" data-translate="confStatCountries">Countries</div>
+            </div>
+            <div class="conf-stat reveal" style="transition-delay:0.2s">
+                <div class="conf-stat-number" data-count="3">3</div>
+                <div class="conf-stat-label" data-translate="confStatRoles">Roles</div>
+            </div>
         </div>
 
-        <!-- Upcoming Conferences (Card Grid) -->
-        <section class="content-section" style="background-color: var(--bg-light);">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="upcomingConfTitle">Upcoming Conferences</h2>
-                
-                <div class="card-grid">
-                    <!-- Card 1 -->
-                    <div class="conf-card">
-                        <div class="conf-img-wrapper">
-                            <img src="https://picsum.photos/seed/conf-geneva/600/400.jpg" alt="Geneva Conference">
-                            <span class="conf-date-badge">Oct 15, 2023</span>
-                            <span class="conf-status-badge" data-translate="upcomingTag">Upcoming</span>
-                        </div>
-                        <div class="conf-card-content">
-                            <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Geneva, Switzerland</div>
-                            <h3 class="conf-card-title" data-translate="conf1Title">International Conference on AI Governance</h3>
-                            <p class="conf-card-desc" data-translate="conf1Desc">Keynote speaker on "Regulatory Frameworks for AI: Balancing Innovation and Protection"</p>
-                            <div class="conf-footer">
-                                <span class="conf-role"><i class="fas fa-user-tie"></i> <span data-translate="roleSpeaker">Speaker</span></span>
-                                <a href="#" class="card-link" data-translate="viewDetails">View Details</a>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Upcoming Conferences -->
+        <section class="conf-section">
+            <p class="conf-section-label" data-translate="upcomingConfTitle">Upcoming Conferences</p>
+            <h2 class="conf-section-heading" data-translate="upcomingHeadline">Scheduled Appearances</h2>
 
-                    <!-- Card 2 -->
-                    <div class="conf-card">
-                        <div class="conf-img-wrapper">
-                            <img src="https://picsum.photos/seed/conf-singapore/600/400.jpg" alt="Singapore Summit">
-                            <span class="conf-date-badge">Nov 8-10, 2023</span>
-                            <span class="conf-status-badge" data-translate="upcomingTag">Upcoming</span>
-                        </div>
-                        <div class="conf-card-content">
-                            <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Singapore</div>
-                            <h3 class="conf-card-title" data-translate="conf2Title">Global Technology Law Summit</h3>
-                            <p class="conf-card-desc" data-translate="conf2Desc">Panel discussion on "Cross-Border Data Flows and Privacy Regulations"</p>
-                            <div class="conf-footer">
-                                <span class="conf-role"><i class="fas fa-users"></i> <span data-translate="rolePanelist">Panelist</span></span>
-                                <a href="#" class="card-link" data-translate="viewDetails">View Details</a>
-                            </div>
-                        </div>
+            <div class="conf-list">
+                <!-- Card 1 -->
+                <div class="conf-row reveal">
+                    <div class="conf-row-date">
+                        <div class="conf-row-year">2023</div>
+                        <div class="conf-row-month">Oct 15</div>
                     </div>
+                    <div class="conf-row-body">
+                        <div class="conf-row-location"><i class="fas fa-map-marker-alt"></i> Geneva, Switzerland</div>
+                        <h3 class="conf-row-title" data-translate="conf1Title">International Conference on AI Governance</h3>
+                        <p class="conf-row-desc" data-translate="conf1Desc">Keynote speaker on "Regulatory Frameworks for AI"</p>
+                    </div>
+                    <div class="conf-row-role">
+                        <span class="role-badge" data-translate="roleSpeaker">Speaker</span>
+                        <span class="status-badge status-upcoming" data-translate="upcomingTag">Upcoming</span>
+                    </div>
+                </div>
 
-                    <!-- Card 3 -->
-                    <div class="conf-card">
-                        <div class="conf-img-wrapper">
-                            <img src="https://picsum.photos/seed/conf-berlin/600/400.jpg" alt="Berlin Symposium">
-                            <span class="conf-date-badge">Dec 4-5, 2023</span>
-                            <span class="conf-status-badge" data-translate="upcomingTag">Upcoming</span>
-                        </div>
-                        <div class="conf-card-content">
-                            <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Berlin, Germany</div>
-                            <h3 class="conf-card-title" data-translate="conf3Title">Digital Rights and Ethics Symposium</h3>
-                            <p class="conf-card-desc" data-translate="conf3Desc">Workshop facilitator for "Implementing Ethical AI Guidelines in Government Policy"</p>
-                            <div class="conf-footer">
-                                <span class="conf-role"><i class="fas fa-chalkboard-teacher"></i> <span data-translate="roleFacilitator">Facilitator</span></span>
-                                <a href="#" class="card-link" data-translate="viewDetails">View Details</a>
-                            </div>
-                        </div>
+                <!-- Card 2 -->
+                <div class="conf-row reveal">
+                    <div class="conf-row-date">
+                        <div class="conf-row-year">2023</div>
+                        <div class="conf-row-month">Nov 8–10</div>
+                    </div>
+                    <div class="conf-row-body">
+                        <div class="conf-row-location"><i class="fas fa-map-marker-alt"></i> Singapore</div>
+                        <h3 class="conf-row-title" data-translate="conf2Title">Global Technology Law Summit</h3>
+                        <p class="conf-row-desc" data-translate="conf2Desc">Panel discussion on "Cross-Border Data Flows"</p>
+                    </div>
+                    <div class="conf-row-role">
+                        <span class="role-badge" data-translate="rolePanelist">Panelist</span>
+                        <span class="status-badge status-upcoming" data-translate="upcomingTag">Upcoming</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="conf-row reveal">
+                    <div class="conf-row-date">
+                        <div class="conf-row-year">2023</div>
+                        <div class="conf-row-month">Dec 4–5</div>
+                    </div>
+                    <div class="conf-row-body">
+                        <div class="conf-row-location"><i class="fas fa-map-marker-alt"></i> Berlin, Germany</div>
+                        <h3 class="conf-row-title" data-translate="conf3Title">Digital Rights Symposium</h3>
+                        <p class="conf-row-desc" data-translate="conf3Desc">Workshop facilitator for "Ethical AI Guidelines"</p>
+                    </div>
+                    <div class="conf-row-role">
+                        <span class="role-badge" data-translate="roleFacilitator">Facilitator</span>
+                        <span class="status-badge status-upcoming" data-translate="upcomingTag">Upcoming</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Past Conferences (Timeline List) -->
-        <section class="content-section past-conf-section">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="pastConfTitle">Past Conferences</h2>
-                
-                <!-- Item 1 -->
-                <div class="past-timeline-item">
-                    <div class="past-timeline-img">
-                        <img src="https://picsum.photos/seed/conf-tokyo/300/300.jpg" alt="Tokyo Congress">
+        <!-- Past Conferences -->
+        <section class="conf-section">
+            <p class="conf-section-label" data-translate="pastConfTitle">Past Conferences</p>
+            <h2 class="conf-section-heading" data-translate="pastHeadline">Previous Engagements</h2>
+
+            <div class="conf-list">
+                <!-- Past 1 -->
+                <div class="conf-row reveal">
+                    <div class="conf-row-date">
+                        <div class="conf-row-year">2023</div>
+                        <div class="conf-row-month">Jun 20–22</div>
                     </div>
-                    <div class="past-timeline-content">
-                        <span class="past-year">Jun 20-22, 2023</span>
-                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</div>
-                        <h3 class="conf-card-title" data-translate="conf4Title">World Technology Law Congress</h3>
-                        <p class="conf-card-desc" data-translate="conf4Desc">Presented paper on "Emerging Regulatory Challenges in Quantum Computing"</p>
+                    <div class="conf-row-body">
+                        <div class="conf-row-location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</div>
+                        <h3 class="conf-row-title" data-translate="conf4Title">World Technology Law Congress</h3>
+                        <p class="conf-row-desc" data-translate="conf4Desc">Presented paper on "Emerging Regulatory Challenges in Quantum Computing"</p>
+                    </div>
+                    <div class="conf-row-role">
+                        <span class="role-badge" data-translate="roleSpeaker">Speaker</span>
+                        <span class="status-badge status-past">Past</span>
                     </div>
                 </div>
 
-                <!-- Item 2 -->
-                <div class="past-timeline-item">
-                    <div class="past-timeline-img">
-                        <img src="https://picsum.photos/seed/conf-london/300/300.jpg" alt="London Privacy">
+                <!-- Past 2 -->
+                <div class="conf-row reveal">
+                    <div class="conf-row-date">
+                        <div class="conf-row-year">2023</div>
+                        <div class="conf-row-month">Mar 15–17</div>
                     </div>
-                    <div class="past-timeline-content">
-                        <span class="past-year">Mar 15-17, 2023</span>
-                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> London, UK</div>
-                        <h3 class="conf-card-title" data-translate="conf5Title">International Privacy Law Conference</h3>
-                        <p class="conf-card-desc" data-translate="conf5Desc">Keynote speaker on "Balancing National Security and Individual Privacy Rights"</p>
+                    <div class="conf-row-body">
+                        <div class="conf-row-location"><i class="fas fa-map-marker-alt"></i> London, UK</div>
+                        <h3 class="conf-row-title" data-translate="conf5Title">International Privacy Law Conference</h3>
+                        <p class="conf-row-desc" data-translate="conf5Desc">Keynote speaker on "Balancing National Security and Individual Privacy Rights"</p>
                     </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="past-timeline-item">
-                    <div class="past-timeline-img">
-                        <img src="https://picsum.photos/seed/conf-dubai/300/300.jpg" alt="Dubai Forum">
-                    </div>
-                    <div class="past-timeline-content">
-                        <span class="past-year">Jan 10-12, 2023</span>
-                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Dubai, UAE</div>
-                        <h3 class="conf-card-title" data-translate="conf6Title">Digital Economy and Law Forum</h3>
-                        <p class="conf-card-desc" data-translate="conf6Desc">Panel discussion on "Legal Frameworks for Cryptocurrency and Blockchain Technology"</p>
+                    <div class="conf-row-role">
+                        <span class="role-badge" data-translate="roleSpeaker">Speaker</span>
+                        <span class="status-badge status-past">Past</span>
                     </div>
                 </div>
 
-                <!-- Item 4 (New) -->
-                <div class="past-timeline-item">
-                    <div class="past-timeline-img">
-                        <img src="https://picsum.photos/seed/conf-paris/300/300.jpg" alt="Paris Summit">
+                <!-- Past 3 -->
+                <div class="conf-row reveal">
+                    <div class="conf-row-date">
+                        <div class="conf-row-year">2023</div>
+                        <div class="conf-row-month">Jan 10–12</div>
                     </div>
-                    <div class="past-timeline-content">
-                        <span class="past-year">Nov 5-6, 2022</span>
-                        <div class="conf-location"><i class="fas fa-map-marker-alt"></i> Paris, France</div>
-                        <h3 class="conf-card-title" data-translate="conf7Title">Global AI Ethics Summit</h3>
-                        <p class="conf-card-desc" data-translate="conf7Desc">Led a roundtable discussion on "Bias in Algorithmic Decision Making Systems"</p>
+                    <div class="conf-row-body">
+                        <div class="conf-row-location"><i class="fas fa-map-marker-alt"></i> Dubai, UAE</div>
+                        <h3 class="conf-row-title" data-translate="conf6Title">Digital Economy and Law Forum</h3>
+                        <p class="conf-row-desc" data-translate="conf6Desc">Panel discussion on "Legal Frameworks for Cryptocurrency and Blockchain Technology"</p>
+                    </div>
+                    <div class="conf-row-role">
+                        <span class="role-badge" data-translate="rolePanelist">Panelist</span>
+                        <span class="status-badge status-past">Past</span>
+                    </div>
+                </div>
+
+                <!-- Past 4 -->
+                <div class="conf-row reveal">
+                    <div class="conf-row-date">
+                        <div class="conf-row-year">2022</div>
+                        <div class="conf-row-month">Nov 5–6</div>
+                    </div>
+                    <div class="conf-row-body">
+                        <div class="conf-row-location"><i class="fas fa-map-marker-alt"></i> Paris, France</div>
+                        <h3 class="conf-row-title" data-translate="conf7Title">Global AI Ethics Summit</h3>
+                        <p class="conf-row-desc" data-translate="conf7Desc">Led a roundtable discussion on "Bias in Algorithmic Decision Making Systems"</p>
+                    </div>
+                    <div class="conf-row-role">
+                        <span class="role-badge" data-translate="roleFacilitator">Facilitator</span>
+                        <span class="status-badge status-past">Past</span>
                     </div>
                 </div>
             </div>
@@ -178,7 +421,6 @@
             <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
         </div>
     </footer>
-  <!-- ... footer code ... -->
 
     <script src="translations.js"></script>
     <script>
@@ -195,6 +437,28 @@
             body.classList.remove('menu-open');
         });
     });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Counter animation
+    function animateCount(el) {
+        const target = +el.getAttribute('data-count');
+        let start = 0;
+        const step = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+            start = Math.min(start + step, target);
+            el.textContent = start;
+            if (start >= target) clearInterval(timer);
+        }, 30);
+    }
+    const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObserver.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
     </script>
 </body>
 </html>

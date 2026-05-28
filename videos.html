@@ -4,20 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Videos - Abdulloh Sodiq</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── PAGE HERO ── */
+        .page-hero {
+            min-height: 45vh;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 10rem 5rem 4rem;
+            position: relative; z-index: 1;
+            border-bottom: 1px solid var(--border);
+        }
+        .page-hero-label {
+            font-size: 0.72rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--emerald);
+            margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .page-hero-label::before {
+            content: ''; width: 40px; height: 1px;
+            background: var(--emerald); display: inline-block;
+        }
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900; color: var(--text-white);
+            letter-spacing: -2px; line-height: 1;
+        }
+        .page-hero h1 .accent { color: var(--emerald); }
+
+        .section-label {
+            font-size: 0.72rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--emerald); margin-bottom: 1rem;
+        }
+        .section-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 900; color: var(--text-white);
+            line-height: 1.15; margin-bottom: 3rem;
+        }
+
+        /* ── FEATURED VIDEO (cinema full-width) ── */
+        .featured-section {
+            padding: 5rem;
+            position: relative; z-index: 1;
+        }
+        .featured-cinema {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 1px;
+            background: var(--border);
+        }
+        .featured-thumb {
+            position: relative; overflow: hidden; cursor: pointer;
+            min-height: 400px;
+        }
+        .featured-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) saturate(0.8);
+            transition: all 0.5s;
+            display: block;
+        }
+        .featured-thumb:hover img {
+            filter: brightness(0.8) saturate(1.1);
+            transform: scale(1.04);
+        }
+        .featured-thumb-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(8,12,12,0.95) 0%, transparent 60%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 2.5rem; z-index: 2;
+        }
+        .featured-play {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px; height: 70px; border-radius: 50%;
+            background: rgba(0,184,148,0.9);
+            display: flex; align-items: center; justify-content: center;
+            color: #080c0c; font-size: 1.6rem;
+            transition: all 0.3s; z-index: 3;
+            box-shadow: 0 0 40px rgba(0,184,148,0.5);
+        }
+        .featured-thumb:hover .featured-play {
+            background: var(--emerald);
+            box-shadow: 0 0 60px rgba(0,184,148,0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .featured-tag-line {
+            font-size: 0.68rem; color: var(--emerald);
+            letter-spacing: 3px; text-transform: uppercase;
+            margin-bottom: 0.5rem; position: relative; z-index: 4;
+        }
+        .featured-vid-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem; color: var(--text-white);
+            line-height: 1.3; position: relative; z-index: 4;
+        }
+        .featured-info {
+            background: var(--bg-card);
+            padding: 3rem; display: flex; flex-direction: column; justify-content: center;
+        }
+        .featured-info .fi-tag {
+            font-size: 0.68rem; color: var(--emerald);
+            letter-spacing: 3px; text-transform: uppercase;
+            margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .featured-info .fi-tag::before {
+            content: ''; width: 20px; height: 1px; background: var(--emerald);
+        }
+        .featured-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem; color: var(--text-white);
+            line-height: 1.3; margin-bottom: 1.5rem;
+        }
+        .featured-info p {
+            font-size: 0.9rem; color: var(--text-muted);
+            line-height: 1.8; margin-bottom: 2rem;
+        }
+
+        /* ── VIDEO GRID ── */
+        .videos-section {
+            padding: 5rem;
+            position: relative; z-index: 1;
+        }
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+        .vid-card {
+            background: var(--bg-dark);
+            position: relative; overflow: hidden;
+            cursor: pointer; transition: background 0.3s;
+        }
+        .vid-card:hover { background: var(--bg-card); }
+        .vid-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--emerald), transparent);
+            opacity: 0; transition: opacity 0.3s; z-index: 4;
+        }
+        .vid-card:hover::before { opacity: 1; }
+        .vid-thumb {
+            position: relative; overflow: hidden; height: 200px;
+        }
+        .vid-thumb img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            filter: brightness(0.65) saturate(0.8);
+            transition: all 0.4s;
+        }
+        .vid-card:hover .vid-thumb img {
+            filter: brightness(0.85) saturate(1.1);
+            transform: scale(1.05);
+        }
+        .vid-play-sm {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(0,184,148,0.85);
+            display: flex; align-items: center; justify-content: center;
+            color: #080c0c; font-size: 1rem;
+            transition: all 0.3s; z-index: 3;
+            box-shadow: 0 0 25px rgba(0,184,148,0.4);
+        }
+        .vid-card:hover .vid-play-sm {
+            background: var(--emerald);
+            box-shadow: 0 0 40px rgba(0,184,148,0.7);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .vid-thumb-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(8,12,12,0.85) 0%, transparent 60%);
+            z-index: 2;
+        }
+        .vid-card-body { padding: 1.5rem 1.8rem 2rem; }
+        .vid-card-native {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem; color: var(--text-white);
+            margin-bottom: 0.6rem; line-height: 1.4; font-weight: 700;
+        }
+        .vid-card-desc {
+            font-size: 0.82rem; color: var(--text-muted); line-height: 1.65;
+        }
+
+        @media (max-width: 992px) {
+            .featured-cinema { grid-template-columns: 1fr; }
+            .featured-thumb { min-height: 280px; }
+            .videos-grid { grid-template-columns: 1fr 1fr; }
+            .featured-section, .videos-section { padding: 4rem 2rem; }
+            .page-hero { padding: 8rem 2rem 3rem; }
+        }
+        @media (max-width: 600px) {
+            .videos-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body class="no-sidebar">
-      <header>
+    <header>
         <nav>
             <a href="index.html" class="logo">Abdulloh Sodiq</a>
-            
-            <!-- NEW: Mobile Menu Toggle Button -->
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
-
             <div class="nav-container">
                 <ul class="nav-links" id="nav-links">
                     <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
@@ -27,8 +218,6 @@
                     <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
                     <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
                 </ul>
-                
-                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
                 <div class="language-switcher">
                     <button class="language-button">
                         <span class="current-language">English</span>
@@ -44,125 +233,129 @@
         </nav>
     </header>
 
+    <main style="position:relative;z-index:1;">
 
-    <main>
-        <div class="page-header">
-            <h1 class="page-title" data-translate="videosTitle">Videos</h1>
+        <!-- ── PAGE HERO ── -->
+        <div class="page-hero">
+            <p class="page-hero-label" data-translate="mediaLabel">Media</p>
+            <h1><span data-translate="vidsLink">Videos</span> &amp; <span class="accent" data-translate="watchNow">Watch Now</span></h1>
         </div>
 
-        <section class="content-section">
-            <div class="content-container">
-                
-                <!-- Featured Video Section -->
-                <div class="featured-video" onclick="window.open('https://www.youtube.com/watch?v=bEeeMbHWA-M&t=47s', '_blank')">
-                    <div class="featured-img-wrapper">
-                        <img src="https://img.youtube.com/vi/bEeeMbHWA-M/hqdefault.jpg" alt="Featured Video">
-                        <div class="video-overlay"></div>
-                        <div class="play-btn" style="width: 80px; height: 80px; font-size: 2rem;"><i class="fas fa-play"></i></div>
-                    </div>
-                    <div class="featured-content">
-                        <span class="featured-tag" data-translate="featuredTag">Featured Video</span>
-                        <h2 class="section-title" style="margin-bottom: 1rem;" data-translate="featuredVideoTitle">Tashkent Law Spring — ИИ в работе адвоката</h2>
-                        <p style="color: var(--text-medium); line-height: 1.8; margin-bottom: 1.5rem;" data-translate="featuredVideoDesc">Abdulloh Sodiq speaks at Tashkent Law Spring on artificial intelligence in legal practice: advantages, risks and prospects of using AI tools in the work of a lawyer.</p>
-                        <a href="#" class="btn btn-primary" onclick="event.stopPropagation(); window.open('https://www.youtube.com/watch?v=bEeeMbHWA-M&t=47s', '_blank')"><i class="fas fa-play-circle"></i> <span data-translate="watchNow">Watch Now</span></a>
+        <!-- ── FEATURED VIDEO ── -->
+        <section class="featured-section">
+            <p class="section-label" data-translate="featuredTag">Featured Video</p>
+            <div class="featured-cinema reveal">
+                <div class="featured-thumb" onclick="window.open('https://www.youtube.com/watch?v=bEeeMbHWA-M&t=47s','_blank')">
+                    <img src="https://img.youtube.com/vi/bEeeMbHWA-M/hqdefault.jpg" alt="Featured">
+                    <div class="featured-play"><i class="fas fa-play"></i></div>
+                    <div class="featured-thumb-overlay">
+                        <span class="featured-tag-line" data-translate="featuredTag">Featured · Tashkent Law Spring</span>
+                        <h3 class="featured-vid-title" data-translate="featuredVideoTitle">Tashkent Law Spring — ИИ в работе адвоката</h3>
                     </div>
                 </div>
-
-                <h2 class="section-title" data-translate="lecturesTitle">Lectures & Presentations</h2>
-                <div class="card-grid">
-                    <!-- Card 1: Sun'iy intellektning huquq dunyosiga ta'siri -->
-                    <div class="card video-card" onclick="window.open('https://www.youtube.com/watch?v=jX3EV1c8zHw', '_blank')">
-                        <div class="video-wrapper">
-                            <img src="https://img.youtube.com/vi/jX3EV1c8zHw/hqdefault.jpg" alt="Video Thumbnail" class="card-image">
-                            <div class="video-overlay"></div>
-                            <div class="play-btn"><i class="fas fa-play"></i></div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Sun'iy intellektning huquq dunyosiga ta'siri</h3>
-                            <p class="card-text" data-translate="video1Desc">How AI is changing the work of legal professionals — analysis, forecasts and practical advice for lawyers.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: Қарз тўловини мажбурий қилувчи ҳуқуқий инструмен -->
-                    <div class="card video-card" onclick="window.open('https://www.youtube.com/watch?v=9Vc-3pC0nl8&t=33s', '_blank')">
-                        <div class="video-wrapper">
-                            <img src="https://img.youtube.com/vi/9Vc-3pC0nl8/hqdefault.jpg" alt="Video Thumbnail" class="card-image">
-                            <div class="video-overlay"></div>
-                            <div class="play-btn"><i class="fas fa-play"></i></div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Қарз тўловини мажбурий қилувчи ҳуқуқий инструмен</h3>
-                            <p class="card-text" data-translate="video2Desc">Legal instruments to compel debt repayment — practical guidance and real case examples.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: FIRIBGARLIK: ADVOKAT vs PROKUROR -->
-                    <div class="card video-card" onclick="window.open('https://www.youtube.com/watch?v=ZD_LSyxMMH4', '_blank')">
-                        <div class="video-wrapper">
-                            <img src="https://img.youtube.com/vi/ZD_LSyxMMH4/hqdefault.jpg" alt="Video Thumbnail" class="card-image">
-                            <div class="video-overlay"></div>
-                            <div class="play-btn"><i class="fas fa-play"></i></div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">FIRIBGARLIK: ADVOKAT vs PROKUROR MULOHAZALARI</h3>
-                            <p class="card-text" data-translate="video3Desc">Fraud cases: a debate between defence attorney and prosecutor on evidence, legal qualification and courtroom strategy.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Advokat va prokuror: qay biri kuchli? -->
-                    <div class="card video-card" onclick="window.open('https://www.youtube.com/watch?v=mePXlM2M4V4', '_blank')">
-                        <div class="video-wrapper">
-                            <img src="https://img.youtube.com/vi/mePXlM2M4V4/hqdefault.jpg" alt="Video Thumbnail" class="card-image">
-                            <div class="video-overlay"></div>
-                            <div class="play-btn"><i class="fas fa-play"></i></div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Advokat va prokuror: qay biri kuchli?</h3>
-                            <p class="card-text" data-translate="video4Desc">Who is stronger in court — the defence lawyer or the prosecutor? An honest discussion about the balance of power in Uzbekistan's justice system.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: Қачонгача совет усулида бизнес юритамиз?! -->
-                    <div class="card video-card" onclick="window.open('https://www.youtube.com/watch?v=pr4rdF4rico', '_blank')">
-                        <div class="video-wrapper">
-                            <img src="https://img.youtube.com/vi/pr4rdF4rico/hqdefault.jpg" alt="Video Thumbnail" class="card-image">
-                            <div class="video-overlay"></div>
-                            <div class="play-btn"><i class="fas fa-play"></i></div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Қачонгача совет усулида бизнес юритамиз?!</h3>
-                            <p class="card-text" data-translate="video5Desc">An open conversation about outdated Soviet-era business practices and what legal modernisation requires of today's entrepreneurs.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 6: ЙПХ ходими видеосини интернетга жойлаш қонунийми? -->
-                    <div class="card video-card" onclick="window.open('https://www.youtube.com/watch?v=cfNo02Lnf0Y&t=83s', '_blank')">
-                        <div class="video-wrapper">
-                            <img src="https://img.youtube.com/vi/cfNo02Lnf0Y/hqdefault.jpg" alt="Video Thumbnail" class="card-image">
-                            <div class="video-overlay"></div>
-                            <div class="play-btn"><i class="fas fa-play"></i></div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">ЙПХ ходими видеосини интернетга жойлаш қонунийми?</h3>
-                            <p class="card-text" data-translate="video6Desc">Is it legal to film a traffic police officer and post the video online? A legal analysis of citizens' rights and restrictions.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 7: Mubashshir Ahmad tergovi tafsilotlari! -->
-                    <div class="card video-card" onclick="window.open('https://www.youtube.com/watch?v=qXnUKvYtf-I&t=4s', '_blank')">
-                        <div class="video-wrapper">
-                            <img src="https://img.youtube.com/vi/qXnUKvYtf-I/hqdefault.jpg" alt="Video Thumbnail" class="card-image">
-                            <div class="video-overlay"></div>
-                            <div class="play-btn"><i class="fas fa-play"></i></div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Mubashshir Ahmad tergovi tafsilotlari!</h3>
-                            <p class="card-text" data-translate="video7Desc">Details of the Mubashshir Ahmad investigation — a legal commentary on a high-profile public case and its procedural aspects.</p>
-                        </div>
-                    </div>
+                <div class="featured-info">
+                    <span class="fi-tag" data-translate="featuredTag">Featured Video</span>
+                    <h2 data-translate="featuredVideoTitle">Tashkent Law Spring — ИИ в работе адвоката</h2>
+                    <p data-translate="featuredVideoDesc">Abdulloh Sodiq speaks at Tashkent Law Spring on artificial intelligence in legal practice: advantages, risks and prospects of using AI tools in the work of a lawyer.</p>
+                    <a href="#" onclick="event.preventDefault();window.open('https://www.youtube.com/watch?v=bEeeMbHWA-M&t=47s','_blank')" class="btn btn-primary"><i class="fas fa-play-circle"></i> <span data-translate="watchNow">Watch Now</span></a>
                 </div>
             </div>
         </section>
+
+        <!-- ── VIDEO GRID ── -->
+        <section class="videos-section">
+            <p class="section-label" data-translate="lecturesTitle">Lectures &amp; Presentations</p>
+            <h2 class="section-headline" data-translate="lecturesTitle">Lectures &amp; Presentations</h2>
+
+            <div class="videos-grid">
+
+                <div class="vid-card reveal" onclick="window.open('https://www.youtube.com/watch?v=jX3EV1c8zHw','_blank')">
+                    <div class="vid-thumb">
+                        <img src="https://img.youtube.com/vi/jX3EV1c8zHw/hqdefault.jpg" alt="">
+                        <div class="vid-thumb-overlay"></div>
+                        <div class="vid-play-sm"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="vid-card-body">
+                        <h3 class="vid-card-native">Sun'iy intellektning huquq dunyosiga ta'siri</h3>
+                        <p class="vid-card-desc" data-translate="video1Desc">How AI is changing the work of legal professionals — analysis, forecasts and practical advice for lawyers.</p>
+                    </div>
+                </div>
+
+                <div class="vid-card reveal" onclick="window.open('https://www.youtube.com/watch?v=9Vc-3pC0nl8&t=33s','_blank')">
+                    <div class="vid-thumb">
+                        <img src="https://img.youtube.com/vi/9Vc-3pC0nl8/hqdefault.jpg" alt="">
+                        <div class="vid-thumb-overlay"></div>
+                        <div class="vid-play-sm"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="vid-card-body">
+                        <h3 class="vid-card-native">Қарз тўловини мажбурий қилувчи ҳуқуқий инструмен</h3>
+                        <p class="vid-card-desc" data-translate="video2Desc">Legal instruments to compel debt repayment — practical guidance and real case examples.</p>
+                    </div>
+                </div>
+
+                <div class="vid-card reveal" onclick="window.open('https://www.youtube.com/watch?v=ZD_LSyxMMH4','_blank')">
+                    <div class="vid-thumb">
+                        <img src="https://img.youtube.com/vi/ZD_LSyxMMH4/hqdefault.jpg" alt="">
+                        <div class="vid-thumb-overlay"></div>
+                        <div class="vid-play-sm"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="vid-card-body">
+                        <h3 class="vid-card-native">FIRIBGARLIK: ADVOKAT vs PROKUROR MULOHAZALARI</h3>
+                        <p class="vid-card-desc" data-translate="video3Desc">Fraud cases: a debate between defence attorney and prosecutor on evidence, legal qualification and courtroom strategy.</p>
+                    </div>
+                </div>
+
+                <div class="vid-card reveal" onclick="window.open('https://www.youtube.com/watch?v=mePXlM2M4V4','_blank')">
+                    <div class="vid-thumb">
+                        <img src="https://img.youtube.com/vi/mePXlM2M4V4/hqdefault.jpg" alt="">
+                        <div class="vid-thumb-overlay"></div>
+                        <div class="vid-play-sm"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="vid-card-body">
+                        <h3 class="vid-card-native">Advokat va prokuror: qay biri kuchli?</h3>
+                        <p class="vid-card-desc" data-translate="video4Desc">Who is stronger in court — the defence lawyer or the prosecutor? An honest discussion about the balance of power.</p>
+                    </div>
+                </div>
+
+                <div class="vid-card reveal" onclick="window.open('https://www.youtube.com/watch?v=pr4rdF4rico','_blank')">
+                    <div class="vid-thumb">
+                        <img src="https://img.youtube.com/vi/pr4rdF4rico/hqdefault.jpg" alt="">
+                        <div class="vid-thumb-overlay"></div>
+                        <div class="vid-play-sm"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="vid-card-body">
+                        <h3 class="vid-card-native">Қачонгача совет усулида бизнес юритамиз?!</h3>
+                        <p class="vid-card-desc" data-translate="video5Desc">An open conversation about outdated Soviet-era business practices and what legal modernisation requires.</p>
+                    </div>
+                </div>
+
+                <div class="vid-card reveal" onclick="window.open('https://www.youtube.com/watch?v=cfNo02Lnf0Y&t=83s','_blank')">
+                    <div class="vid-thumb">
+                        <img src="https://img.youtube.com/vi/cfNo02Lnf0Y/hqdefault.jpg" alt="">
+                        <div class="vid-thumb-overlay"></div>
+                        <div class="vid-play-sm"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="vid-card-body">
+                        <h3 class="vid-card-native">ЙПХ ходими видеосини интернетга жойлаш қонунийми?</h3>
+                        <p class="vid-card-desc" data-translate="video6Desc">Is it legal to film a traffic police officer and post the video online? A legal analysis of citizens' rights.</p>
+                    </div>
+                </div>
+
+                <div class="vid-card reveal" onclick="window.open('https://www.youtube.com/watch?v=qXnUKvYtf-I&t=4s','_blank')">
+                    <div class="vid-thumb">
+                        <img src="https://img.youtube.com/vi/qXnUKvYtf-I/hqdefault.jpg" alt="">
+                        <div class="vid-thumb-overlay"></div>
+                        <div class="vid-play-sm"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="vid-card-body">
+                        <h3 class="vid-card-native">Mubashshir Ahmad tergovi tafsilotlari!</h3>
+                        <p class="vid-card-desc" data-translate="video7Desc">Details of the Mubashshir Ahmad investigation — a legal commentary on a high-profile public case.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -172,32 +365,22 @@
     </footer>
 
     <script src="translations.js"></script>
-    
-    <!-- NEW: Mobile Menu Toggle Script -->
     <script>
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
     const body = document.body;
-
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        
-        // Toggle body scroll lock
-        if (navLinks.classList.contains('active')) {
-            body.classList.add('menu-open');
-        } else {
-            body.classList.remove('menu-open');
-        }
+        body.classList.toggle('menu-open', navLinks.classList.contains('active'));
     });
-
-    // Close menu and unlock scroll when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            body.classList.remove('menu-open');
-        });
-    });
-</script>
-
+    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+    }));
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
 </body>
 </html>

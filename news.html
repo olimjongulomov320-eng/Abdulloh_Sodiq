@@ -4,39 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News - Abdulloh Sodiq</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .news-img-finance  { background: linear-gradient(135deg, #1a5276, #2980b9); }
-        .news-img-legaltech{ background: linear-gradient(135deg, #145a32, #27ae60); }
-        .news-img-ai       { background: linear-gradient(135deg, #4a235a, #8e44ad); }
-        .news-img-legal    { background: linear-gradient(135deg, #7b241c, #e74c3c); }
-        .news-img-privacy  { background: linear-gradient(135deg, #1e8449, #52be80); }
-        .news-img-cyber    { background: linear-gradient(135deg, #784212, #f39c12); }
-        .tag-ai        { background: rgba(0,184,148,0.12); color: #00b894; }
-        .tag-privacy   { background: rgba(0,184,148,0.08); color: #8ab8b3; }
-        .tag-cyber     { background: rgba(0,184,148,0.1);  color: #00cca3; }
-        .tag-legal     { background: rgba(0,184,148,0.08); color: #8ab8b3; }
-        .tag-finance   { background: rgba(0,184,148,0.12); color: #00b894; }
-        .tag-legaltech { background: rgba(0,184,148,0.1);  color: #00cca3; }
-        .news-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: all 0.35s; display: flex; flex-direction: column; }
-        .news-card:hover { transform: translateY(-6px); border-color: var(--border-bright); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(0,184,148,0.15); }
-        .news-card-image { width: 100%; height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(255,255,255,0.75); }
-        .news-card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-        .news-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
-        .news-date { font-size: 0.82rem; color: var(--text-muted); }
-        .news-tag { font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.7rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .news-card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-white); margin-bottom: 0.7rem; line-height: 1.4; }
-        .news-card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.2rem; }
-        .news-source { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem; }
-        .news-read-link { font-size: 0.88rem; font-weight: 600; color: var(--emerald); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; margin-top: auto; transition: gap 0.2s; }
+        /* gradient banners */
+        .news-img-finance  { background: linear-gradient(135deg, #1a3a5c, #2980b9); }
+        .news-img-legaltech{ background: linear-gradient(135deg, #0d3321, #27ae60); }
+        .news-img-ai       { background: linear-gradient(135deg, #2a1040, #8e44ad); }
+        .news-img-legal    { background: linear-gradient(135deg, #3d1010, #c0392b); }
+        .news-img-privacy  { background: linear-gradient(135deg, #0d2e1a, #27ae60); }
+        .news-img-cyber    { background: linear-gradient(135deg, #3d2800, #e67e22); }
+
+        /* tags */
+        .tag-ai        { background: rgba(0,184,148,0.12); color: var(--emerald); }
+        .tag-privacy   { background: rgba(0,184,148,0.07); color: var(--text-muted); }
+        .tag-cyber     { background: rgba(230,126,34,0.12); color: #e67e22; }
+        .tag-legal     { background: rgba(0,184,148,0.07); color: var(--text-muted); }
+        .tag-finance   { background: rgba(41,128,185,0.12); color: #5dade2; }
+        .tag-legaltech { background: rgba(0,204,163,0.1);  color: var(--emerald-glow); }
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            min-height: 45vh;
+            display: flex; flex-direction: column;
+            justify-content: flex-end;
+            padding: 10rem 5rem 4rem;
+            position: relative; z-index: 1;
+            border-bottom: 1px solid var(--border);
+        }
+        .page-hero-label {
+            font-size: 0.72rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--emerald);
+            margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .page-hero-label::before {
+            content: ''; width: 40px; height: 1px;
+            background: var(--emerald); display: inline-block;
+        }
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900; color: var(--text-white);
+            letter-spacing: -2px; line-height: 1;
+        }
+        .page-hero h1 .accent { color: var(--emerald); }
+
+        /* ── NEWS GRID ── */
+        .news-section {
+            padding: 7rem 5rem;
+            position: relative; z-index: 1;
+        }
+        .section-label {
+            font-size: 0.72rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--emerald);
+            margin-bottom: 1rem;
+        }
+        .section-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 900; color: var(--text-white);
+            line-height: 1.15; margin-bottom: 3rem;
+        }
+
+        /* news list — not a grid, but a stacked editorial layout */
+        .news-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+
+        .news-row {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            background: var(--bg-dark);
+            transition: background 0.3s;
+            position: relative;
+        }
+        .news-row::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .news-row:hover { background: var(--bg-card); }
+        .news-row:hover::before { opacity: 1; }
+
+        .news-row-img {
+            height: 200px; overflow: hidden; position: relative;
+        }
+        .news-row-img .icon-banner {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; color: rgba(255,255,255,0.6);
+        }
+        .news-row-body {
+            padding: 2rem 2.5rem;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .news-row-meta {
+            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 0.8rem; flex-wrap: wrap;
+        }
+        .news-tag {
+            font-size: 0.68rem; font-weight: 700;
+            padding: 0.2rem 0.7rem; border-radius: 20px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .news-date {
+            font-size: 0.78rem; color: var(--text-muted);
+        }
+        .news-row-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; color: var(--text-white);
+            margin-bottom: 0.8rem; line-height: 1.35;
+        }
+        .news-row-desc {
+            font-size: 0.88rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 1.2rem; max-width: 580px;
+        }
+        .news-row-footer {
+            display: flex; align-items: center; gap: 1.5rem;
+        }
+        .news-source {
+            font-size: 0.75rem; color: rgba(138,184,179,0.5);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .news-read-link {
+            font-size: 0.82rem; font-weight: 600;
+            color: var(--emerald); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            transition: gap 0.2s;
+        }
         .news-read-link:hover { gap: 0.7rem; }
-        .featured-article-card { background: var(--bg-card); border-left: 3px solid var(--emerald); border-radius: 0 8px 8px 0; padding: 1.8rem; border: 1px solid var(--border); border-left: 3px solid var(--emerald); transition: transform 0.2s; }
-        .featured-article-card:hover { transform: translateX(5px); border-color: var(--border-bright); }
-        .featured-article-card .news-tag { margin-bottom: 0.8rem; display: inline-block; }
-        .featured-article-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.7rem; }
-        .featured-article-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.2rem; }
+
+        /* ── FEATURED ARTICLES (editorial cards) ── */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            margin-top: 3rem;
+        }
+        .featured-card {
+            background: var(--bg-dark);
+            padding: 3rem;
+            transition: background 0.3s;
+            position: relative;
+        }
+        .featured-card:hover { background: var(--bg-card); }
+        .featured-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .featured-card:hover::before { opacity: 1; }
+        .featured-card .news-tag { margin-bottom: 1rem; display: inline-block; }
+        .featured-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem; color: var(--text-white);
+            margin-bottom: 1rem; line-height: 1.4;
+        }
+        .featured-card p {
+            font-size: 0.9rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .news-row { grid-template-columns: 1fr; }
+            .news-row-img { height: 180px; }
+            .featured-grid { grid-template-columns: 1fr; }
+            .news-section, .page-hero { padding: 5rem 2rem; }
+            .page-hero { padding-top: 8rem; }
+        }
     </style>
 </head>
 <body class="no-sidebar">
@@ -70,146 +210,152 @@
         </nav>
     </header>
 
-    <main>
-        <div class="page-header">
-            <h1 class="page-title" data-translate="newsTitle">News</h1>
+    <main style="position:relative;z-index:1;">
+
+        <!-- ── PAGE HERO ── -->
+        <div class="page-hero">
+            <p class="page-hero-label" data-translate="newsLink">News</p>
+            <h1><span data-translate="latestUpdates">Latest</span> <span class="accent">Updates</span></h1>
         </div>
 
-        <!-- Latest News Section -->
-        <section class="content-section">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="latestUpdates">Latest Updates</h2>
-                <div class="card-grid">
+        <!-- ── NEWS LIST ── -->
+        <section class="news-section">
+            <p class="section-label" data-translate="newsLink">News</p>
+            <h2 class="section-headline" data-translate="latestUpdates">Latest Updates</h2>
 
-                    <!-- News 1: Islamic Banking Law Uzbekistan -->
-                    <div class="news-card">
-                        <div class="news-card-image news-img-finance">
-                            <i class="fas fa-university"></i>
+            <div class="news-list">
+
+                <div class="news-row reveal">
+                    <div class="news-row-img">
+                        <div class="icon-banner news-img-finance"><i class="fas fa-university"></i></div>
+                    </div>
+                    <div class="news-row-body">
+                        <div class="news-row-meta">
+                            <span class="news-tag tag-finance" data-translate="tagFinance">Finance Law</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news1date">27 March 2026</span></span>
                         </div>
-                        <div class="news-card-body">
-                            <div class="news-meta">
-                                <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news1date">27 March 2026</span></span>
-                                <span class="news-tag tag-finance" data-translate="tagFinance">Finance Law</span>
-                            </div>
-                            <h3 class="news-card-title" data-translate="news1Title">Uzbekistan Adopts Law on Islamic Banking</h3>
-                            <p class="news-card-desc" data-translate="news1Desc">President Mirziyoyev signed Law No. ZRU-1126 introducing Islamic banking instruments — murabaha, mudaraba, musharaka and others — into Uzbekistan's financial system. The country officially joins the dual banking model, opening major opportunities for businesses and investors in Islamic finance.</p>
-                            <div class="news-source"><i class="fas fa-external-link-alt"></i> Spot.uz</div>
+                        <h3 class="news-row-title" data-translate="news1Title">Uzbekistan Adopts Law on Islamic Banking</h3>
+                        <p class="news-row-desc" data-translate="news1Desc">President Mirziyoyev signed Law No. ZRU-1126 introducing Islamic banking instruments — murabaha, mudaraba, musharaka and others — into Uzbekistan's financial system.</p>
+                        <div class="news-row-footer">
+                            <span class="news-source"><i class="fas fa-external-link-alt"></i> Spot.uz</span>
                             <a href="https://www.spot.uz/ru/2026/03/28/islamic-banking/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- News 2: SmartLex.uz -->
-                    <div class="news-card">
-                        <div class="news-card-image news-img-legaltech">
-                            <i class="fas fa-file-contract"></i>
+                <div class="news-row reveal">
+                    <div class="news-row-img">
+                        <div class="icon-banner news-img-legaltech"><i class="fas fa-file-contract"></i></div>
+                    </div>
+                    <div class="news-row-body">
+                        <div class="news-row-meta">
+                            <span class="news-tag tag-legaltech" data-translate="tagLegalTech">Legal Tech</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news2date">2025</span></span>
                         </div>
-                        <div class="news-card-body">
-                            <div class="news-meta">
-                                <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news2date">2025</span></span>
-                                <span class="news-tag tag-legaltech" data-translate="tagLegalTech">Legal Tech</span>
-                            </div>
-                            <h3 class="news-card-title" data-translate="news2Title">SmartLex.uz: AI-Powered Contract Management Comes to Uzbekistan</h3>
-                            <p class="news-card-desc" data-translate="news2Desc">SmartLex.uz has emerged as Uzbekistan's leading AI platform for automated contract management, enabling businesses to draft, analyze, and manage legal documents faster and with fewer errors. The platform is designed specifically for the Uzbek legal environment, reducing legal costs and improving compliance.</p>
-                            <div class="news-source"><i class="fas fa-external-link-alt"></i> SmartLex.uz</div>
+                        <h3 class="news-row-title" data-translate="news2Title">SmartLex.uz: AI-Powered Contract Management Comes to Uzbekistan</h3>
+                        <p class="news-row-desc" data-translate="news2Desc">SmartLex.uz has emerged as Uzbekistan's leading AI platform for automated contract management, enabling businesses to draft, analyze, and manage legal documents faster.</p>
+                        <div class="news-row-footer">
+                            <span class="news-source"><i class="fas fa-external-link-alt"></i> SmartLex.uz</span>
                             <a href="https://smartlex.uz/ru/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- News 3: WakilAI -->
-                    <div class="news-card">
-                        <div class="news-card-image news-img-ai">
-                            <i class="fas fa-robot"></i>
+                <div class="news-row reveal">
+                    <div class="news-row-img">
+                        <div class="icon-banner news-img-ai"><i class="fas fa-robot"></i></div>
+                    </div>
+                    <div class="news-row-body">
+                        <div class="news-row-meta">
+                            <span class="news-tag tag-legaltech" data-translate="tagLegalTech">Legal Tech</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news3date">2025</span></span>
                         </div>
-                        <div class="news-card-body">
-                            <div class="news-meta">
-                                <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news3date">2025</span></span>
-                                <span class="news-tag tag-legaltech" data-translate="tagLegalTech">Legal Tech</span>
-                            </div>
-                            <h3 class="news-card-title" data-translate="news3Title">WakilAI: Uzbekistan's First Private Legal AI Ecosystem</h3>
-                            <p class="news-card-desc" data-translate="news3Desc">WakilAI has launched as the first private Legal AI ecosystem in Uzbekistan, combining RAG-based legal assistance with a lawyer-client marketplace. The multilingual platform (Uzbek, Russian, English) provides citation-backed answers from official legal sources (lex.uz) while connecting citizens with professional lawyers.</p>
-                            <div class="news-source"><i class="fas fa-external-link-alt"></i> WakilAI</div>
+                        <h3 class="news-row-title" data-translate="news3Title">WakilAI: Uzbekistan's First Private Legal AI Ecosystem</h3>
+                        <p class="news-row-desc" data-translate="news3Desc">WakilAI has launched as the first private Legal AI ecosystem in Uzbekistan, combining RAG-based legal assistance with a lawyer-client marketplace.</p>
+                        <div class="news-row-footer">
+                            <span class="news-source"><i class="fas fa-external-link-alt"></i> WakilAI</span>
                             <a href="https://wakil.ai/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- News 4: Uzbekistan AI Strategy 2030 -->
-                    <div class="news-card">
-                        <div class="news-card-image news-img-ai">
-                            <i class="fas fa-brain"></i>
+                <div class="news-row reveal">
+                    <div class="news-row-img">
+                        <div class="icon-banner news-img-ai"><i class="fas fa-brain"></i></div>
+                    </div>
+                    <div class="news-row-body">
+                        <div class="news-row-meta">
+                            <span class="news-tag tag-ai" data-translate="tagAI">AI Law</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news4date">14 October 2024</span></span>
                         </div>
-                        <div class="news-card-body">
-                            <div class="news-meta">
-                                <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news4date">14 October 2024</span></span>
-                                <span class="news-tag tag-ai" data-translate="tagAI">AI Law</span>
-                            </div>
-                            <h3 class="news-card-title" data-translate="news4Title">Uzbekistan Approves AI Development Strategy Until 2030</h3>
-                            <p class="news-card-desc" data-translate="news4Desc">Uzbekistan adopted a comprehensive AI development strategy covering 60+ priority projects across healthcare, courts, and public services. The strategy includes an AI legal assistant for citizens and a regulatory document analysis platform for lawyers and judges — signaling a major shift in the country's legal tech landscape.</p>
-                            <div class="news-source"><i class="fas fa-external-link-alt"></i> Lex.uz</div>
+                        <h3 class="news-row-title" data-translate="news4Title">Uzbekistan Approves AI Development Strategy Until 2030</h3>
+                        <p class="news-row-desc" data-translate="news4Desc">Uzbekistan adopted a comprehensive AI development strategy covering 60+ priority projects across healthcare, courts, and public services.</p>
+                        <div class="news-row-footer">
+                            <span class="news-source"><i class="fas fa-external-link-alt"></i> Lex.uz</span>
                             <a href="https://www.lex.uz/docs/7159258" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- News 5: New LLC Law April 2026 -->
-                    <div class="news-card">
-                        <div class="news-card-image news-img-legal">
-                            <i class="fas fa-building"></i>
+                <div class="news-row reveal">
+                    <div class="news-row-img">
+                        <div class="icon-banner news-img-legal"><i class="fas fa-building"></i></div>
+                    </div>
+                    <div class="news-row-body">
+                        <div class="news-row-meta">
+                            <span class="news-tag tag-legal" data-translate="tagLegal">Corporate Law</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news5date">21 April 2026</span></span>
                         </div>
-                        <div class="news-card-body">
-                            <div class="news-meta">
-                                <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news5date">21 April 2026</span></span>
-                                <span class="news-tag tag-legal" data-translate="tagLegal">Corporate Law</span>
-                            </div>
-                            <h3 class="news-card-title" data-translate="news5Title">Uzbekistan Adopts New Law on Limited Liability Companies</h3>
-                            <p class="news-card-desc" data-translate="news5Desc">President Mirziyoyev signed Law No. ZRU-1137 — a landmark overhaul of corporate governance for LLCs in Uzbekistan. The 71-article law modernises supervisory board powers, introduces remote voting for decisions, strengthens minority shareholder rights, and eliminates existing legal loopholes. Enters into force on 22 July 2026.</p>
-                            <div class="news-source"><i class="fas fa-external-link-alt"></i> Spot.uz</div>
+                        <h3 class="news-row-title" data-translate="news5Title">Uzbekistan Adopts New Law on Limited Liability Companies</h3>
+                        <p class="news-row-desc" data-translate="news5Desc">President Mirziyoyev signed Law No. ZRU-1137 — a landmark overhaul of corporate governance for LLCs in Uzbekistan. Enters into force on 22 July 2026.</p>
+                        <div class="news-row-footer">
+                            <span class="news-source"><i class="fas fa-external-link-alt"></i> Spot.uz</span>
                             <a href="https://www.spot.uz/ru/2026/04/22/llc-act-new/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- News 6: Uzbekistan Tax Reforms 2026 -->
-                    <div class="news-card">
-                        <div class="news-card-image news-img-finance">
-                            <i class="fas fa-hand-holding-usd"></i>
+                <div class="news-row reveal">
+                    <div class="news-row-img">
+                        <div class="icon-banner news-img-finance"><i class="fas fa-hand-holding-usd"></i></div>
+                    </div>
+                    <div class="news-row-body">
+                        <div class="news-row-meta">
+                            <span class="news-tag tag-finance" data-translate="tagFinance">Finance Law</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news6date">1 May 2026</span></span>
                         </div>
-                        <div class="news-card-body">
-                            <div class="news-meta">
-                                <span class="news-date"><i class="far fa-calendar-alt"></i> <span data-translate="news6date">1 May 2026</span></span>
-                                <span class="news-tag tag-finance" data-translate="tagFinance">Finance Law</span>
-                            </div>
-                            <h3 class="news-card-title" data-translate="news6Title">Uzbekistan Launches Business Creditworthiness Assessment System</h3>
-                            <p class="news-card-desc" data-translate="news6Desc">From 1 May 2026, Uzbekistan introduced a unified business creditworthiness assessment system drawing on tax payments, utility bills, turnover and export data. Individual entrepreneurs with turnover under 1 billion soums now pay just 1% tax — down from 4% — as part of sweeping reforms to improve the country's investment climate.</p>
-                            <div class="news-source"><i class="fas fa-external-link-alt"></i> EY Uzbekistan</div>
+                        <h3 class="news-row-title" data-translate="news6Title">Uzbekistan Launches Business Creditworthiness Assessment System</h3>
+                        <p class="news-row-desc" data-translate="news6Desc">From 1 May 2026, Uzbekistan introduced a unified business creditworthiness assessment system. Individual entrepreneurs with turnover under 1 billion soums now pay just 1% tax.</p>
+                        <div class="news-row-footer">
+                            <span class="news-source"><i class="fas fa-external-link-alt"></i> EY Uzbekistan</span>
                             <a href="https://www.ey.com/en_uz/technical/tax-alerts/2026/01/uzbekistan-tax-updates-2026" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readMore">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
+                </div>
 
+            </div>
+        </section>
+
+        <!-- ── FEATURED ARTICLES ── -->
+        <section class="news-section" style="padding-top:0;">
+            <p class="section-label" data-translate="featuredTitle">Featured</p>
+            <h2 class="section-headline" data-translate="featuredTitle">Featured Articles</h2>
+            <div class="featured-grid">
+                <div class="featured-card reveal">
+                    <span class="news-tag tag-finance" data-translate="tagFinance">Finance Law</span>
+                    <h3 data-translate="featured1Title">Islamic Banking in Uzbekistan: What Business Needs to Know</h3>
+                    <p data-translate="featured1Desc">An in-depth look at Law No. ZRU-1126: which instruments are now permitted, how the dual banking system will work, what new opportunities open for entrepreneurs, and what legal risks businesses should be prepared for.</p>
+                    <a href="https://www.gazeta.uz/ru/2026/03/30/islamic-finance/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readArticle">Read Article <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="featured-card reveal">
+                    <span class="news-tag tag-legaltech" data-translate="tagLegalTech">Legal Tech</span>
+                    <h3 data-translate="featured2Title">How AI Is Transforming the Legal Profession in Uzbekistan</h3>
+                    <p data-translate="featured2Desc">From SmartLex's AI contract management to WakilAI's legal assistance ecosystem — a comprehensive overview of how artificial intelligence is reshaping legal services in Uzbekistan.</p>
+                    <a href="https://settleadvisory.com/useful-links/how-ai-is-transforming-the-legal-profession-in-uzbekistan-reality-challenges-and-prospects/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readArticle">Read Article <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Articles Section -->
-        <section class="content-section">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="featuredTitle">Featured Articles</h2>
-                <div class="card-grid">
-
-                    <div class="featured-article-card">
-                        <span class="news-tag tag-finance" data-translate="tagFinance">Finance Law</span>
-                        <h3 data-translate="featured1Title">Islamic Banking in Uzbekistan: What Business Needs to Know</h3>
-                        <p data-translate="featured1Desc">An in-depth look at Law No. ZRU-1126: which instruments are now permitted, how the dual banking system will work, what new opportunities open for entrepreneurs, and what legal risks businesses should be prepared for.</p>
-                        <a href="https://www.gazeta.uz/ru/2026/03/30/islamic-finance/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readArticle">Read Article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-
-                    <div class="featured-article-card">
-                        <span class="news-tag tag-legaltech" data-translate="tagLegalTech">Legal Tech</span>
-                        <h3 data-translate="featured2Title">How AI Is Transforming the Legal Profession in Uzbekistan</h3>
-                        <p data-translate="featured2Desc">From SmartLex's AI contract management to WakilAI's legal assistance ecosystem — a comprehensive overview of how artificial intelligence is reshaping legal services in Uzbekistan and what it means for lawyers, businesses, and citizens seeking access to justice.</p>
-                        <a href="https://settleadvisory.com/useful-links/how-ai-is-transforming-the-legal-profession-in-uzbekistan-reality-challenges-and-prospects/" target="_blank" rel="noopener noreferrer" class="news-read-link" data-translate="readArticle">Read Article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
@@ -220,21 +366,21 @@
 
     <script src="translations.js"></script>
     <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        const body = document.body;
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            body.classList.toggle('menu-open', navLinks.classList.contains('active'));
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                body.classList.remove('menu-open');
-            });
-        });
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const body = document.body;
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open', navLinks.classList.contains('active'));
+    });
+    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+    }));
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     </script>
 </body>
 </html>

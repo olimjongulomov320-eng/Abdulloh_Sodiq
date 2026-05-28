@@ -4,31 +4,278 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications - Abdulloh Sodiq</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-
     <style>
-        .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .case-card { background: var(--bg-card); border-radius: 4px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; transition: all 0.35s; }
-        .case-card:hover { transform: translateY(-6px); border-color: var(--border-bright); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(0,184,148,0.15); }
-        .case-header { background: linear-gradient(135deg, rgba(0,184,148,0.15), rgba(0,184,148,0.05)); padding: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border); }
-        .case-number { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--emerald); }
-        .case-year { font-size: 0.85rem; font-weight: 500; background: rgba(0,184,148,0.1); color: var(--emerald); padding: 0.2rem 0.7rem; border-radius: 20px; border: 1px solid var(--border); }
-        .case-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-        .case-category { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--emerald); margin-bottom: 0.8rem; }
-        .case-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-white); margin-bottom: 1rem; line-height: 1.4; }
-        .case-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.2rem; }
-        .case-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
-        .case-tag { font-size: 0.72rem; padding: 0.25rem 0.7rem; border-radius: 20px; background: rgba(0,184,148,0.06); color: var(--text-muted); border: 1px solid var(--border); }
-        .case-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto; }
-        .case-status { font-size: 0.78rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
-        .case-status.resolved { color: var(--emerald); }
-        .case-status.ongoing  { color: #f39c12; }
+        /* Page hero */
+        .pubs-hero {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 10rem 5rem 4rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pubs-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 80% 40%, rgba(0,184,148,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pubs-hero-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 1.2rem;
+        }
+        .pubs-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--text-white);
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+        .pubs-hero-title .accent { color: var(--emerald); }
+        .pubs-hero-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 60ch;
+            line-height: 1.7;
+        }
+
+        /* Section wrapper */
+        .pubs-section {
+            padding: 5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .pubs-section-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 1rem;
+        }
+        .pubs-section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 3rem;
+        }
+
+        /* Article rows — editorial list */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--border);
+        }
+        .article-row {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 0;
+            background: var(--bg-dark);
+            padding: 2.8rem 0;
+            position: relative;
+            transition: background 0.25s;
+        }
+        .article-row::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald), transparent);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .article-row:hover { background: var(--bg-card); }
+        .article-row:hover::before { opacity: 1; }
+
+        .article-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--border-bright);
+            line-height: 1;
+            padding-right: 2rem;
+        }
+        .article-body { border-left: 1px solid var(--border); padding-left: 2.5rem; }
+        .article-category {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 0.6rem;
+        }
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-white);
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        .article-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 65ch;
+        }
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+        .article-tag {
+            font-size: 0.72rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            background: rgba(0,184,148,0.06);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .article-action {
+            padding-left: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            gap: 0.8rem;
+        }
+        .article-status {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            background: rgba(0,184,148,0.1);
+            color: var(--emerald);
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        .article-link {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--emerald);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+            transition: gap 0.2s;
+        }
+        .article-link:hover { gap: 0.8rem; }
+
+        /* Case studies — numbered grid */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+        .case-item {
+            background: var(--bg-dark);
+            padding: 2.5rem;
+            position: relative;
+            transition: background 0.25s;
+        }
+        .case-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald), transparent);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .case-item:hover { background: var(--bg-card); }
+        .case-item:hover::before { opacity: 1; }
+        .case-item-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--border-bright);
+            line-height: 1;
+            margin-bottom: 1.2rem;
+        }
+        .case-item-category {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 0.6rem;
+        }
+        .case-item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-white);
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        .case-item-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+        .case-item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+        .case-item-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+        .case-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
         .case-status.landmark { color: var(--emerald); }
-        .case-link { font-size: 0.88rem; font-weight: 500; color: var(--emerald); text-decoration: none; display: flex; align-items: center; gap: 0.3rem; transition: gap 0.2s; }
-        .case-link:hover { gap: 0.6rem; }
-        @media (max-width: 768px) { .case-grid { grid-template-columns: 1fr; } }
+        .case-status.ongoing  { color: #f39c12; }
+        .case-status.resolved { color: var(--emerald); }
+        .case-read {
+            font-size: 0.83rem;
+            font-weight: 500;
+            color: var(--emerald);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s;
+        }
+        .case-read:hover { gap: 0.6rem; }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 900px) {
+            .pubs-hero { padding: 8rem 2rem 3rem; }
+            .pubs-section { padding: 3rem 2rem; }
+            .article-row { grid-template-columns: 50px 1fr; }
+            .article-action { display: none; }
+            .case-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 1100px) {
+            .case-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body class="no-sidebar">
@@ -63,206 +310,169 @@
     </header>
 
     <main>
-        <div class="page-header">
-            <h1 class="page-title" data-translate="pubsTitle">Publications</h1>
-        </div>
+        <!-- Page Hero -->
+        <section class="pubs-hero">
+            <p class="pubs-hero-label" data-translate="pubsLabel">Research & Writing</p>
+            <h1 class="pubs-hero-title" data-translate="pubsTitle">Publications &amp; <span class="accent">Research</span></h1>
+            <p class="pubs-hero-desc" data-translate="pubsHeroDesc">Peer-reviewed articles and analytical case studies at the intersection of law, finance, and technology in Uzbekistan and the wider region.</p>
+        </section>
 
         <!-- Articles Section -->
-        <section class="content-section">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="articlesTitle">Articles</h2>
+        <section class="pubs-section">
+            <p class="pubs-section-label" data-translate="articlesLabel">Peer-Reviewed</p>
+            <h2 class="pubs-section-heading" data-translate="articlesTitle">Articles</h2>
 
-                <div class="case-grid">
-
-                    <!-- Article 1 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="art1Number">Article No. 01</span>
-                            <span class="case-year">2026</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="art1Category">Islamic Finance &amp; Consumer Law</div>
-                            <h3 class="case-title" data-translate="art1Title">Consumer Protection in Islamic Financial Services within a Dual Banking System: Overcoming Information Asymmetry</h3>
-                            <p class="case-desc" data-translate="art1Desc">Examines legal mechanisms for overcoming information asymmetry between Islamic financial service providers and consumers in Uzbekistan's emerging dual banking system. Comparative analysis of Malaysia, Indonesia, UK and Russia. Published in Innovations in Technology and Science Education (ISSN 2181-371X), pp. 77–84.</p>
-                            <div class="case-tags">
-                                <span class="case-tag">Islamic Banking</span>
-                                <span class="case-tag">Consumer Protection</span>
-                                <span class="case-tag">Uzbekistan</span>
-                                <span class="case-tag">Dual Banking</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status landmark"><i class="fas fa-file-alt"></i> <span data-translate="statusPublished">Published</span></span>
-                                <a href="article1.pdf" class="case-link" target="_blank" data-translate="readArticleLink">Read Article <i class="fas fa-arrow-right"></i></a>
-                            </div>
+            <div class="article-list">
+                <!-- Article 1 -->
+                <div class="article-row reveal">
+                    <div class="article-number">01</div>
+                    <div class="article-body">
+                        <div class="article-category" data-translate="art1Category">Islamic Finance &amp; Consumer Law</div>
+                        <h3 class="article-title" data-translate="art1Title">Consumer Protection in Islamic Financial Services within a Dual Banking System: Overcoming Information Asymmetry</h3>
+                        <p class="article-desc" data-translate="art1Desc">Examines legal mechanisms for overcoming information asymmetry between Islamic financial service providers and consumers in Uzbekistan's emerging dual banking system. Comparative analysis of Malaysia, Indonesia, UK and Russia. Published in Innovations in Technology and Science Education (ISSN 2181-371X), pp. 77–84.</p>
+                        <div class="article-tags">
+                            <span class="article-tag">Islamic Banking</span>
+                            <span class="article-tag">Consumer Protection</span>
+                            <span class="article-tag">Uzbekistan</span>
+                            <span class="article-tag">Dual Banking</span>
+                            <span class="article-tag">2026</span>
                         </div>
                     </div>
+                    <div class="article-action">
+                        <span class="article-status" data-translate="statusPublished">Published</span>
+                        <a href="article1.pdf" class="article-link" target="_blank" data-translate="readArticleLink">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
 
-                    <!-- Article 2 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="art2Number">Article No. 02</span>
-                            <span class="case-year">2026</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="art2Category">International Financial Regulation</div>
-                            <h3 class="case-title" data-translate="art2Title">The Role of AAOIFI, IFSB, and Basel Committee in Ensuring the Regulatory Coherence of Dual Banking Systems</h3>
-                            <p class="case-desc" data-translate="art2Desc">Investigates the complementary roles of AAOIFI, IFSB, and the Basel Committee in achieving regulatory coherence within dual banking systems. Comparative analysis of Malaysia, Bahrain, UAE and Uzbekistan. Published in Society and Innovations (ISSN 2181-1415), Vol. 7, Special Issue 04, pp. 224–232. DOI: 10.47689/2181-1415-vol7-iss4/S-pp224-232</p>
-                            <div class="case-tags">
-                                <span class="case-tag">AAOIFI</span>
-                                <span class="case-tag">IFSB</span>
-                                <span class="case-tag">Basel III</span>
-                                <span class="case-tag">Islamic Finance</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status landmark"><i class="fas fa-file-alt"></i> <span data-translate="statusPublished">Published</span></span>
-                                <a href="article2.pdf" class="case-link" target="_blank" data-translate="readArticleLink">Read Article <i class="fas fa-arrow-right"></i></a>
-                            </div>
+                <!-- Article 2 -->
+                <div class="article-row reveal">
+                    <div class="article-number">02</div>
+                    <div class="article-body">
+                        <div class="article-category" data-translate="art2Category">International Financial Regulation</div>
+                        <h3 class="article-title" data-translate="art2Title">The Role of AAOIFI, IFSB, and Basel Committee in Ensuring the Regulatory Coherence of Dual Banking Systems</h3>
+                        <p class="article-desc" data-translate="art2Desc">Investigates the complementary roles of AAOIFI, IFSB, and the Basel Committee in achieving regulatory coherence within dual banking systems. Comparative analysis of Malaysia, Bahrain, UAE and Uzbekistan. Published in Society and Innovations (ISSN 2181-1415), Vol. 7, Special Issue 04, pp. 224–232. DOI: 10.47689/2181-1415-vol7-iss4/S-pp224-232</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AAOIFI</span>
+                            <span class="article-tag">IFSB</span>
+                            <span class="article-tag">Basel III</span>
+                            <span class="article-tag">Islamic Finance</span>
+                            <span class="article-tag">2026</span>
                         </div>
                     </div>
-
+                    <div class="article-action">
+                        <span class="article-status" data-translate="statusPublished">Published</span>
+                        <a href="article2.pdf" class="article-link" target="_blank" data-translate="readArticleLink">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Case Studies Section -->
-        <section class="content-section">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="casesTitle">Case Studies</h2>
+        <section class="pubs-section">
+            <p class="pubs-section-label" data-translate="casesLabel">Legal Analysis</p>
+            <h2 class="pubs-section-heading" data-translate="casesTitle">Case Studies</h2>
 
-                <div class="case-grid">
-
-                    <!-- Case 1 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="case1Number">Case No. 01</span>
-                            <span class="case-year">2023</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="case1Category">AI &amp; Medical Law</div>
-                            <h3 class="case-title" data-translate="case1Title">AI-Assisted Diagnosis Liability in Healthcare</h3>
-                            <p class="case-desc" data-translate="case1Desc">Analysis of legal accountability when an AI diagnostic tool provides an incorrect recommendation that leads to patient harm. Examines liability distribution between the software developer, the hospital, and the attending physician.</p>
-                            <div class="case-tags">
-                                <span class="case-tag">AI Liability</span>
-                                <span class="case-tag">Medical Law</span>
-                                <span class="case-tag">Tort</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status landmark"><i class="fas fa-gavel"></i> <span data-translate="statusLandmark">Landmark</span></span>
-                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
+            <div class="case-grid">
+                <!-- Case 1 -->
+                <div class="case-item reveal">
+                    <div class="case-item-number">01</div>
+                    <div class="case-item-category" data-translate="case1Category">AI &amp; Medical Law</div>
+                    <h3 class="case-item-title" data-translate="case1Title">AI-Assisted Diagnosis Liability in Healthcare</h3>
+                    <p class="case-item-desc" data-translate="case1Desc">Analysis of legal accountability when an AI diagnostic tool provides an incorrect recommendation that leads to patient harm. Examines liability distribution between the software developer, the hospital, and the attending physician.</p>
+                    <div class="case-item-tags">
+                        <span class="article-tag">AI Liability</span>
+                        <span class="article-tag">Medical Law</span>
+                        <span class="article-tag">Tort</span>
                     </div>
-
-                    <!-- Case 2 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="case2Number">Case No. 02</span>
-                            <span class="case-year">2023</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="case2Category">Data Privacy</div>
-                            <h3 class="case-title" data-translate="case2Title">GDPR vs. US CLOUD Act: Cross-Border Data Conflict</h3>
-                            <p class="case-desc" data-translate="case2Desc">Comparative analysis of the conflict between European GDPR data protection requirements and the US CLOUD Act obligations, focusing on multinational corporations caught between competing legal regimes.</p>
-                            <div class="case-tags">
-                                <span class="case-tag">GDPR</span>
-                                <span class="case-tag">Data Privacy</span>
-                                <span class="case-tag">International</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status ongoing"><i class="fas fa-spinner"></i> <span data-translate="statusOngoing">Ongoing</span></span>
-                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
+                    <div class="case-item-footer">
+                        <span class="case-status landmark"><i class="fas fa-gavel"></i> <span data-translate="statusLandmark">Landmark</span></span>
+                        <a href="#" class="case-read" data-translate="readCase">Read <i class="fas fa-arrow-right"></i></a>
                     </div>
+                </div>
 
-                    <!-- Case 3 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="case3Number">Case No. 03</span>
-                            <span class="case-year">2022</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="case3Category">Blockchain &amp; Contract Law</div>
-                            <h3 class="case-title" data-translate="case3Title">Smart Contract Enforceability in Commercial Disputes</h3>
-                            <p class="case-desc" data-translate="case3Desc">Examination of whether self-executing blockchain smart contracts meet the legal requirements for binding commercial agreements, and how courts in different jurisdictions have ruled on their enforceability.</p>
-                            <div class="case-tags">
-                                <span class="case-tag">Blockchain</span>
-                                <span class="case-tag">Contract</span>
-                                <span class="case-tag">FinTech</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status resolved"><i class="fas fa-check-circle"></i> <span data-translate="statusResolved">Resolved</span></span>
-                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
+                <!-- Case 2 -->
+                <div class="case-item reveal" style="transition-delay:0.05s">
+                    <div class="case-item-number">02</div>
+                    <div class="case-item-category" data-translate="case2Category">Data Privacy</div>
+                    <h3 class="case-item-title" data-translate="case2Title">GDPR vs. US CLOUD Act: Cross-Border Data Conflict</h3>
+                    <p class="case-item-desc" data-translate="case2Desc">Comparative analysis of the conflict between European GDPR data protection requirements and the US CLOUD Act obligations, focusing on multinational corporations caught between competing legal regimes.</p>
+                    <div class="case-item-tags">
+                        <span class="article-tag">GDPR</span>
+                        <span class="article-tag">Data Privacy</span>
+                        <span class="article-tag">International</span>
                     </div>
-
-                    <!-- Case 4 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="case4Number">Case No. 04</span>
-                            <span class="case-year">2022</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="case4Category">Civil Liberties</div>
-                            <h3 class="case-title" data-translate="case4Title">Facial Recognition &amp; Constitutional Privacy Rights</h3>
-                            <p class="case-desc" data-translate="case4Desc">Study of a legal challenge against police use of facial recognition software in public spaces, examining Fourth Amendment rights and the proportionality of biometric surveillance against public safety benefits.</p>
-                            <div class="case-tags">
-                                <span class="case-tag">Facial Recognition</span>
-                                <span class="case-tag">Privacy</span>
-                                <span class="case-tag">Surveillance</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status landmark"><i class="fas fa-gavel"></i> <span data-translate="statusLandmark">Landmark</span></span>
-                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
+                    <div class="case-item-footer">
+                        <span class="case-status ongoing"><i class="fas fa-spinner"></i> <span data-translate="statusOngoing">Ongoing</span></span>
+                        <a href="#" class="case-read" data-translate="readCase">Read <i class="fas fa-arrow-right"></i></a>
                     </div>
+                </div>
 
-                    <!-- Case 5 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="case5Number">Case No. 05</span>
-                            <span class="case-year">2023</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="case5Category">Platform Liability</div>
-                            <h3 class="case-title" data-translate="case5Title">Social Media Algorithmic Harm &amp; Section 230</h3>
-                            <p class="case-desc" data-translate="case5Desc">Analysis of whether social media platforms can be held liable for harms caused by their recommendation algorithms, testing the limits of Section 230 immunity and exploring regulatory frameworks for algorithmic accountability.</p>
-                            <div class="case-tags">
-                                <span class="case-tag">Platform Law</span>
-                                <span class="case-tag">Algorithms</span>
-                                <span class="case-tag">Section 230</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status ongoing"><i class="fas fa-spinner"></i> <span data-translate="statusOngoing">Ongoing</span></span>
-                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
+                <!-- Case 3 -->
+                <div class="case-item reveal" style="transition-delay:0.1s">
+                    <div class="case-item-number">03</div>
+                    <div class="case-item-category" data-translate="case3Category">Blockchain &amp; Contract Law</div>
+                    <h3 class="case-item-title" data-translate="case3Title">Smart Contract Enforceability in Commercial Disputes</h3>
+                    <p class="case-item-desc" data-translate="case3Desc">Examination of whether self-executing blockchain smart contracts meet the legal requirements for binding commercial agreements, and how courts in different jurisdictions have ruled on their enforceability.</p>
+                    <div class="case-item-tags">
+                        <span class="article-tag">Blockchain</span>
+                        <span class="article-tag">Contract</span>
+                        <span class="article-tag">FinTech</span>
                     </div>
-
-                    <!-- Case 6 -->
-                    <div class="case-card">
-                        <div class="case-header">
-                            <span class="case-number" data-translate="case6Number">Case No. 06</span>
-                            <span class="case-year">2021</span>
-                        </div>
-                        <div class="case-body">
-                            <div class="case-category" data-translate="case6Category">International Cyber Law</div>
-                            <h3 class="case-title" data-translate="case6Title">State-Sponsored Cyberattacks &amp; International Accountability</h3>
-                            <p class="case-desc" data-translate="case6Desc">Investigation into the legal frameworks for attributing and responding to state-sponsored cyberattacks against critical infrastructure, examining gaps in international law and the applicability of countermeasures doctrine.</p>
-                            <div class="case-tags">
-                                <span class="case-tag">Cybersecurity</span>
-                                <span class="case-tag">International Law</span>
-                                <span class="case-tag">State Responsibility</span>
-                            </div>
-                            <div class="case-footer">
-                                <span class="case-status resolved"><i class="fas fa-check-circle"></i> <span data-translate="statusResolved">Resolved</span></span>
-                                <a href="#" class="case-link" data-translate="readCase">Read Case <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
+                    <div class="case-item-footer">
+                        <span class="case-status resolved"><i class="fas fa-check-circle"></i> <span data-translate="statusResolved">Resolved</span></span>
+                        <a href="#" class="case-read" data-translate="readCase">Read <i class="fas fa-arrow-right"></i></a>
                     </div>
+                </div>
 
+                <!-- Case 4 -->
+                <div class="case-item reveal">
+                    <div class="case-item-number">04</div>
+                    <div class="case-item-category" data-translate="case4Category">Civil Liberties</div>
+                    <h3 class="case-item-title" data-translate="case4Title">Facial Recognition &amp; Constitutional Privacy Rights</h3>
+                    <p class="case-item-desc" data-translate="case4Desc">Study of a legal challenge against police use of facial recognition software in public spaces, examining Fourth Amendment rights and the proportionality of biometric surveillance against public safety benefits.</p>
+                    <div class="case-item-tags">
+                        <span class="article-tag">Facial Recognition</span>
+                        <span class="article-tag">Privacy</span>
+                        <span class="article-tag">Surveillance</span>
+                    </div>
+                    <div class="case-item-footer">
+                        <span class="case-status landmark"><i class="fas fa-gavel"></i> <span data-translate="statusLandmark">Landmark</span></span>
+                        <a href="#" class="case-read" data-translate="readCase">Read <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Case 5 -->
+                <div class="case-item reveal" style="transition-delay:0.05s">
+                    <div class="case-item-number">05</div>
+                    <div class="case-item-category" data-translate="case5Category">Platform Liability</div>
+                    <h3 class="case-item-title" data-translate="case5Title">Social Media Algorithmic Harm &amp; Section 230</h3>
+                    <p class="case-item-desc" data-translate="case5Desc">Analysis of whether social media platforms can be held liable for harms caused by their recommendation algorithms, testing the limits of Section 230 immunity and exploring regulatory frameworks for algorithmic accountability.</p>
+                    <div class="case-item-tags">
+                        <span class="article-tag">Platform Law</span>
+                        <span class="article-tag">Algorithms</span>
+                        <span class="article-tag">Section 230</span>
+                    </div>
+                    <div class="case-item-footer">
+                        <span class="case-status ongoing"><i class="fas fa-spinner"></i> <span data-translate="statusOngoing">Ongoing</span></span>
+                        <a href="#" class="case-read" data-translate="readCase">Read <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Case 6 -->
+                <div class="case-item reveal" style="transition-delay:0.1s">
+                    <div class="case-item-number">06</div>
+                    <div class="case-item-category" data-translate="case6Category">International Cyber Law</div>
+                    <h3 class="case-item-title" data-translate="case6Title">State-Sponsored Cyberattacks &amp; International Accountability</h3>
+                    <p class="case-item-desc" data-translate="case6Desc">Investigation into the legal frameworks for attributing and responding to state-sponsored cyberattacks against critical infrastructure, examining gaps in international law and the applicability of countermeasures doctrine.</p>
+                    <div class="case-item-tags">
+                        <span class="article-tag">Cybersecurity</span>
+                        <span class="article-tag">International Law</span>
+                        <span class="article-tag">State Responsibility</span>
+                    </div>
+                    <div class="case-item-footer">
+                        <span class="case-status resolved"><i class="fas fa-check-circle"></i> <span data-translate="statusResolved">Resolved</span></span>
+                        <a href="#" class="case-read" data-translate="readCase">Read <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -276,21 +486,25 @@
 
     <script src="translations.js"></script>
     <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        const body = document.body;
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            body.classList.toggle('menu-open', navLinks.classList.contains('active'));
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const body = document.body;
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open', navLinks.classList.contains('active'));
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
         });
+    });
 
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                body.classList.remove('menu-open');
-            });
-        });
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

@@ -4,21 +4,237 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Abdulloh Sodiq</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page hero */
+        .contact-hero {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 10rem 5rem 4rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 60%, rgba(0,184,148,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .contact-hero-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 1.2rem;
+        }
+        .contact-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--text-white);
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+        .contact-hero-title .accent { color: var(--emerald); }
+        .contact-hero-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 55ch;
+            line-height: 1.7;
+        }
 
+        /* Main contact body — split grid */
+        .contact-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            min-height: 60vh;
+        }
+
+        /* Left — info panel */
+        .contact-info {
+            background: var(--bg-dark);
+            padding: 5rem;
+        }
+        .contact-info-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 1.5rem;
+        }
+        .contact-info-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 2.5vw, 2rem);
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 2.2rem;
+            align-items: flex-start;
+        }
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0,184,148,0.08);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--emerald);
+            flex-shrink: 0;
+            font-size: 0.95rem;
+        }
+        .info-content h3 {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 0.4rem;
+        }
+        .info-content p, .info-content a {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            line-height: 1.5;
+        }
+        .info-content a:hover { color: var(--text-white); }
+
+        /* Social links */
+        .social-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,184,148,0.06);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .social-btn:hover {
+            background: rgba(0,184,148,0.15);
+            color: var(--emerald);
+            border-color: var(--emerald);
+        }
+
+        /* Divider line */
+        .info-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0;
+        }
+
+        /* Right — form panel */
+        .contact-form-panel {
+            background: var(--bg-card);
+            padding: 5rem;
+        }
+        .contact-form-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 1.5rem;
+        }
+        .contact-form-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 2.5vw, 2rem);
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 2.5rem;
+            line-height: 1.2;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+        .form-control {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 0;
+            padding: 0.9rem 1.2rem;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-white);
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--emerald);
+        }
+        .form-control::placeholder { color: var(--text-muted); opacity: 0.6; }
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--emerald);
+            color: #000;
+            font-size: 0.83rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 900px) {
+            .contact-hero { padding: 8rem 2rem 3rem; }
+            .contact-body { grid-template-columns: 1fr; }
+            .contact-info, .contact-form-panel { padding: 3rem 2rem; }
+        }
+    </style>
 </head>
 <body class="no-sidebar">
     <header>
         <nav>
             <a href="index.html" class="logo">Abdulloh Sodiq</a>
-            
-            <!-- NEW: Mobile Menu Toggle Button -->
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
-
             <div class="nav-container">
                 <ul class="nav-links" id="nav-links">
                     <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
@@ -28,8 +244,6 @@
                     <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
                     <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
                 </ul>
-                
-                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
                 <div class="language-switcher">
                     <button class="language-button">
                         <span class="current-language">English</span>
@@ -46,84 +260,87 @@
     </header>
 
     <main>
-        <div class="page-header">
-            <h1 class="page-title" data-translate="contactTitle">Contact</h1>
-        </div>
+        <!-- Page Hero -->
+        <section class="contact-hero">
+            <p class="contact-hero-label" data-translate="contactLabel">Get In Touch</p>
+            <h1 class="contact-hero-title">Let's <span class="accent">Talk</span></h1>
+            <p class="contact-hero-desc" data-translate="ctaDesc">Based in Tashkent. Available for consultations, speaking engagements, and strategic legal partnerships.</p>
+        </section>
 
-        <section class="content-section">
-            <div class="content-container">
-                <div class="contact-wrapper">
-                    
-                    <!-- Left Column: Contact Info -->
-                    <div class="contact-info-section">
-                        <h2 class="section-title" style="margin-bottom: 2rem;" data-translate="contactInfoTitle">Contact Information</h2>
-                        
-                        <div class="info-item">
-                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <div class="info-content">
-                                <h3 data-translate="office">Office</h3>
-                                <p>Yakkasaroy 5, Tashkent, Uzbekistan</p>
-                            </div>
-                        </div>
+        <!-- Split contact body -->
+        <div class="contact-body">
+            <!-- Left: Info -->
+            <div class="contact-info reveal">
+                <p class="contact-info-label" data-translate="contactInfoTitle">Contact Information</p>
+                <h2 class="contact-info-heading" data-translate="getInTouch">Get in Touch</h2>
 
-                        <div class="info-item">
-                            <div class="info-icon"><i class="fab fa-telegram"></i></div>
-                            <div class="info-content">
-                                <h3 data-translate="email">Telegram</h3>
-                                <p><a href="https://t.me/Abdulloh_Sodiq_lawyer" target="_blank" rel="noopener noreferrer">@Abdulloh_Sodiq_lawyer</a></p>
-                            </div>
-                        </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-content">
+                        <h3 data-translate="office">Office</h3>
+                        <p>Yakkasaroy 5, Tashkent, Uzbekistan</p>
+                    </div>
+                </div>
 
-                        <div class="info-item">
-                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
-                            <div class="info-content">
-                                <h3 data-translate="phone">Phone</h3>
-                                <p><a href="tel:+998974258770">+998 97 425 87 70</a></p>
-                            </div>
-                        </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fab fa-telegram"></i></div>
+                    <div class="info-content">
+                        <h3 data-translate="email">Telegram</h3>
+                        <p><a href="https://t.me/Abdulloh_Sodiq_lawyer" target="_blank" rel="noopener noreferrer">@Abdulloh_Sodiq_lawyer</a></p>
+                    </div>
+                </div>
 
-                        <div class="info-item">
-                            <div class="info-icon"><i class="fas fa-share-alt"></i></div>
-                            <div class="info-content">
-                                <h3 data-translate="socialMedia">Social Media</h3>
-                                <div class="social-links-contact">
-                                    <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-btn" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                                    <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-btn" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-btn" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-                                    <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-btn" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-                                    <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-btn" title="Telegram" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
-                                </div>
-                            </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-content">
+                        <h3 data-translate="phone">Phone</h3>
+                        <p><a href="tel:+998974258770">+998 97 425 87 70</a></p>
+                    </div>
+                </div>
+
+                <hr class="info-divider">
+
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-share-alt"></i></div>
+                    <div class="info-content">
+                        <h3 data-translate="socialMedia">Social Media</h3>
+                        <div class="social-row">
+                            <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-btn" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-btn" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-btn" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-btn" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                            <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-btn" title="Telegram" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
                         </div>
                     </div>
-
-                    <!-- Right Column: Contact Form -->
-                    <div class="contact-form-section">
-                        <h2 class="section-title" style="margin-bottom: 2rem;" data-translate="sendMessage">Send a Message</h2>
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <label for="name" data-translate="formName">Your Name</label>
-                                <input type="text" id="name" name="name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" data-translate="formEmail">Your Email</label>
-                                <input type="email" id="email" name="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject" data-translate="formSubject">Subject</label>
-                                <input type="text" id="subject" name="subject" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="message" data-translate="formMessage">Message</label>
-                                <textarea id="message" name="message" class="form-control" required></textarea>
-                            </div>
-                            <button type="submit" class="btn-submit" data-translate="sendBtn">Send Message</button>
-                        </form>
-                    </div>
-
                 </div>
             </div>
-        </section>
+
+            <!-- Right: Form -->
+            <div class="contact-form-panel reveal" style="transition-delay:0.15s">
+                <p class="contact-form-label" data-translate="sendMessage">Send a Message</p>
+                <h2 class="contact-form-heading" data-translate="ctaHeadline">Need legal counsel? Let's talk.</h2>
+
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name" data-translate="formName">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-translate="formEmail">Your Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" data-translate="formSubject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-translate="formMessage">Message</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-translate="sendBtn">Send Message</button>
+                </form>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -131,6 +348,7 @@
             <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
         </div>
     </footer>
+
     <script src="translations.js"></script>
     <script>
     const menuToggle = document.getElementById('menu-toggle');
@@ -146,6 +364,12 @@
             body.classList.remove('menu-open');
         });
     });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

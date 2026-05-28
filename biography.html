@@ -4,20 +4,281 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biography - Abdulloh Sodiq</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── BIO HERO SPLIT ── */
+        .bio-hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+        .bio-hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10rem 4rem 5rem 5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .bio-hero-right {
+            position: relative;
+            overflow: hidden;
+        }
+        .bio-hero-right img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            filter: brightness(0.65) contrast(1.1) saturate(0.8);
+            display: block;
+        }
+        .bio-hero-right::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(8,12,12,0.95) 0%, rgba(8,12,12,0.4) 50%, transparent 80%);
+            z-index: 1;
+        }
+        .bio-hero-right::after {
+            content: 'ATTORNEY';
+            position: absolute; right: 2rem; top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem; letter-spacing: 6px;
+            color: rgba(0,184,148,0.2); z-index: 2;
+        }
+        .bio-eyebrow {
+            font-size: 0.72rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--emerald);
+            margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .bio-eyebrow::before {
+            content: ''; display: inline-block;
+            width: 40px; height: 1px;
+            background: var(--emerald); box-shadow: 0 0 8px var(--emerald);
+        }
+        .bio-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 900; line-height: 1;
+            color: var(--text-white); letter-spacing: -2px;
+            margin-bottom: 0.5rem;
+        }
+        .bio-name .accent { color: var(--emerald); display: block; text-shadow: 0 0 40px rgba(0,184,148,0.4); }
+        .bio-subtitle {
+            font-size: 0.9rem; color: var(--text-muted);
+            letter-spacing: 1px; margin: 1.5rem 0 2.5rem;
+            line-height: 1.8; max-width: 380px;
+            border-left: 2px solid var(--emerald); padding-left: 1.2rem;
+        }
+        .bio-stats {
+            display: flex; gap: 2.5rem; margin-top: 2rem;
+        }
+        .bio-stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem; font-weight: 900;
+            color: var(--emerald); line-height: 1;
+            text-shadow: 0 0 20px rgba(0,184,148,0.3);
+        }
+        .bio-stat-label {
+            font-size: 0.7rem; color: var(--text-muted);
+            letter-spacing: 1px; text-transform: uppercase; margin-top: 0.3rem;
+        }
+
+        /* ── QUOTE STRIP ── */
+        .quote-strip {
+            padding: 5rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            position: relative; z-index: 1;
+        }
+        .big-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-style: italic; color: var(--text-white);
+            max-width: 800px; margin: 0 auto 1.5rem;
+            line-height: 1.5; position: relative;
+        }
+        .big-quote::before {
+            content: '"';
+            font-size: 6rem; color: var(--emerald); opacity: 0.2;
+            position: absolute; top: -2.5rem; left: -1rem;
+            font-style: normal; line-height: 1;
+        }
+        .quote-attr {
+            font-size: 0.82rem; color: var(--emerald);
+            letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        /* ── PROFILE SPLIT ── */
+        .profile-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 60vh;
+            position: relative; z-index: 1;
+        }
+        .profile-split-img {
+            position: relative; overflow: hidden;
+        }
+        .profile-split-img img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: top;
+            filter: brightness(0.65) saturate(0.75);
+            transition: transform 0.8s ease;
+        }
+        .profile-split:hover .profile-split-img img { transform: scale(1.04); }
+        .profile-split-img::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(8,12,12,0.8));
+        }
+        .profile-split-text {
+            display: flex; flex-direction: column;
+            justify-content: center; padding: 5rem;
+            background: var(--bg-card);
+            border-left: 1px solid var(--border);
+        }
+        .profile-split-text p {
+            font-size: 0.95rem; color: var(--text-muted);
+            line-height: 1.9; margin-bottom: 1.2rem;
+        }
+
+        /* ── EXPERIENCE TIMELINE (redesigned) ── */
+        .exp-section {
+            padding: 7rem 5rem;
+            position: relative; z-index: 1;
+        }
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin-top: 3rem;
+        }
+        .exp-item {
+            background: var(--bg-dark);
+            padding: 2.5rem;
+            transition: background 0.3s;
+            position: relative;
+        }
+        .exp-item:hover { background: var(--bg-card); }
+        .exp-item::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .exp-item:hover::before { opacity: 1; }
+        .exp-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem; color: var(--emerald);
+            letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;
+        }
+        .exp-year::before {
+            content: ''; width: 20px; height: 1px;
+            background: var(--emerald); display: inline-block;
+        }
+        .exp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; color: var(--text-white);
+            margin-bottom: 0.7rem; font-weight: 700;
+        }
+        .exp-desc {
+            font-size: 0.88rem; color: var(--text-muted);
+            line-height: 1.7; margin-bottom: 0.8rem;
+        }
+        .exp-org {
+            font-size: 0.8rem; color: var(--emerald-dim);
+            font-style: italic;
+        }
+
+        /* ── EDUCATION ── */
+        .edu-section {
+            padding: 7rem 5rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            position: relative; z-index: 1;
+        }
+
+        /* ── ROLES GRID ── */
+        .roles-section {
+            padding: 7rem 5rem;
+            position: relative; z-index: 1;
+        }
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin-top: 3rem;
+        }
+        .role-item {
+            background: var(--bg-dark);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .role-item:hover { background: var(--bg-card); }
+        .role-icon {
+            font-size: 1.8rem; color: var(--emerald);
+            margin-bottom: 1.2rem;
+            filter: drop-shadow(0 0 8px rgba(0,184,148,0.4));
+        }
+        .role-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem; color: var(--text-white);
+            margin-bottom: 0.5rem; font-weight: 700;
+        }
+        .role-org {
+            font-size: 0.78rem; color: var(--text-muted);
+        }
+
+        /* ── SECTION LABELS ── */
+        .section-label {
+            font-size: 0.72rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--emerald);
+            margin-bottom: 1rem;
+        }
+        .section-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900; color: var(--text-white);
+            line-height: 1.15; margin-bottom: 1rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 992px) {
+            .bio-hero { grid-template-columns: 1fr; }
+            .bio-hero-right { display: none; }
+            .bio-hero-left { padding: 9rem 2rem 5rem; }
+            .profile-split { grid-template-columns: 1fr; }
+            .profile-split-img { height: 350px; }
+            .profile-split-text { padding: 3rem 2rem; }
+            .exp-grid { grid-template-columns: 1fr; }
+            .roles-grid { grid-template-columns: repeat(2,1fr); }
+            .exp-section, .edu-section, .roles-section, .quote-strip { padding: 5rem 2rem; }
+        }
+        @media (max-width: 768px) {
+            .bio-stats { gap: 1.5rem; }
+            .roles-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
 <body class="no-sidebar">
-     <header>
+    <header>
         <nav>
             <a href="index.html" class="logo">Abdulloh Sodiq</a>
-            
-            <!-- NEW: Mobile Menu Toggle Button -->
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
-
             <div class="nav-container">
                 <ul class="nav-links" id="nav-links">
                     <li class="nav-item"><a href="biography.html" data-translate="bioLink">Biography</a></li>
@@ -27,8 +288,6 @@
                     <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
                     <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
                 </ul>
-                
-                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
                 <div class="language-switcher">
                     <button class="language-button">
                         <span class="current-language">English</span>
@@ -44,113 +303,133 @@
         </nav>
     </header>
 
+    <main style="position:relative;z-index:1;">
 
-    <main>
-        <div class="page-header">
-            <h1 class="page-title" data-translate="bioTitle">Biography</h1>
+        <!-- ── HERO SPLIT ── -->
+        <section class="bio-hero">
+            <div class="bio-hero-left">
+                <p class="bio-eyebrow" data-translate="bioLink">Biography</p>
+                <h1 class="bio-name">
+                    Abdulloh
+                    <span class="accent">Sodiq</span>
+                </h1>
+                <p class="bio-subtitle" data-translate="exp1Title">Managing Partner &amp; Attorney — Gulyamov, Sadikov &amp; Partners</p>
+                <div class="bio-stats">
+                    <div>
+                        <div class="bio-stat-number" data-count="20">0</div>
+                        <div class="bio-stat-label" data-translate="statYears">Years Experience</div>
+                    </div>
+                    <div>
+                        <div class="bio-stat-number" data-count="500">0</div>
+                        <div class="bio-stat-label" data-translate="statCases">Cases Won</div>
+                    </div>
+                    <div>
+                        <div class="bio-stat-number" data-count="50">0</div>
+                        <div class="bio-stat-label" data-translate="statConf">Conferences</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bio-hero-right">
+                <img src="A.Sodiq.jpg" alt="Abdulloh Sodiq">
+            </div>
+        </section>
+
+        <!-- ── QUOTE STRIP ── -->
+        <div class="quote-strip reveal">
+            <blockquote class="big-quote" data-translate="bioQuote">
+                "Our goal is not just to solve problems, but to create a strong legal shield for the safe and sustainable growth of your business."
+            </blockquote>
+            <p class="quote-attr">— Abdulloh Sodiq</p>
         </div>
 
-        <!-- NEW: Professional Profile Section with Image -->
-        <section class="content-section">
-            <div class="content-container profile-layout">
-                <div class="profile-text">
-                    <h2 class="section-title" data-translate="bioProfileTitle">Professional Profile</h2>
-                    <p data-translate="bioProfileText1">Abdulloh Sodiq is the Managing Partner of "Gulyamov, Sadikov &amp; Partners" law firm and a licensed attorney with over 20 years of successful experience in law. He is one of the leading experts in business protection and legal support for major economic projects in Uzbekistan.</p>
-                    <p data-translate="bioProfileText2">Through years of work in state law enforcement agencies and his deep analytical approach to working with business entities, he has earned a place among the country's most respected business lawyers.</p>
-                    <blockquote style="border-left: 3px solid var(--primary-blue); padding-left: 1.2rem; margin: 1.5rem 0; color: var(--text-medium); font-style: italic;" data-translate="bioQuote">"Our goal is not just to solve problems, but to create a strong legal shield for the safe and sustainable growth of your business." — Abdulloh Sodiq</blockquote>
+        <!-- ── PROFILE SPLIT ── -->
+        <section class="profile-split reveal">
+            <div class="profile-split-img">
+                <img src="A.Sodiq.jpg" alt="Abdulloh Sodiq">
+            </div>
+            <div class="profile-split-text">
+                <p class="section-label" data-translate="bioProfileTitle">Professional Profile</p>
+                <h2 class="section-headline" style="font-size:1.8rem;margin-bottom:1.5rem;" data-translate="bioProfileTitle">Professional Profile</h2>
+                <p data-translate="bioProfileText1">Abdulloh Sodiq is the Managing Partner of "Gulyamov, Sadikov &amp; Partners" law firm and a licensed attorney with over 20 years of successful experience in law.</p>
+                <p data-translate="bioProfileText2">Through years of work in state law enforcement agencies and his deep analytical approach, he has earned a place among the country's most respected business lawyers.</p>
+                <a href="contact.html" class="btn btn-primary" style="margin-top:2rem;" data-translate="getInTouch">Get in Touch</a>
+            </div>
+        </section>
+
+        <!-- ── EXPERIENCE ── -->
+        <section class="exp-section">
+            <p class="section-label" data-translate="bioExperience">Professional Experience</p>
+            <h2 class="section-headline" data-translate="bioExperience">Professional Experience</h2>
+            <div class="exp-grid">
+                <div class="exp-item reveal">
+                    <div class="exp-year" data-translate="presentLabel">Present</div>
+                    <h3 class="exp-title" data-translate="exp1Title">Managing Partner &amp; Attorney</h3>
+                    <p class="exp-desc" data-translate="exp1Desc">Manages the firm's strategic development and ensures the highest international standards of legal services for clients.</p>
+                    <span class="exp-org" data-translate="exp1Location">"Gulyamov, Sadikov &amp; Partners" Law Firm</span>
                 </div>
-                <div class="profile-image-wrapper">
-                    <img src="A.Sodiq.jpg" alt="Abdulloh Sodiq Portrait" class="profile-photo">
+                <div class="exp-item reveal">
+                    <div class="exp-year" data-translate="presentLabel">Present</div>
+                    <h3 class="exp-title" data-translate="exp2Title">Deputy Chairman for Legal Affairs</h3>
+                    <p class="exp-desc" data-translate="exp2Desc">Contributes significantly to improving the business environment, refining legislation, and systematically protecting business rights in Uzbekistan.</p>
+                    <span class="exp-org" data-translate="exp2Location">Uzbekistan Economic Assembly</span>
+                </div>
+                <div class="exp-item reveal">
+                    <div class="exp-year" data-translate="presentLabel">Present</div>
+                    <h3 class="exp-title" data-translate="exp3Title">Official Expert</h3>
+                    <p class="exp-desc" data-translate="exp3Desc">Provides practical and strategic advice to hundreds of entrepreneurs on taxation, contracts, international trade, and risk management.</p>
+                    <span class="exp-org" data-translate="exp3Location">MFakor, Milliard &amp; Alliance Business Clubs</span>
+                </div>
+                <div class="exp-item reveal">
+                    <div class="exp-year">2005–2010</div>
+                    <h3 class="exp-title" data-translate="exp4Title">Senior Officer — Economic Crimes &amp; Anti-Corruption Unit</h3>
+                    <p class="exp-desc" data-translate="exp4Desc">Gained invaluable experience in economic crime investigations, financial audits, and the internal mechanisms of state oversight bodies.</p>
+                    <span class="exp-org" data-translate="exp4Location">Prosecutor's Office of the Republic of Karakalpakstan</span>
                 </div>
             </div>
         </section>
 
-        <!-- Education Section -->
-        <section class="content-section alt-bg">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="bioEducation">Education</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">2001–2005</div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title" data-translate="edu1Title">Bachelor of Laws</h3>
-                            <p class="timeline-description" data-translate="edu1Desc">Received a fundamental legal education at the country's leading law institution</p>
-                            <p class="timeline-location" data-translate="edu1Location">Tashkent State Law Institute, Tashkent, Uzbekistan</p>
-                        </div>
-                    </div>
+        <!-- ── EDUCATION ── -->
+        <section class="edu-section">
+            <div style="max-width:900px;margin:0 auto;">
+                <p class="section-label" data-translate="bioEducation">Education</p>
+                <h2 class="section-headline" data-translate="bioEducation">Education</h2>
+                <div class="exp-item reveal" style="background:var(--bg-card2);border:1px solid var(--border);margin-top:2rem;">
+                    <div class="exp-year">2001–2005</div>
+                    <h3 class="exp-title" data-translate="edu1Title">Bachelor of Laws</h3>
+                    <p class="exp-desc" data-translate="edu1Desc">Received a fundamental legal education at the country's leading law institution.</p>
+                    <span class="exp-org" data-translate="edu1Location">Tashkent State Law Institute, Tashkent, Uzbekistan</span>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section class="content-section">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="bioExperience">Professional Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year" data-translate="presentLabel">Present</div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title" data-translate="exp1Title">Managing Partner &amp; Attorney</h3>
-                            <p class="timeline-description" data-translate="exp1Desc">Manages the firm's strategic development and ensures the highest international standards of legal services for clients</p>
-                            <p class="timeline-location" data-translate="exp1Location">"Gulyamov, Sadikov &amp; Partners" Law Firm</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year" data-translate="presentLabel">Present</div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title" data-translate="exp2Title">Deputy Chairman for Legal Affairs</h3>
-                            <p class="timeline-description" data-translate="exp2Desc">Contributes significantly to improving the business environment, refining legislation, and systematically protecting business rights in Uzbekistan</p>
-                            <p class="timeline-location" data-translate="exp2Location">Uzbekistan Economic Assembly</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year" data-translate="presentLabel">Present</div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title" data-translate="exp3Title">Official Expert</h3>
-                            <p class="timeline-description" data-translate="exp3Desc">Provides practical and strategic advice to hundreds of entrepreneurs on taxation, contracts, international trade, and risk management</p>
-                            <p class="timeline-location" data-translate="exp3Location">MFakor, Milliard &amp; Alliance Business Clubs</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2005–2010</div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title" data-translate="exp4Title">Senior Officer — Economic Crimes &amp; Anti-Corruption Unit</h3>
-                            <p class="timeline-description" data-translate="exp4Desc">Gained invaluable experience in economic crime investigations, financial audits, and the internal mechanisms of state oversight bodies</p>
-                            <p class="timeline-location" data-translate="exp4Location">Prosecutor's Office of the Republic of Karakalpakstan</p>
-                        </div>
-                    </div>
+        <!-- ── KEY ROLES ── -->
+        <section class="roles-section">
+            <p class="section-label" data-translate="bioAwardsTitle">Key Roles &amp; Recognitions</p>
+            <h2 class="section-headline" data-translate="bioAwardsTitle">Key Roles &amp; Recognitions</h2>
+            <div class="roles-grid">
+                <div class="role-item reveal">
+                    <div class="role-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="role-title" data-translate="award1Title">Managing Partner</div>
+                    <div class="role-org" data-translate="award1Year">Gulyamov, Sadikov &amp; Partners</div>
+                </div>
+                <div class="role-item reveal">
+                    <div class="role-icon"><i class="fas fa-landmark"></i></div>
+                    <div class="role-title" data-translate="award2Title">Deputy Chairman for Legal Affairs</div>
+                    <div class="role-org" data-translate="award2Year">Uzbekistan Economic Assembly</div>
+                </div>
+                <div class="role-item reveal">
+                    <div class="role-icon"><i class="fas fa-star"></i></div>
+                    <div class="role-title" data-translate="award3Title">Official Expert</div>
+                    <div class="role-org" data-translate="award3Year">MFakor, Milliard &amp; Alliance</div>
+                </div>
+                <div class="role-item reveal">
+                    <div class="role-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="role-title" data-translate="award4Title">Published Researcher</div>
+                    <div class="role-org" data-translate="award4Year">Society and Innovations, 2026</div>
                 </div>
             </div>
         </section>
 
-        <!-- Key Roles & Recognitions Section -->
-        <section class="content-section alt-bg">
-            <div class="content-container">
-                <h2 class="section-title" data-translate="bioAwardsTitle">Key Roles & Recognitions</h2>
-                <div class="awards-grid">
-                    <div class="award-card">
-                        <i class="fas fa-handshake award-icon"></i>
-                        <h3 data-translate="award1Title">Managing Partner</h3>
-                        <p data-translate="award1Year">Gulyamov, Sadikov & Partners</p>
-                    </div>
-                    <div class="award-card">
-                        <i class="fas fa-landmark award-icon"></i>
-                        <h3 data-translate="award2Title">Deputy Chairman for Legal Affairs</h3>
-                        <p data-translate="award2Year">Uzbekistan Economic Assembly</p>
-                    </div>
-                    <div class="award-card">
-                        <i class="fas fa-star award-icon"></i>
-                        <h3 data-translate="award3Title">Official Expert</h3>
-                        <p data-translate="award3Year">MFakor, Milliard & Alliance</p>
-                    </div>
-                    <div class="award-card">
-                        <i class="fas fa-certificate award-icon"></i>
-                        <h3 data-translate="award4Title">Published Researcher</h3>
-                        <p data-translate="award4Year">Society and Innovations, 2026</p>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
@@ -158,7 +437,6 @@
             <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
         </div>
     </footer>
-  <!-- ... footer code ... -->
 
     <script src="translations.js"></script>
     <script>
@@ -169,12 +447,33 @@
         navLinks.classList.toggle('active');
         body.classList.toggle('menu-open', navLinks.classList.contains('active'));
     });
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            body.classList.remove('menu-open');
+    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+    }));
+
+    /* Scroll reveal */
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    /* Counter */
+    const cObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target, target = parseInt(el.dataset.count);
+            let current = 0;
+            const step = Math.ceil(target / 60);
+            const timer = setInterval(() => {
+                current = Math.min(current + step, target);
+                el.textContent = current + '+';
+                if (current >= target) clearInterval(timer);
+            }, 25);
+            cObs.unobserve(el);
         });
-    });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(c => cObs.observe(c));
     </script>
 </body>
 </html>
