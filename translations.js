@@ -130,10 +130,17 @@ const translations = {
         'roleSpeaker': 'Speaker',
         'rolePanelist': 'Panelist',
         'roleFacilitator': 'Facilitator',
+        'conf4Title': 'World Technology Law Congress',
+        'conf4Desc': 'Presented paper on "Emerging Regulatory Challenges in Quantum Computing"',
+        'conf5Title': 'International Privacy Law Conference',
+        'conf5Desc': 'Keynote speaker on "Balancing National Security and Individual Privacy Rights"',
+        'conf6Title': 'Digital Economy and Law Forum',
+        'conf6Desc': 'Panel discussion on "Legal Frameworks for Cryptocurrency and Blockchain Technology"',
         'conf7Title': 'Global AI Ethics Summit',
         'conf7Desc': 'Led a roundtable discussion on "Bias in Algorithmic Decision Making Systems"',
+        'presentLabel': 'Present',
 
-        
+
         'pubsTitle': 'Publications',
         // Articles (real)
         'articlesTitle': 'Articles',
@@ -403,10 +410,17 @@ const translations = {
         'roleSpeaker': 'Спикер',
         'rolePanelist': 'Участник дискуссии',
         'roleFacilitator': 'Ведущий',
+        'conf4Title': 'Всемирный конгресс по технологическому праву',
+        'conf4Desc': 'Представил доклад "Новые регуляторные вызовы в области квантовых вычислений"',
+        'conf5Title': 'Международная конференция по праву конфиденциальности',
+        'conf5Desc': 'Основной докладчик на тему "Баланс между национальной безопасностью и индивидуальными правами на неприкосновенность частной жизни"',
+        'conf6Title': 'Форум по цифровой экономике и праву',
+        'conf6Desc': 'Панельная дискуссия "Правовые рамки для криптовалюты и технологии блокчейн"',
         'conf7Title': 'Глобальный саммит по этике ИИ',
         'conf7Desc': 'Вел круглый стол по теме "Предвзятость в алгоритмических системах принятия решений"',
+        'presentLabel': 'Настоящее время',
 
-        
+
         'pubsTitle': 'Публикации',
         // Articles (real)
         'articlesTitle': 'Статьи',
@@ -678,10 +692,17 @@ const translations = {
         'roleSpeaker': 'Ma\'ruzachi',
         'rolePanelist': 'Panelli ishtirokchi',
         'roleFacilitator': 'Moderator',
+        'conf4Title': 'Jahon texnologiya huquqi kongressi',
+        'conf4Desc': '"Kvant hisoblashda yangi regulyatsion muammolar" mavzusida ma\'ruza taqdim etdi',
+        'conf5Title': 'Maxfiylik huquqi bo\'yicha xalqaro konferensiya',
+        'conf5Desc': '"Milliy xavfsizlik va shaxsiy maxfiylik huquqlari o\'rtasidagi muvozanat" mavzusida asosiy ma\'ruzachi',
+        'conf6Title': 'Raqamli iqtisodiyot va huquq forumi',
+        'conf6Desc': '"Kriptovalyuta va blokcheyn texnologiyasi uchun huquqiy doiralar" mavzusida panel muhokamasi',
         'conf7Title': 'Global Sun\'iy Intellekt Etikasi Sammiti',
         'conf7Desc': '"Algoritmik qaror qabul qilish tizimlaridagi tarafkashlik" mavzusida stol ustmaust suhbatni boshqardi',
+        'presentLabel': 'Hozirgi vaqt',
 
-        
+
         'pubsTitle': 'Nashrlar',
         // Articles (real)
         'articlesTitle': 'Maqolalar',

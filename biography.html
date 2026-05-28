@@ -88,7 +88,7 @@
                 <h2 class="section-title" data-translate="bioExperience">Professional Experience</h2>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-year">Present</div>
+                        <div class="timeline-year" data-translate="presentLabel">Present</div>
                         <div class="timeline-content">
                             <h3 class="timeline-title" data-translate="exp1Title">Managing Partner &amp; Attorney</h3>
                             <p class="timeline-description" data-translate="exp1Desc">Manages the firm's strategic development and ensures the highest international standards of legal services for clients</p>
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-year">Present</div>
+                        <div class="timeline-year" data-translate="presentLabel">Present</div>
                         <div class="timeline-content">
                             <h3 class="timeline-title" data-translate="exp2Title">Deputy Chairman for Legal Affairs</h3>
                             <p class="timeline-description" data-translate="exp2Desc">Contributes significantly to improving the business environment, refining legislation, and systematically protecting business rights in Uzbekistan</p>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-year">Present</div>
+                        <div class="timeline-year" data-translate="presentLabel">Present</div>
                         <div class="timeline-content">
                             <h3 class="timeline-title" data-translate="exp3Title">Official Expert</h3>
                             <p class="timeline-description" data-translate="exp3Desc">Provides practical and strategic advice to hundreds of entrepreneurs on taxation, contracts, international trade, and risk management</p>
@@ -161,36 +161,20 @@
   <!-- ... footer code ... -->
 
     <script src="translations.js"></script>
-    
-    <!-- NEW: Mobile Menu Toggle Script -->
-   <script>
+    <script>
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
     const body = document.body;
-
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        
-        // Toggle body scroll lock
-        if (navLinks.classList.contains('active')) {
-            body.classList.add('menu-open');
-        } else {
-            body.classList.remove('menu-open');
-        }
+        body.classList.toggle('menu-open', navLinks.classList.contains('active'));
     });
-
-    // Close menu and unlock scroll when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             body.classList.remove('menu-open');
         });
     });
-</script>
-
-</body>
-</html>
-
-    <script src="translations.js"></script>
+    </script>
 </body>
 </html>

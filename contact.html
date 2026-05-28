@@ -320,39 +320,21 @@
             <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
         </div>
     </footer>
-  <!-- ... footer code ... -->
-
     <script src="translations.js"></script>
-    
-    <!-- NEW: Mobile Menu Toggle Script -->
     <script>
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
     const body = document.body;
-
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        
-        // Toggle body scroll lock
-        if (navLinks.classList.contains('active')) {
-            body.classList.add('menu-open');
-        } else {
-            body.classList.remove('menu-open');
-        }
+        body.classList.toggle('menu-open', navLinks.classList.contains('active'));
     });
-
-    // Close menu and unlock scroll when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             body.classList.remove('menu-open');
         });
     });
-</script>
-
-</body>
-</html>
-
-    <script src="translations.js"></script>
+    </script>
 </body>
 </html>
