@@ -3,107 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdulloh Sodiq - Professional Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Abdulloh Sodiq — Attorney at Law</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    
     <style>
-        /* --- Layout Structure: Sidebar + Header --- */
-        
-        /* 1. Social Sidebar: Fixed Far Left, Full Height */
-        .social-sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh; 
-            width: 80px;
-            background-color: var(--bg-white);
-            border-right: 1px solid var(--border-color);
-            z-index: 1001; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
-        }
-      
+        /* ── PAGE-SPECIFIC OVERRIDES ── */
 
-
-        .social-icons-group {
-            margin-top: 100px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Full-height split hero */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0.8rem 0;
-            color: var(--text-medium);
+        /* Left panel */
+        .hero-left {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            transition: color 0.2s ease;
+            padding: 9rem 4rem 5rem 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 1px;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1;
+            color: var(--text-white);
+            letter-spacing: -2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-name .accent {
+            color: var(--emerald);
+            display: block;
+            text-shadow: 0 0 40px rgba(0,184,148,0.4);
+        }
+
+        .hero-title {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin: 1.5rem 0 2.5rem;
+            line-height: 1.8;
+            max-width: 380px;
+            border-left: 2px solid var(--emerald);
+            padding-left: 1.2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .btn-outline {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.85rem 1.8rem;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: transparent;
+            color: var(--emerald);
+            border: 1px solid var(--border-bright);
         }
 
-        .social-icon:hover {
-            color: var(--primary-blue);
+        .btn-outline:hover {
+            background: rgba(0,184,148,0.08);
+            border-color: var(--emerald);
+            box-shadow: 0 0 20px rgba(0,184,148,0.15);
         }
 
-        .social-icon i {
-            font-size: 1.2rem;
+        /* Stats row */
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
         }
 
-        /* 2. Header: Fixed Top, but shifted right to clear sidebar */
-        
-        nav {
-            max-width: calc(1200px - 80px); 
+        .stat-item { text-align: left; }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--emerald);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(0,184,148,0.3);
         }
 
-        /* 3. Main Content: Shifted right to clear sidebar */
-        main {
-            margin-left: 80px;
+        .stat-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+        }
+
+        /* Right panel — photo */
+        .hero-right {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            filter: brightness(0.7) contrast(1.1) saturate(0.85);
+            display: block;
+        }
+
+        /* Emerald gradient overlay on photo */
+        .hero-right::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(8,12,12,0.95) 0%,
+                rgba(8,12,12,0.5) 40%,
+                transparent 70%
+            );
+            z-index: 1;
+        }
+
+        /* Vertical text on right */
+        .hero-right::after {
+            content: 'ATTORNEY';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            color: rgba(0,184,148,0.25);
+            z-index: 2;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 3;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--emerald), transparent);
+            animation: scrollLine 1.5s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+            50%       { opacity: 1;   transform: scaleY(1); }
+        }
+
+        /* ── EXPERTISE SECTION ── */
+        .expertise-section {
+            padding: 7rem 5rem;
             position: relative;
             z-index: 1;
         }
 
-        /* --- Research Grid Styles --- */
+        .section-label {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 1rem;
+        }
+
+        .section-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: var(--text-white);
+            line-height: 1.15;
+            margin-bottom: 4rem;
+            max-width: 500px;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .expertise-item {
+            background: var(--bg-dark);
+            padding: 2.5rem;
+            transition: background 0.3s ease;
+            cursor: default;
+        }
+
+        .expertise-item:hover {
+            background: var(--bg-card);
+        }
+
+        .expertise-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(0,184,148,0.12);
+            line-height: 1;
+            margin-bottom: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .expertise-item:hover .expertise-number {
+            color: rgba(0,184,148,0.3);
+        }
+
+        .expertise-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        .expertise-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ── ABOUT STRIP ── */
+        .about-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 60vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image-col {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            filter: brightness(0.65) saturate(0.75);
+            transition: transform 0.8s ease;
+        }
+
+        .about-strip:hover .about-image-col img {
+            transform: scale(1.04);
+        }
+
+        .about-image-col::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(8,12,12,0.85));
+        }
+
+        .about-text-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem;
+            background: var(--bg-card);
+            border-left: 1px solid var(--border);
+        }
+
+        .about-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--text-white);
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .about-quote::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--emerald);
+            opacity: 0.3;
+            position: absolute;
+            top: -2rem;
+            left: -1rem;
+            line-height: 1;
+            font-style: normal;
+        }
+
+        .about-body {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ── VIDEO SECTION ── */
+        .video-section {
+            padding: 7rem 5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-strip {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            margin-top: 3rem;
+        }
+
+        .vid-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--bg-card);
+        }
+
+        .vid-item img {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            object-fit: cover;
+            filter: brightness(0.65) saturate(0.8);
+            transition: all 0.4s ease;
+            display: block;
+        }
+
+        .vid-item:hover img {
+            filter: brightness(0.85) saturate(1.1);
+            transform: scale(1.04);
+        }
+
+        .vid-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(8,12,12,0.95) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            z-index: 2;
+        }
+
+        .vid-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(0,184,148,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #080c0c;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            z-index: 3;
+            box-shadow: 0 0 30px rgba(0,184,148,0.4);
+        }
+
+        .vid-item:hover .vid-play {
+            background: var(--emerald);
+            box-shadow: 0 0 50px rgba(0,184,148,0.7);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .vid-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            color: var(--text-white);
+            line-height: 1.4;
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 4;
+        }
+
+        .vid-item:first-child .vid-title {
+            font-size: 1.3rem;
+        }
+
+        .vid-tag {
+            font-size: 0.7rem;
+            color: var(--emerald);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 4;
+        }
+
+        /* ── NEWS TICKER ── */
+        .ticker-wrap {
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            background: var(--bg-card);
+            position: relative;
+            z-index: 1;
+        }
+
+        .ticker-label {
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            background: var(--emerald);
+            color: #080c0c;
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .ticker {
+            display: flex;
+            gap: 4rem;
+            animation: ticker 30s linear infinite;
+            padding-left: 200px;
+            white-space: nowrap;
+        }
+
+        .ticker:hover { animation-play-state: paused; }
+
+        @keyframes ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .ticker-item span {
+            color: var(--emerald);
+            margin-right: 0.5rem;
+        }
+
+        /* ── CONTACT CTA ── */
+        .cta-section {
+            padding: 8rem 5rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(0,184,148,0.04) 0%, transparent 60%);
+        }
+
+        .cta-section .section-headline {
+            max-width: 600px;
+            margin: 1rem auto 2.5rem;
+        }
+
+        .cta-section p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        /* ── FOCUS GRID (keeping for compat) ── */
         .focus-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
             margin-top: 3rem;
         }
 
         @media (max-width: 992px) {
-            .focus-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .focus-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .focus-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .social-sidebar {
-                display: none;
-            }
-
-            header {
-                left: 0;
-            }
-            main {
-                margin-left: 0;
-            }
+            .focus-grid { grid-template-columns: 1fr; }
+            .social-sidebar { display: none; }
+            header { left: 0; }
+            main { margin-left: 0; }
         }
 
-        /* Mobile Social Bar */
-        .mobile-social-bar {
-            display: none;
+        .focus-item {
+            background: var(--bg-dark);
+            padding: 2.5rem;
+            text-align: left;
+            transition: background 0.3s;
         }
+
+        .focus-item:hover { background: var(--bg-card); }
+
+        .focus-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: rgba(0,184,148,0.08);
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--emerald);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .focus-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--text-white);
+            margin-bottom: 0.7rem;
+        }
+
+        .focus-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Mobile social bar */
+        .mobile-social-bar { display: none; }
 
         @media (max-width: 768px) {
             .mobile-social-bar {
@@ -112,69 +580,44 @@
                 align-items: center;
                 gap: 1.5rem;
                 padding: 1rem;
-                background-color: var(--bg-white);
-                border-top: 1px solid var(--border-color);
+                background: var(--bg-card);
+                border-top: 1px solid var(--border);
             }
-
             .mobile-social-bar .social-icon {
-                width: 44px;
-                height: 44px;
-                margin: 0;
-                color: var(--text-medium);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: color 0.2s ease;
-                text-decoration: none;
+                width: 44px; height: 44px; margin: 0;
+                color: var(--text-muted);
+                display: flex; align-items: center; justify-content: center;
+                transition: color 0.2s; text-decoration: none;
             }
-
-            .mobile-social-bar .social-icon:hover {
-                color: var(--primary-blue);
-            }
-
-            .mobile-social-bar .social-icon i {
-                font-size: 1.3rem;
-            }
+            .mobile-social-bar .social-icon:hover { color: var(--emerald); }
+            .mobile-social-bar .social-icon i { font-size: 1.2rem; }
         }
 
-        .focus-item {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: all 0.3s ease;
+        /* ── RESPONSIVE ── */
+        @media (max-width: 992px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-right { display: none; }
+            .hero-left { padding: 9rem 2rem 5rem; }
+
+            .expertise-grid { grid-template-columns: 1fr 1fr; }
+
+            .about-strip { grid-template-columns: 1fr; }
+            .about-image-col { height: 350px; }
+            .about-text-col { padding: 3rem 2rem; }
+
+            .video-strip { grid-template-columns: 1fr; }
+
+            .expertise-section,
+            .video-section,
+            .cta-section { padding: 5rem 2rem; }
         }
 
-        .focus-item:hover {
-            border-color: var(--primary-blue);
-            box-shadow: 0 10px 25px rgba(58, 123, 213, 0.08);
-        }
-
-        .focus-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
-            background-color: var(--bg-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-blue);
-            font-size: 1.5rem;
-        }
-
-        .focus-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 0.8rem;
-        }
-
-        .focus-desc {
-            font-size: 0.95rem;
-            color: var(--text-medium);
-            line-height: 1.6;
+        @media (max-width: 768px) {
+            .hero-left { padding: 8rem 1.5rem 4rem; }
+            .hero-name { font-size: 3rem; letter-spacing: -1px; }
+            .hero-stats { gap: 1.5rem; }
+            .stat-number { font-size: 2rem; }
+            .expertise-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -190,6 +633,7 @@
             <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-icon" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
             <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-icon" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-icon" title="Telegram" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
         </div>
     </div>
 
@@ -197,8 +641,7 @@
     <header>
         <nav>
             <a href="index.html" class="logo">Abdulloh Sodiq</a>
-            
-            <!-- NEW: Mobile Menu Toggle Button -->
+
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
@@ -212,8 +655,7 @@
                     <li class="nav-item"><a href="publications.html" data-translate="pubsLink">Publications</a></li>
                     <li class="nav-item"><a href="contact.html" data-translate="contactLink">Contact</a></li>
                 </ul>
-                
-                <!-- Language Switcher (Hidden on mobile usually, but kept here) -->
+
                 <div class="language-switcher">
                     <button class="language-button">
                         <span class="current-language">English</span>
@@ -229,133 +671,178 @@
         </nav>
     </header>
 
+    <main style="position:relative;z-index:1;">
 
-    <main>
-        <!-- Hero Section -->
+        <!-- ── HERO ── -->
         <section class="hero">
-            <div class="hero-container">
-                <div class="profile-image-container">
-                    <img src="ChatGPT Image Mar 31, 2026 at 12_45_45 PM.png" alt="Profile" class="profile-image">
+            <div class="hero-left">
+                <p class="hero-eyebrow">Attorney at Law · Tashkent, Uzbekistan</p>
+
+                <h1 class="hero-name" data-translate="name">
+                    Abdulloh
+                    <span class="accent">Sodiq</span>
+                </h1>
+
+                <p class="hero-title" data-translate="description">
+                    Managing Partner & Attorney at Gulyamov, Sadikov & Partners. 20+ years in business law, legal protection, and strategic consulting.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="biography.html" class="btn btn-primary" data-translate="aboutBtn">About Me</a>
+                    <a href="contact.html" class="btn-outline">Get in Touch</a>
                 </div>
-                <div class="hero-content">
-                    <h1 data-translate="name">Abdulloh <span>Sodiq</span></h1>
-                    <h2>
-                        <span data-translate="title1">Managing Partner & Attorney</span>
-                        <span data-translate="title2">Gulyamov, Sadikov & Partners</span>
-                    </h2>
-                    <p data-translate="description">Over 20 years of experience in business law, legal protection, and strategic consulting. Deputy Chairman of the Uzbekistan Economic Assembly for Legal Affairs and official expert of leading business clubs.</p>
-                    <div class="hero-buttons">
-                        <a href="biography.html" class="btn btn-primary" data-translate="aboutBtn">About Me</a>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="20">0</div>
+                        <div class="stat-label">Years Experience</div>
                     </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Cases Won</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-label">Conferences</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <img src="ChatGPT Image Mar 31, 2026 at 12_45_45 PM.png" alt="Abdulloh Sodiq">
+            </div>
+
+            <div class="scroll-indicator">Scroll</div>
+        </section>
+
+        <!-- ── NEWS TICKER ── -->
+        <div class="ticker-wrap">
+            <div class="ticker-label">Latest</div>
+            <div class="ticker">
+                <span class="ticker-item"><span>●</span> AI Act adopted in Europe — new era for legal practice</span>
+                <span class="ticker-item"><span>●</span> Abdulloh Sodiq speaks at Tashkent Law Spring 2026</span>
+                <span class="ticker-item"><span>●</span> Meta fined €1.2B — largest GDPR penalty in history</span>
+                <span class="ticker-item"><span>●</span> SmartLex platform launches — AI in Uzbek legal system</span>
+                <span class="ticker-item"><span>●</span> New publication: AI Governance in Central Asia</span>
+                <!-- duplicate for seamless loop -->
+                <span class="ticker-item"><span>●</span> AI Act adopted in Europe — new era for legal practice</span>
+                <span class="ticker-item"><span>●</span> Abdulloh Sodiq speaks at Tashkent Law Spring 2026</span>
+                <span class="ticker-item"><span>●</span> Meta fined €1.2B — largest GDPR penalty in history</span>
+                <span class="ticker-item"><span>●</span> SmartLex platform launches — AI in Uzbek legal system</span>
+                <span class="ticker-item"><span>●</span> New publication: AI Governance in Central Asia</span>
+            </div>
+        </div>
+
+        <!-- ── EXPERTISE ── -->
+        <section class="expertise-section">
+            <p class="section-label">Practice Areas</p>
+            <h2 class="section-headline">Legal expertise that<br>delivers results.</h2>
+
+            <div class="expertise-grid">
+                <div class="expertise-item reveal">
+                    <div class="expertise-number">01</div>
+                    <h3 class="expertise-title">Business Law</h3>
+                    <p class="expertise-desc">Corporate structuring, contracts, M&A transactions and business dispute resolution across Uzbekistan and CIS markets.</p>
+                </div>
+                <div class="expertise-item reveal">
+                    <div class="expertise-number">02</div>
+                    <h3 class="expertise-title">AI & Technology Law</h3>
+                    <p class="expertise-desc">Legal frameworks for artificial intelligence, digital rights, data protection, and emerging technology regulation.</p>
+                </div>
+                <div class="expertise-item reveal">
+                    <div class="expertise-number">03</div>
+                    <h3 class="expertise-title">Criminal Defence</h3>
+                    <p class="expertise-desc">Experienced criminal defence representation, from investigation stage through trial and appeals.</p>
+                </div>
+                <div class="expertise-item reveal">
+                    <div class="expertise-number">04</div>
+                    <h3 class="expertise-title">Debt Recovery</h3>
+                    <p class="expertise-desc">Strategic legal instruments to compel debt repayment and enforce financial obligations effectively.</p>
+                </div>
+                <div class="expertise-item reveal">
+                    <div class="expertise-number">05</div>
+                    <h3 class="expertise-title">Media & Digital Rights</h3>
+                    <p class="expertise-desc">Advising on online content legality, privacy rights, and the intersection of media law with digital platforms.</p>
+                </div>
+                <div class="expertise-item reveal">
+                    <div class="expertise-number">06</div>
+                    <h3 class="expertise-title">Strategic Consulting</h3>
+                    <p class="expertise-desc">Long-term legal strategy for businesses, entrepreneurs, and public figures navigating complex legal environments.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Research Focus Section -->
-        <section class="content-section" style="background-color: var(--bg-light);">
-            <div class="content-container">
-                <h2 class="section-title" style="text-align: center; display: block; width: 100%;" data-translate="bioResearch">Research Interests</h2>
-                
-                <div class="focus-grid">
-                    <!-- Card 1 -->
-                    <div class="focus-item">
-                        <div class="focus-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3 class="focus-title" data-translate="research1Title">Digital Rights & Privacy</h3>
-                        <p class="focus-desc" data-translate="research1Desc">Exploring legal frameworks for protecting individual privacy in the digital age.</p>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="focus-item">
-                        <div class="focus-icon"><i class="fas fa-microchip"></i></div>
-                        <h3 class="focus-title" data-translate="research2Title">Technology Regulation</h3>
-                        <p class="focus-desc" data-translate="research2Desc">Analyzing regulatory approaches for emerging technologies including AI and blockchain.</p>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="focus-item">
-                        <div class="focus-icon"><i class="fas fa-globe"></i></div>
-                        <h3 class="focus-title" data-translate="research3Title">International Technology Law</h3>
-                        <p class="focus-desc" data-translate="research3Desc">Comparative analysis of technology law approaches across different jurisdictions.</p>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="focus-item">
-                        <div class="focus-icon"><i class="fas fa-brain"></i></div>
-                        <h3 class="focus-title" data-translate="research4Title">AI Governance & Ethics</h3>
-                        <p class="focus-desc" data-translate="research4Desc">Developing legal frameworks for responsible AI development and deployment.</p>
-                    </div>
-
-                    <!-- Card 5: Cybersecurity (FIXED) -->
-                    <div class="focus-item">
-                        <div class="focus-icon"><i class="fas fa-lock"></i></div>
-                        <h3 class="focus-title" data-translate="research5Title">Cybersecurity Law</h3>
-                        <p class="focus-desc" data-translate="research5Desc">Addressing legal challenges in protecting critical infrastructure and combating cyber threats.</p>
-                    </div>
-
-                    <!-- Card 6: IP Rights (FIXED) -->
-                    <div class="focus-item">
-                        <div class="focus-icon"><i class="fas fa-copyright"></i></div>
-                        <h3 class="focus-title" data-translate="research6Title">Intellectual Property</h3>
-                        <p class="focus-desc" data-translate="research6Desc">Protecting creative and scientific innovations in the rapidly evolving digital landscape.</p>
-                    </div>
-                </div>
+        <!-- ── ABOUT STRIP ── -->
+        <section class="about-strip reveal">
+            <div class="about-image-col">
+                <img src="ChatGPT Image Mar 31, 2026 at 12_45_45 PM.png" alt="Abdulloh Sodiq">
+            </div>
+            <div class="about-text-col">
+                <p class="section-label">About</p>
+                <blockquote class="about-quote" data-translate="aboutQuote">
+                    Justice is not just a profession — it is a calling.
+                </blockquote>
+                <p class="about-body" data-translate="description">
+                    Over 20 years of experience in business law, legal protection, and strategic consulting. Deputy Chairman of the Uzbekistan Economic Assembly for Legal Affairs and official expert of leading business clubs. Speaker, author, and recognised voice in Uzbek and international legal discourse.
+                </p>
+                <a href="biography.html" class="btn btn-primary" data-translate="aboutBtn">Full Biography</a>
             </div>
         </section>
 
-        <!-- Latest News Section -->
-        <section class="content-section" style="background-color: var(--bg-white);">
-            <div class="content-container">
-                <h2 class="section-title" style="text-align: center; display: block; width: 100%;" data-translate="latestUpdates">Latest Updates</h2>
-                
-                <div class="card-grid">
-                    <div class="card">
-                        <img src="https://picsum.photos/seed/eu-ai-act/400/250.jpg" alt="News" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title" data-translate="news1Title">EU Adopts World's First Comprehensive AI Law</h3>
-                            <p class="card-text" data-translate="news1Desc">The European Parliament passed the AI Act — the world's first binding legal framework regulating artificial intelligence.</p>
-                            <a href="news.html" class="card-link" data-translate="readMore">Read More</a>
-                        </div>
-                    </div>
+        <!-- ── VIDEOS ── -->
+        <section class="video-section">
+            <p class="section-label">Media</p>
+            <h2 class="section-headline">Watch &amp; Listen</h2>
 
-                    <div class="card">
-                        <img src="https://picsum.photos/seed/meta-gdpr/400/250.jpg" alt="News" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title" data-translate="news3Title">Meta Fined €1.2 Billion — Largest GDPR Penalty in History</h3>
-                            <p class="card-text" data-translate="news3Desc">Ireland's Data Protection Commission issued a record €1.2 billion fine against Meta for illegally transferring European user data to the US.</p>
-                            <a href="news.html" class="card-link" data-translate="readMore">Read More</a>
-                        </div>
+            <div class="video-strip">
+                <!-- Featured -->
+                <div class="vid-item" onclick="window.open('https://www.youtube.com/watch?v=bEeeMbHWA-M&t=47s','_blank')">
+                    <img src="https://img.youtube.com/vi/bEeeMbHWA-M/hqdefault.jpg" alt="">
+                    <div class="vid-play"><i class="fas fa-play"></i></div>
+                    <div class="vid-overlay">
+                        <span class="vid-tag">Featured · Tashkent Law Spring</span>
+                        <h3 class="vid-title">Искусственный интеллект в работе адвоката — преимущества и риски</h3>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="vid-item" onclick="window.open('https://www.youtube.com/watch?v=ZD_LSyxMMH4','_blank')">
+                    <img src="https://img.youtube.com/vi/ZD_LSyxMMH4/hqdefault.jpg" alt="">
+                    <div class="vid-play"><i class="fas fa-play"></i></div>
+                    <div class="vid-overlay">
+                        <span class="vid-tag">Debate</span>
+                        <h3 class="vid-title">FIRIBGARLIK: ADVOKAT vs PROKUROR</h3>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="vid-item" onclick="window.open('https://www.youtube.com/watch?v=mePXlM2M4V4','_blank')">
+                    <img src="https://img.youtube.com/vi/mePXlM2M4V4/hqdefault.jpg" alt="">
+                    <div class="vid-play"><i class="fas fa-play"></i></div>
+                    <div class="vid-overlay">
+                        <span class="vid-tag">Discussion</span>
+                        <h3 class="vid-title">Advokat va prokuror: qay biri kuchli?</h3>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Publications Section -->
-        <section class="content-section" style="background-color: var(--bg-light);">
-            <div class="content-container">
-                <h2 class="section-title" style="text-align: center; display: block; width: 100%;" data-translate="pubsTitle">Publications</h2>
-                
-                <div class="card-grid">
-                    <div class="card detail-card" style="border-left: 3px solid var(--primary-blue);">
-                        <div class="card-content">
-                            <h3 class="card-title" data-translate="book1Title">Artificial Intelligence and the Law</h3>
-                            <p class="card-text" data-translate="book1Desc">A comprehensive analysis of legal frameworks for AI governance.</p>
-                            <a href="publications.html" class="card-link" data-translate="viewDetails">View Details</a>
-                        </div>
-                    </div>
-
-                    <div class="card detail-card" style="border-left: 3px solid var(--primary-blue);">
-                        <div class="card-content">
-                            <h3 class="card-title" data-translate="book2Title">Digital Privacy Rights in the Information Age</h3>
-                            <p class="card-text" data-translate="book2Desc">An exploration of privacy rights in the digital era.</p>
-                            <a href="publications.html" class="card-link" data-translate="viewDetails">View Details</a>
-                        </div>
-                    </div>
-                </div>
+            <div style="text-align:center;margin-top:2.5rem;">
+                <a href="videos.html" class="btn-outline">View All Videos</a>
             </div>
         </section>
+
+        <!-- ── CTA ── -->
+        <section class="cta-section">
+            <p class="section-label">Contact</p>
+            <h2 class="section-headline">Need legal counsel?<br>Let's talk.</h2>
+            <p data-translate="ctaDesc">Based in Tashkent. Available for consultations, speaking engagements, and strategic legal partnerships.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> &nbsp;Telegram</a>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Mobile Social Bar (visible only on mobile) -->
+    <!-- Mobile Social Bar -->
     <div class="mobile-social-bar">
         <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-icon" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-icon" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
@@ -365,78 +852,62 @@
 
     <footer>
         <div class="footer-content">
-            <!-- Changed name here -->
             <p class="copyright">&copy; 2026 Abdulloh Sodiq. <span data-translate="rights">All rights reserved.</span></p>
         </div>
     </footer>
-  <!-- ... footer code ... -->
 
     <script src="translations.js"></script>
     <script>
     /* Mobile menu */
     const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('nav-links');
-    const body = document.body;
-
+    const navLinks   = document.getElementById('nav-links');
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        body.classList.toggle('menu-open', navLinks.classList.contains('active'));
+        document.body.classList.toggle('menu-open', navLinks.classList.contains('active'));
     });
-
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            body.classList.remove('menu-open');
-        });
-    });
+    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    }));
 
     /* Particle canvas */
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
+    let W, H, parts = [];
 
-    function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-    }
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
 
-    function Particle() {
+    function Dot() {
         this.x = Math.random() * W;
         this.y = Math.random() * H;
-        this.r = Math.random() * 1.5 + 0.3;
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.alpha = Math.random() * 0.5 + 0.1;
+        this.r = Math.random() * 1.2 + 0.3;
+        this.vx = (Math.random() - 0.5) * 0.25;
+        this.vy = (Math.random() - 0.5) * 0.25;
+        this.a = Math.random() * 0.45 + 0.08;
     }
 
-    function init() {
-        resize();
-        particles = Array.from({length: 90}, () => new Particle());
-    }
+    function init() { resize(); parts = Array.from({length: 80}, () => new Dot()); }
 
     function draw() {
         ctx.clearRect(0, 0, W, H);
-        particles.forEach(p => {
+        parts.forEach(p => {
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0,184,148,${p.alpha})`;
+            ctx.fillStyle = `rgba(0,184,148,${p.a})`;
             ctx.fill();
             p.x += p.vx; p.y += p.vy;
             if (p.x < 0 || p.x > W) p.vx *= -1;
             if (p.y < 0 || p.y > H) p.vy *= -1;
         });
-
-        /* connect nearby */
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist < 120) {
+        for (let i = 0; i < parts.length; i++) {
+            for (let j = i+1; j < parts.length; j++) {
+                const dx = parts[i].x - parts[j].x, dy = parts[i].y - parts[j].y;
+                const d = Math.sqrt(dx*dx + dy*dy);
+                if (d < 110) {
                     ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0,184,148,${0.08 * (1 - dist/120)})`;
+                    ctx.moveTo(parts[i].x, parts[i].y);
+                    ctx.lineTo(parts[j].x, parts[j].y);
+                    ctx.strokeStyle = `rgba(0,184,148,${0.07*(1-d/110)})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -446,33 +917,40 @@
     }
 
     window.addEventListener('resize', resize);
-    init();
-    draw();
+    init(); draw();
 
-    /* Parallax on hero */
+    /* Parallax on hero photo */
     window.addEventListener('scroll', () => {
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            const y = window.scrollY;
-            hero.style.backgroundPositionY = (y * 0.4) + 'px';
-            const img = hero.querySelector('.profile-image');
-            if (img) img.style.transform = `translateY(${y * 0.08}px)`;
-        }
-        /* canvas parallax */
-        canvas.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+        const img = document.querySelector('.hero-right img');
+        if (img) img.style.transform = `translateY(${window.scrollY * 0.12}px)`;
+        canvas.style.transform = `translateY(${window.scrollY * 0.25}px)`;
     });
 
     /* Scroll reveal */
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    document.querySelectorAll('.card, .focus-item, .detail-card').forEach(el => {
-        el.classList.add('reveal');
-        observer.observe(el);
-    });
+    /* Counter animation */
+    const counters = document.querySelectorAll('[data-count]');
+    const cObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            const target = parseInt(el.dataset.count);
+            const suffix = el.dataset.suffix || '+';
+            let current = 0;
+            const step = Math.ceil(target / 60);
+            const timer = setInterval(() => {
+                current = Math.min(current + step, target);
+                el.textContent = current + suffix;
+                if (current >= target) clearInterval(timer);
+            }, 25);
+            cObs.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    counters.forEach(c => cObs.observe(c));
     </script>
-
-
 </body>
 </html>
