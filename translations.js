@@ -217,7 +217,59 @@ const translations = {
         'email': 'Telegram',
         'office': 'Office',
         'phone': 'Phone',
-        'socialMedia': 'Social Media'
+        'socialMedia': 'Social Media',
+
+        // Homepage hero
+        'heroEyebrow': 'Attorney at Law · Tashkent, Uzbekistan',
+        'heroTitle': 'Managing Partner & Attorney at Gulyamov, Sadikov & Partners. 20+ years in business law, legal protection, and strategic consulting.',
+        'statYears': 'Years Experience',
+        'statCases': 'Cases Won',
+        'statConf': 'Conferences',
+
+        // Ticker
+        'tickerLabel': 'Latest',
+        'tick1': 'AI Act adopted in Europe — new era for legal practice',
+        'tick2': 'Abdulloh Sodiq speaks at Tashkent Law Spring 2026',
+        'tick3': 'Meta fined €1.2B — largest GDPR penalty in history',
+        'tick4': 'SmartLex platform launches — AI in Uzbek legal system',
+        'tick5': 'New publication: AI Governance in Central Asia',
+
+        // Expertise section
+        'expertiseLabel': 'Practice Areas',
+        'expertiseHeadline': 'Legal expertise that delivers results.',
+        'exp01Title': 'Business Law',
+        'exp01Desc': 'Corporate structuring, contracts, M&A transactions and business dispute resolution across Uzbekistan and CIS markets.',
+        'exp02Title': 'AI & Technology Law',
+        'exp02Desc': 'Legal frameworks for artificial intelligence, digital rights, data protection, and emerging technology regulation.',
+        'exp03Title': 'Criminal Defence',
+        'exp03Desc': 'Experienced criminal defence representation, from investigation stage through trial and appeals.',
+        'exp04Title': 'Debt Recovery',
+        'exp04Desc': 'Strategic legal instruments to compel debt repayment and enforce financial obligations effectively.',
+        'exp05Title': 'Media & Digital Rights',
+        'exp05Desc': 'Advising on online content legality, privacy rights, and the intersection of media law with digital platforms.',
+        'exp06Title': 'Strategic Consulting',
+        'exp06Desc': 'Long-term legal strategy for businesses, entrepreneurs, and public figures navigating complex legal environments.',
+
+        // About strip
+        'aboutLabel': 'About',
+        'aboutQuote': 'Justice is not just a profession — it is a calling.',
+        'aboutBody': 'Over 20 years of experience in business law, legal protection, and strategic consulting. Deputy Chairman of the Uzbekistan Economic Assembly for Legal Affairs and official expert of leading business clubs. Speaker, author, and recognised voice in Uzbek and international legal discourse.',
+        'fullBio': 'Full Biography',
+
+        // Video section
+        'mediaLabel': 'Media',
+        'mediaHeadline': 'Watch & Listen',
+        'vidTag1': 'Featured · Tashkent Law Spring',
+        'vidTitle1': 'Artificial Intelligence in Legal Practice — Advantages & Risks',
+        'vidTag2': 'Debate',
+        'vidTitle2': 'FRAUD: ATTORNEY vs PROSECUTOR',
+        'vidTag3': 'Discussion',
+        'vidTitle3': 'Attorney vs Prosecutor: Who is Stronger?',
+        'viewAllVideos': 'View All Videos',
+
+        // CTA
+        'ctaHeadline': 'Need legal counsel? Let\'s talk.',
+        'ctaDesc': 'Based in Tashkent. Available for consultations, speaking engagements, and strategic legal partnerships.'
     },
     'ru': {
         // Common elements
@@ -440,7 +492,59 @@ const translations = {
         'email': 'Telegram',
         'office': 'Офис',
         'phone': 'Телефон',
-        'socialMedia': 'Социальные сети'
+        'socialMedia': 'Социальные сети',
+
+        // Homepage hero
+        'heroEyebrow': 'Адвокат · Ташкент, Узбекистан',
+        'heroTitle': 'Управляющий партнёр и адвокат в Gulyamov, Sadikov & Partners. Более 20 лет в бизнес-праве, правовой защите и стратегическом консультировании.',
+        'statYears': 'Лет опыта',
+        'statCases': 'Выигранных дел',
+        'statConf': 'Конференций',
+
+        // Ticker
+        'tickerLabel': 'Новости',
+        'tick1': 'Принят AI Act в Европе — новая эра для юридической практики',
+        'tick2': 'Абдуллох Содик выступает на Tashkent Law Spring 2026',
+        'tick3': 'Meta оштрафована на €1.2 млрд — крупнейший штраф по GDPR',
+        'tick4': 'Запуск платформы SmartLex — ИИ в правовой системе Узбекистана',
+        'tick5': 'Новая публикация: Управление ИИ в Центральной Азии',
+
+        // Expertise section
+        'expertiseLabel': 'Практика',
+        'expertiseHeadline': 'Юридическая экспертиза, которая даёт результат.',
+        'exp01Title': 'Бизнес-право',
+        'exp01Desc': 'Корпоративная структура, договоры, сделки M&A и разрешение деловых споров на рынках Узбекистана и СНГ.',
+        'exp02Title': 'ИИ и технологическое право',
+        'exp02Desc': 'Правовые рамки для искусственного интеллекта, цифровых прав, защиты данных и регулирования новых технологий.',
+        'exp03Title': 'Уголовная защита',
+        'exp03Desc': 'Опытная защита по уголовным делам — от стадии расследования до суда и апелляций.',
+        'exp04Title': 'Взыскание долгов',
+        'exp04Desc': 'Стратегические правовые инструменты для принудительного взыскания долгов и исполнения финансовых обязательств.',
+        'exp05Title': 'СМИ и цифровые права',
+        'exp05Desc': 'Консультации по законности онлайн-контента, праву на конфиденциальность и пересечению медиаправа с цифровыми платформами.',
+        'exp06Title': 'Стратегическое консультирование',
+        'exp06Desc': 'Долгосрочная правовая стратегия для бизнеса, предпринимателей и публичных фигур в сложной правовой среде.',
+
+        // About strip
+        'aboutLabel': 'Обо мне',
+        'aboutQuote': 'Правосудие — это не просто профессия, это призвание.',
+        'aboutBody': 'Более 20 лет опыта в бизнес-праве, правовой защите и стратегическом консультировании. Заместитель председателя Экономической ассамблеи Узбекистана по правовым вопросам и официальный эксперт ведущих бизнес-клубов. Спикер, автор и признанный голос в узбекском и международном правовом дискурсе.',
+        'fullBio': 'Полная биография',
+
+        // Video section
+        'mediaLabel': 'Медиа',
+        'mediaHeadline': 'Смотреть и слушать',
+        'vidTag1': 'Рекомендуемое · Tashkent Law Spring',
+        'vidTitle1': 'Искусственный интеллект в работе адвоката — преимущества и риски',
+        'vidTag2': 'Дискуссия',
+        'vidTitle2': 'МОШЕННИЧЕСТВО: АДВОКАТ vs ПРОКУРОР',
+        'vidTag3': 'Обсуждение',
+        'vidTitle3': 'Адвокат и прокурор: кто сильнее?',
+        'viewAllVideos': 'Все видео',
+
+        // CTA
+        'ctaHeadline': 'Нужна юридическая помощь? Давайте поговорим.',
+        'ctaDesc': 'Базируется в Ташкенте. Принимает заявки на консультации, выступления и стратегическое правовое партнёрство.'
     },
     'uz': {
         // Common elements
@@ -664,7 +768,59 @@ const translations = {
         'email': 'Telegram',
         'office': 'Ofis',
         'phone': 'Telefon',
-        'socialMedia': 'Ijtimoiy tarmoqlar'
+        'socialMedia': 'Ijtimoiy tarmoqlar',
+
+        // Homepage hero
+        'heroEyebrow': 'Advokat · Toshkent, O\'zbekiston',
+        'heroTitle': 'Gulyamov, Sadikov & Partners boshqaruvchi sherigi va advokati. 20 yildan ortiq biznes huquqi, huquqiy himoya va strategik maslahat sohasidagi tajriba.',
+        'statYears': 'Yillik tajriba',
+        'statCases': 'Yutilgan ish',
+        'statConf': 'Konferensiya',
+
+        // Ticker
+        'tickerLabel': 'Yangiliklar',
+        'tick1': 'Evropada AI Act qabul qilindi — yuridik amaliyot uchun yangi davr',
+        'tick2': 'Abdulloh Sodiq Tashkent Law Spring 2026 da so\'zlaydi',
+        'tick3': 'Meta €1.2 mlrd jarima oldi — GDPR tarixidagi eng katta jarima',
+        'tick4': 'SmartLex platformasi ishga tushdi — O\'zbekiston huquq tizimida SI',
+        'tick5': 'Yangi nashr: Markaziy Osiyoda SI boshqaruvi',
+
+        // Expertise section
+        'expertiseLabel': 'Amaliyot sohalari',
+        'expertiseHeadline': 'Natija beruvchi huquqiy ekspertiza.',
+        'exp01Title': 'Biznes huquqi',
+        'exp01Desc': 'O\'zbekiston va MDH bozorlarida korporativ tuzilma, shartnomalar, M&A bitishuvlari va biznes nizolarini hal qilish.',
+        'exp02Title': 'SI va texnologiya huquqi',
+        'exp02Desc': 'Sun\'iy intellekt, raqamli huquqlar, ma\'lumotlarni himoya qilish va yangi texnologiyalarni tartibga solish uchun huquqiy doiralar.',
+        'exp03Title': 'Jinoyat himoyasi',
+        'exp03Desc': 'Tergov bosqichidan tortib sud va apellyatsiyagacha bo\'lgan tajribali jinoiy himoya vakilligi.',
+        'exp04Title': 'Qarzlarni undirish',
+        'exp04Desc': 'Qarz to\'lovini majburiy qiluvchi va moliyaviy majburiyatlarni samarali bajarishga undovchi strategik huquqiy instrumentlar.',
+        'exp05Title': 'Media va raqamli huquqlar',
+        'exp05Desc': 'Onlayn kontent qonuniyligi, maxfiylik huquqlari va media huquqining raqamli platformalar bilan kesishishi bo\'yicha maslahat.',
+        'exp06Title': 'Strategik maslahat',
+        'exp06Desc': 'Murakkab huquqiy muhitda harakat qiluvchi biznes, tadbirkorlar va jamoat shaxslari uchun uzoq muddatli huquqiy strategiya.',
+
+        // About strip
+        'aboutLabel': 'Men haqimda',
+        'aboutQuote': 'Adolat shunchaki kasb emas — bu chaqiriq.',
+        'aboutBody': '20 yildan ortiq biznes huquqi, huquqiy himoya va strategik maslahat sohasidagi tajriba. O\'zbekiston Iqtisodiy assambleyasi raisining huquqiy masalalar bo\'yicha o\'rinbosari va yetakchi biznes klublarining rasmiy eksperti. Spiker, muallif va o\'zbek hamda xalqaro huquqiy muloqotda tan olingan ovoz.',
+        'fullBio': 'To\'liq biografiya',
+
+        // Video section
+        'mediaLabel': 'Media',
+        'mediaHeadline': 'Tomosha qiling va eshiting',
+        'vidTag1': 'Tavsiya etilgan · Tashkent Law Spring',
+        'vidTitle1': 'Advokat ishida sun\'iy intellekt — afzalliklar va xatarlar',
+        'vidTag2': 'Bahs',
+        'vidTitle2': 'FIRIBGARLIK: ADVOKAT vs PROKUROR',
+        'vidTag3': 'Muhokama',
+        'vidTitle3': 'Advokat va prokuror: qay biri kuchli?',
+        'viewAllVideos': 'Barcha videolar',
+
+        // CTA
+        'ctaHeadline': 'Huquqiy maslahat kerakmi? Gaplashaylik.',
+        'ctaDesc': 'Toshkentda joylashgan. Konsultatsiyalar, chiqishlar va strategik huquqiy hamkorlik uchun murojaat qabul qilinadi.'
     }
 };
 
