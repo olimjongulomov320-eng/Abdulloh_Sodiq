@@ -213,16 +213,33 @@
         .reveal.visible { opacity: 1; transform: none; }
 
         @media (max-width: 900px) {
-            .conf-hero { padding: 8rem 2rem 3rem; }
-            .conf-section { padding: 3rem 2rem; }
-            .conf-row { grid-template-columns: 1fr; gap: 1rem; padding: 2rem; }
+            .conf-hero { padding: 7.5rem 1.5rem 2.5rem; }
+            .conf-section { padding: 3rem 1.5rem; }
+            .conf-row { grid-template-columns: 1fr; gap: 1rem; padding: 1.75rem 1.25rem; }
             .conf-row-date { flex-direction: row; align-items: baseline; gap: 0.8rem; padding: 0; border: none; }
             .conf-row-body { border-left: none; padding-left: 0; }
             .conf-row-role { align-items: flex-start; padding-left: 0; flex-direction: row; flex-wrap: wrap; }
-            .conf-stats { grid-template-columns: 1fr; }
-            .conf-stat { padding: 2rem; }
+            /* Keep the three stats on one row — stacking them full-width
+               added ~250px of mostly-empty space on phones. */
+            .conf-stats { grid-template-columns: repeat(3, 1fr); }
+            .conf-stat { padding: 1.5rem 1.25rem; }
+        }
+        @media (max-width: 560px) {
+            .conf-hero { padding: 7rem 1.25rem 2.25rem; }
+            .conf-section { padding: 2.5rem 1.25rem; }
+            .conf-hero-title { font-size: 2.3rem; }
+            .conf-stat { padding: 1.15rem 0.85rem; }
+            .conf-stat-number { font-size: 1.85rem; }
+            .conf-stat-label { font-size: 0.6rem; letter-spacing: 1px; }
+            .conf-row-year { font-size: 1.5rem; }
+            .conf-row-title { font-size: 1.05rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
         }
     </style>
+    <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="no-sidebar">
     <header>
@@ -417,6 +434,15 @@
             </div>
         </section>
     </main>
+
+    <!-- Social Bar -->
+    <div class="social-bar">
+        <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-icon" title="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-icon" title="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-icon" title="YouTube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-icon" title="Telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
 
     <footer>
         <div class="footer-content">

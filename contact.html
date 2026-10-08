@@ -113,6 +113,12 @@
             text-decoration: none;
             line-height: 1.5;
         }
+        .info-content a {
+            /* phone / telegram links were a 19px tap target */
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
         .info-content a:hover { color: var(--text-white); }
 
         /* Social links */
@@ -224,11 +230,24 @@
         .reveal.visible { opacity: 1; transform: none; }
 
         @media (max-width: 900px) {
-            .contact-hero { padding: 8rem 2rem 3rem; }
-            .contact-body { grid-template-columns: 1fr; }
-            .contact-info, .contact-form-panel { padding: 3rem 2rem; }
+            .contact-hero { padding: 7.5rem 1.5rem 2.5rem; }
+            .contact-body { grid-template-columns: 1fr; min-height: 0; }
+            .contact-info, .contact-form-panel { padding: 2.75rem 1.5rem; }
+        }
+        @media (max-width: 560px) {
+            .contact-hero { padding: 7rem 1.25rem 2.25rem; }
+            .contact-hero-title { font-size: 2.3rem; }
+            .contact-info, .contact-form-panel { padding: 2.25rem 1.25rem; }
+            .contact-info-heading { margin-bottom: 2rem; }
+            .info-item { margin-bottom: 1.6rem; gap: 1rem; }
+            .social-btn { width: 44px; height: 44px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
         }
     </style>
+    <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="no-sidebar">
     <header>
@@ -344,6 +363,15 @@
             </div>
         </div>
     </main>
+
+    <!-- Social Bar -->
+    <div class="social-bar">
+        <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-icon" title="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-icon" title="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-icon" title="YouTube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-icon" title="Telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
 
     <footer>
         <div class="footer-content">

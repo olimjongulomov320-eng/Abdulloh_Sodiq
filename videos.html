@@ -194,15 +194,50 @@
 
         @media (max-width: 992px) {
             .featured-cinema { grid-template-columns: 1fr; }
-            .featured-thumb { min-height: 280px; }
+            .featured-thumb { min-height: 260px; }
             .videos-grid { grid-template-columns: 1fr 1fr; }
-            .featured-section, .videos-section { padding: 4rem 2rem; }
-            .page-hero { padding: 8rem 2rem 3rem; }
+            .featured-section, .videos-section { padding: 4rem 1.5rem; }
+            .page-hero { padding: 7.5rem 1.5rem 2.5rem; }
+            .featured-info { padding: 2rem 1.5rem; }
+            .featured-thumb-overlay { padding: 1.5rem; }
         }
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
+            /* Lay the cards out as horizontal rows on phones. A 1-column
+               grid of 7 thumbnail+text cards made the page ~66% taller
+               than desktop with a very low information density. */
             .videos-grid { grid-template-columns: 1fr; }
+            .vid-card {
+                display: grid;
+                grid-template-columns: 132px 1fr;
+                align-items: stretch;
+            }
+            .vid-thumb { height: auto; min-height: 96px; }
+            .vid-play-sm { width: 38px; height: 38px; font-size: 0.85rem; }
+            .vid-card-body { padding: 1rem 1.1rem; display: flex; flex-direction: column; justify-content: center; }
+            .vid-card-native { font-size: 0.95rem; margin-bottom: 0.4rem; }
+            .vid-card-desc {
+                font-size: 0.8rem;
+                line-height: 1.6;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .featured-section, .videos-section { padding: 3.25rem 1.25rem; }
+            .page-hero { padding: 7rem 1.25rem 2.25rem; }
+            .featured-vid-title { font-size: 1.15rem; }
+            .featured-play { width: 56px; height: 56px; font-size: 1.3rem; }
+        }
+        @media (max-width: 400px) {
+            .vid-card { grid-template-columns: 108px 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
         }
     </style>
+    <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="no-sidebar">
     <header>
@@ -359,6 +394,15 @@
         </section>
 
     </main>
+
+    <!-- Social Bar -->
+    <div class="social-bar">
+        <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-icon" title="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-icon" title="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-icon" title="YouTube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-icon" title="Telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
 
     <footer>
         <div class="footer-content">

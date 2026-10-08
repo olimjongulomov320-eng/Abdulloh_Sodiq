@@ -107,6 +107,9 @@ nav {
     letter-spacing: 0.5px;
     transition: color 0.2s;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
 }
 
 .logo:hover {
@@ -221,6 +224,7 @@ nav {
     border: 1px solid var(--border);
     border-radius: 0;
     padding: 0.4rem 0.9rem;
+    min-height: 44px;
     cursor: pointer;
     transition: all 0.2s;
     font-family: 'Inter', sans-serif;
@@ -262,15 +266,26 @@ nav {
     box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 20px rgba(0,184,148,0.08);
 }
 
-.language-switcher:hover .language-list {
+.language-switcher:hover .language-list,
+.language-switcher.open .language-list {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
+.language-switcher.open .language-button {
+    border-color: var(--emerald);
+    color: var(--emerald);
+}
+
+.language-switcher.open .language-button i {
+    transform: rotate(180deg);
+}
+
 .language-option {
     display: flex;
     align-items: center;
+    min-height: 44px;
     gap: 0.7rem;
     padding: 0.7rem 1.1rem;
     color: var(--text-muted);
@@ -375,15 +390,20 @@ nav {
 
 .social-icon i { font-size: 1.1rem; }
 
-/* Desktop shift */
-@media (min-width: 769px) {
+/* Compact / desktop chrome switch.
+   The full nav needs ~1170px before it starts overflowing, so the rail and
+   the inline links are only used at >=1200px. Between 769px and ~1170px the
+   links used to render off-screen and were silently clipped by
+   `body { overflow-x: hidden }`, which left tablets and small laptops with
+   no working navigation at all. */
+@media (min-width: 1200px) {
     header { left: 60px; width: calc(100% - 60px); }
     main { margin-left: 60px; }
     .social-sidebar { display: flex; }
     .menu-toggle { display: none; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
     .social-sidebar { display: none !important; }
     header { left: 0; width: 100%; }
     main { margin-left: 0; }
@@ -830,8 +850,56 @@ footer {
     color: rgba(138, 184, 179, 0.5);
 }
 
+/* ===================== SOCIAL BAR ===================== */
+/* On the homepage the fixed left rail already carries these links on desktop,
+   so the bar is mobile-only there. Inner pages ship no rail at all, so they
+   show the bar at every width — without it they had no social links anywhere. */
+.social-bar {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding: 1.25rem 1rem;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+}
+
+body.no-sidebar .social-bar { display: flex; }
+
+@media (max-width: 768px) {
+    .social-bar { display: flex; }
+}
+
+.social-bar .social-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+}
+
+.social-bar .social-icon:hover {
+    color: var(--emerald);
+    background: rgba(0, 184, 148, 0.1);
+}
+
+.social-bar .social-icon i { font-size: 1.2rem; }
+
 /* ===================== NO SIDEBAR PAGES ===================== */
+/* Inner pages ship no .social-sidebar markup, so they must not reserve the
+   60px gutter. The desktop media query offsets `header` but not `main` for
+   sidebar pages, so both have to be reset here or the header ends up
+   indented 60px while the page content stays flush to the viewport edge. */
 body.no-sidebar main { margin-left: 0; }
+body.no-sidebar header { left: 0; width: 100%; }
 
 /* ===================== PROFILE LAYOUT ===================== */
 .profile-layout {
@@ -1570,13 +1638,17 @@ textarea.form-control {
     .logo { order: 1; flex: 1; z-index: 10; }
 
     .menu-toggle {
-        display: block;
         order: 3;
         background: none;
         border: 1px solid var(--border);
         font-size: 1rem;
         color: var(--text-muted);
         cursor: pointer;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0.45rem 0.7rem;
         margin-left: 1rem;
         z-index: 11;
@@ -1697,4 +1769,106 @@ textarea.form-control {
     .timeline-item { flex-direction: column; }
     .timeline-year { margin-bottom: 0.5rem; }
     .timeline-item::before { left: 0; }
+}
+
+/* ===================== COMPACT NAV (below 1200px) ===================== */
+/* Declared last so it wins over the earlier 768px/992px nav rules. The
+   hamburger replaces the inline links for every width where the full nav
+   would not fit, not just on phones. */
+@media (max-width: 1199px) {
+    nav {
+        flex-wrap: nowrap;
+        position: relative;
+        padding: 0 1.5rem;
+        height: 60px;
+        align-items: center;
+    }
+
+    .logo { order: 1; flex: 1; z-index: 10; }
+
+    .menu-toggle {
+        order: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0.45rem 0.7rem;
+        margin-left: 1rem;
+        z-index: 11;
+        transition: color 0.2s, border-color 0.2s;
+    }
+
+    .menu-toggle:hover { color: var(--emerald); border-color: var(--emerald); }
+
+    .nav-container {
+        order: 2;
+        display: flex;
+        align-items: center;
+        position: static;
+    }
+
+    .language-switcher { margin-left: 0; }
+    .language-button { padding: 0.35rem 0.7rem; font-size: 0.68rem; }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(8, 12, 12, 0.98);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        flex-direction: column;
+        align-items: stretch;
+        border-top: 1px solid var(--border);
+        z-index: 999;
+        padding: 0.5rem 0;
+        margin: 0;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-links.active { display: flex; }
+
+    .nav-item { margin: 0; width: 100%; }
+
+    .nav-item > a {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        height: auto;
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        width: 100%;
+        color: var(--text-muted);
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+    }
+
+    .nav-item > a::after { display: none; }
+    .nav-item > a:hover { color: var(--text-white); background: rgba(0, 184, 148, 0.06); }
+
+    .submenu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border-top: none;
+        padding-left: 1.5rem;
+        background: transparent;
+        display: none;
+    }
+
+    .nav-item:hover .submenu,
+    .nav-item:focus-within .submenu { display: block; }
+
+    .language-list { right: 0; left: auto; min-width: 130px; }
+
+    body.menu-open { overflow: hidden; }
 }
