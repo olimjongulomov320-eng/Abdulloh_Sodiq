@@ -152,7 +152,12 @@ const translations = {
         'art2Category': 'International Financial Regulation',
         'art2Title': 'The Role of AAOIFI, IFSB, and Basel Committee in Ensuring the Regulatory Coherence of Dual Banking Systems',
         'art2Desc': 'Investigates the complementary roles of AAOIFI, IFSB, and the Basel Committee in achieving regulatory coherence within dual banking systems. Comparative analysis of Malaysia, Bahrain, UAE and Uzbekistan. Published in Society and Innovations (ISSN 2181-1415), Vol. 7, Special Issue 04, pp. 224–232.',
+        'art3Number': 'Article No. 03',
+        'art3Category': 'International Forum',
+        'art3Title': 'Invited Speaker — Tashkent Law Spring Forum 2025',
+        'art3Desc': 'Selected as a speaker at Tashkent Law Spring, the flagship international legal forum organized by the Ministry of Justice of the Republic of Uzbekistan. Featured as Managing Partner of the “Gulyamov, Sadikov & Partners” law firm and recognized among lawyers serving local businesses, foreign investors and government authorities.',
         'statusPublished': 'Published',
+        'statusInvited': 'Invited',
         'readArticleLink': 'Read Article',
         // Case Studies
         'casesTitle': 'Case Studies',
@@ -451,7 +456,12 @@ const translations = {
         'art2Category': 'Международное финансовое регулирование',
         'art2Title': 'Роль AAOIFI, IFSB и Базельского комитета в обеспечении регуляторной согласованности дуальных банковских систем',
         'art2Desc': 'Исследуются взаимодополняющие роли AAOIFI, IFSB и Базельского комитета в достижении регуляторной согласованности в дуальных банковских системах. Сравнительный анализ Малайзии, Бахрейна, ОАЭ и Узбекистана. Опубликовано в журнале Society and Innovations (ISSN 2181-1415), т. 7, спецвыпуск 04, стр. 224–232.',
+        'art3Number': 'Статья № 03',
+        'art3Category': 'Международный форум',
+        'art3Title': 'Приглашённый спикер — форум Tashkent Law Spring 2025',
+        'art3Desc': 'Приглашённый спикер международного юридического форума Tashkent Law Spring, организованного Министерством юстиции Республики Узбекистан. Представлен как управляющий партнёр юридической фирмы «Gulyamov, Sadikov & Partners» и признан среди юристов, работающих с местным бизнесом, иностранными инвесторами и государственными органами.',
         'statusPublished': 'Опубликовано',
+        'statusInvited': 'Приглашён',
         'readArticleLink': 'Читать статью',
         // Case Studies
         'casesTitle': 'Тематические исследования',
@@ -752,7 +762,12 @@ const translations = {
         'art2Category': 'Xalqaro moliyaviy tartibga solish',
         'art2Title': 'AAOIFI, IFSB va Bazel qo\'mitasining dual bank tizimlarining regulyator muvofiqligi ta\'minlashdagi roli',
         'art2Desc': 'Dual bank tizimlarida regulyator muvofiqligi ta\'minlashda AAOIFI, IFSB va Bazel qo\'mitasining to\'ldiruvchi rollari o\'rganiladi. Malayziya, Bahrayn, BAA va O\'zbekiston bo\'yicha qiyosiy tahlil. Society and Innovations (ISSN 2181-1415) jurnalida chop etilgan, 7-jild, 4-maxsus son, 224–232-betlar.',
+        'art3Number': 'Maqola № 03',
+        'art3Category': 'Xalqaro forum',
+        'art3Title': 'Taklif etilgan spiker — Tashkent Law Spring forumi 2025',
+        'art3Desc': 'O\'zbekiston Respublikasi Adliya vazirligi tashkil etgan Tashkent Law Spring xalqaro huquq forumiga taklif etilgan spiker sifatida ishtirok etdi. «Gulyamov, Sadikov & Partners» yuridik firmasining boshqaruvchi sheriklari sifatida tanishtirildi va mahalliy biznes, chet el investitorlari va davlat organlari bilan ishlaydigan yuristlar orasida tan olindi.',
         'statusPublished': 'Chop etilgan',
+        'statusInvited': 'Taklif etilgan',
         'readArticleLink': 'Maqolani o\'qish',
         // Case Studies
         'casesTitle': 'Tematik tadqiqotlar',
@@ -945,4 +960,29 @@ document.addEventListener('DOMContentLoaded', function() {
             setLanguage(lang);
         });
     });
+
+    /* The dropdown is revealed with :hover, which touch devices emulate
+       unreliably — it can open on first tap but there is no dependable way
+       to close it again. Drive it from an explicit .open class too. */
+    const switcher = document.querySelector('.language-switcher');
+    const languageButton = switcher && switcher.querySelector('.language-button');
+
+    if (switcher && languageButton) {
+        const close = () => switcher.classList.remove('open');
+
+        languageButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            switcher.classList.toggle('open');
+        });
+
+        languageOptions.forEach(option => option.addEventListener('click', close));
+
+        document.addEventListener('click', function(e) {
+            if (!switcher.contains(e.target)) close();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') close();
+        });
+    }
 });

@@ -168,9 +168,10 @@
             font-weight: 500;
             color: var(--emerald);
             text-decoration: none;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.4rem;
+            min-height: 44px;
             white-space: nowrap;
             transition: gap 0.2s;
         }
@@ -257,9 +258,10 @@
             font-weight: 500;
             color: var(--emerald);
             text-decoration: none;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.3rem;
+            min-height: 44px;
             transition: gap 0.2s;
         }
         .case-read:hover { gap: 0.6rem; }
@@ -268,17 +270,50 @@
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: none; }
 
-        @media (max-width: 900px) {
-            .pubs-hero { padding: 8rem 2rem 3rem; }
-            .pubs-section { padding: 3rem 2rem; }
-            .article-row { grid-template-columns: 50px 1fr; }
-            .article-action { display: none; }
-            .case-grid { grid-template-columns: 1fr; }
-        }
+        /* Wide-to-narrow: these blocks MUST stay in this order so the
+           narrower breakpoint is declared last and wins on small screens. */
         @media (max-width: 1100px) {
             .case-grid { grid-template-columns: repeat(2, 1fr); }
         }
+        @media (max-width: 900px) {
+            .pubs-hero { padding: 8rem 2rem 3rem; }
+            .pubs-section { padding: 3.25rem 1.5rem; }
+            .pubs-section-heading { margin-bottom: 2rem; }
+            .case-grid { grid-template-columns: 1fr; }
+            .case-item { padding: 2rem 1.5rem; }
+            .article-row { grid-template-columns: 56px 1fr; padding: 2.2rem 0; }
+            /* Keep the PDF reachable on mobile: stack it under the body
+               instead of hiding it. */
+            .article-action {
+                grid-column: 1 / -1;
+                padding-left: 0;
+                padding-top: 1.4rem;
+                margin-top: 1.4rem;
+                border-top: 1px solid var(--border);
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1.25rem;
+            }
+            .article-link { min-height: 44px; }
+        }
+        @media (max-width: 560px) {
+            .pubs-hero-title { font-size: 2.4rem; }
+            .article-row { grid-template-columns: 40px 1fr; }
+            .article-number { font-size: 1.5rem; }
+            .article-tags { gap: 0.4rem; }
+            .pubs-hero { padding: 7rem 1.25rem 2.25rem; }
+            .pubs-section { padding: 2.5rem 1.25rem; }
+            .pubs-hero-title { font-size: 2.3rem; }
+            .case-item { padding: 1.75rem 1.25rem; }
+            .article-body { padding-right: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
     </style>
+    <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="no-sidebar">
     <header>
@@ -364,6 +399,26 @@
                     <div class="article-action">
                         <span class="article-status" data-translate="statusPublished">Published</span>
                         <a href="article2.pdf" class="article-link" target="_blank" data-translate="readArticleLink">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="article-row reveal">
+                    <div class="article-number">03</div>
+                    <div class="article-body">
+                        <div class="article-category" data-translate="art3Category">International Forum</div>
+                        <h3 class="article-title" data-translate="art3Title">Invited Speaker — Tashkent Law Spring Forum 2025</h3>
+                        <p class="article-desc" data-translate="art3Desc">Selected as a speaker at Tashkent Law Spring, the flagship international legal forum organized by the Ministry of Justice of the Republic of Uzbekistan. Featured as Managing Partner of the “Gulyamov, Sadikov &amp; Partners” law firm and recognized among lawyers serving local businesses, foreign investors and government authorities.</p>
+                        <div class="article-tags">
+                            <span class="article-tag">Tashkent Law Spring</span>
+                            <span class="article-tag">Ministry of Justice</span>
+                            <span class="article-tag">Public Speaking</span>
+                            <span class="article-tag">2025</span>
+                        </div>
+                    </div>
+                    <div class="article-action">
+                        <span class="article-status" data-translate="statusInvited">Invited</span>
+                        <a href="https://tashkentlawspring.uz/speaker/view?id=239" class="article-link" target="_blank" rel="noopener noreferrer" data-translate="readArticleLink">Read Article <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -479,6 +534,15 @@
             </div>
         </section>
     </main>
+
+    <!-- Social Bar -->
+    <div class="social-bar">
+        <a href="https://share.google/mGgowYeP6X7xsFa9G" class="social-icon" title="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1EpZqGsUV3/" class="social-icon" title="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://uz.linkedin.com/in/abdulloh-sodiq-0b6926254" class="social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com/@advokat_abdulloh_sodiq" class="social-icon" title="YouTube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://t.me/Abdulloh_Sodiq_lawyer" class="social-icon" title="Telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
 
     <footer>
         <div class="footer-content">
