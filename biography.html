@@ -258,21 +258,35 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 992px) {
-            /* Stack the hero and keep the portrait visible on small screens. */
+            /* Full-bleed portrait backdrop with the bio copy on top. */
             .bio-hero {
                 grid-template-columns: 1fr;
-                min-height: auto;
+                min-height: 100vh;
+                min-height: 100svh;
             }
             .bio-hero-right {
-                display: block;
-                order: 2;
-                height: 58vh;
-                min-height: 300px;
-                max-height: 460px;
-                border-top: 1px solid var(--border);
+                position: absolute;
+                inset: 0;
+                z-index: 0;
             }
-            .bio-hero-right::after { right: 1rem; font-size: 0.6rem; letter-spacing: 4px; }
-            .bio-hero-left { padding: 8rem 2rem 3.5rem; }
+            .bio-hero-right img {
+                object-position: center 15%;
+                filter: brightness(0.6) contrast(1.1) saturate(0.8);
+            }
+            .bio-hero-right::before {
+                background: linear-gradient(
+                    to top,
+                    rgba(8,12,12,0.97) 0%,
+                    rgba(8,12,12,0.85) 35%,
+                    rgba(8,12,12,0.5) 70%,
+                    rgba(8,12,12,0.35) 100%
+                );
+            }
+            .bio-hero-right::after { display: none; }
+            .bio-hero-left {
+                justify-content: flex-end;
+                padding: 8rem 1.5rem 3.5rem;
+            }
             .profile-split { grid-template-columns: 1fr; }
             .profile-split-img { height: 300px; }
             .profile-split-text { padding: 3rem 2rem; }

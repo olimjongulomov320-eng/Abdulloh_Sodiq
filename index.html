@@ -576,23 +576,38 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 992px) {
-            /* Stack the hero instead of deleting the portrait — the photo is
-               the strongest element on the page and must survive on mobile. */
+            /* Magazine-cover treatment: the portrait becomes a full-bleed
+               backdrop and the copy sits on top of it. */
             .hero {
                 grid-template-columns: 1fr;
-                min-height: auto;
+                min-height: 100vh;
+                min-height: 100svh;
             }
             .hero-right {
-                display: block;
-                order: 2;
-                height: 58vh;
-                min-height: 300px;
-                max-height: 460px;
-                border-top: 1px solid var(--border);
+                position: absolute;
+                inset: 0;
+                z-index: 0;
             }
-            .hero-right::after { right: 1rem; font-size: 0.6rem; letter-spacing: 4px; }
-            .hero-left { padding: 8rem 2rem 3.5rem; }
-            /* Hero is no longer full-height, so the scroll cue has no meaning */
+            .hero-right img {
+                object-position: center 15%;
+                filter: brightness(0.6) contrast(1.1) saturate(0.85);
+            }
+            /* Stronger bottom-up veil so the copy stays readable over the photo */
+            .hero-right::before {
+                background: linear-gradient(
+                    to top,
+                    rgba(8,12,12,0.97) 0%,
+                    rgba(8,12,12,0.85) 35%,
+                    rgba(8,12,12,0.5) 70%,
+                    rgba(8,12,12,0.35) 100%
+                );
+            }
+            .hero-right::after { display: none; }
+            .hero-left {
+                justify-content: flex-end;
+                padding: 8rem 1.5rem 3.5rem;
+            }
+            /* Photo now carries the composition, the cue would overlap it */
             .scroll-indicator { display: none; }
 
             .expertise-grid { grid-template-columns: 1fr 1fr; }
